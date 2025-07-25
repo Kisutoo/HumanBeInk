@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -23,7 +24,7 @@ class RegistrationFormType extends AbstractType
             ->add('pseudonyme')
             ->add('email')
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => "J'accepte les conditions générales d'utilisations",
+                'label' => "J'accepte les conditions généralesd'utilisations",
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -40,7 +41,7 @@ class RegistrationFormType extends AbstractType
                 "second_options" => ["label" => "Confirmer le mot de passe"],
                 'constraints' => [
                     new Length([
-                        'min' => 6,
+                        'min' => 12,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
