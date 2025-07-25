@@ -9,13 +9,17 @@ h1{
     background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     color: transparent;
     background-clip: text;
+    filter: grayscale(0);
 }
 
-.homePage{
+.fondHomePage{
     height: 50em;
 
     background-image: url(/img/fondHome.jpg);
     background-size: 100%;
     background-position:center;
-    background-color: grayscale(100%);
+    filter: grayscale(100%);
+}
+.homePage{
+    filter: grayscale(0);
 }
