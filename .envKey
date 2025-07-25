@@ -1,0 +1,6 @@
+###> karser/karser-recaptcha3-bundle ###
+# Get your API key and secret from https://g.co/recaptcha/v3
+
+RECAPTCHA3_KEY=6Lf2l44rAAAAAP06yRSF9jIBwj1_lDwksNQXaCWs
+RECAPTCHA3_SECRET=6Lf2l44rAAAAAP66fXPzNZr81X4Y5PDBdVsb9I68
+###< karser/karser-recaptcha3-bundle ###
