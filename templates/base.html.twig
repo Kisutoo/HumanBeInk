@@ -12,6 +12,16 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="nav">
+            <div class="burger">
+                <div class="rec1"></div>
+                <div class="rec2"></div>
+                <div class="rec1"></div>
+            </div>
+            <div class="langue">
+                <a href=""><img class="drapeau" src="{{ asset("img/fr-flag.webp")}}" alt="Drapeau français"></a>
+            </div>
+        </nav>
         <div class="alertsuccess">
             {% for message in app.flashes("success") %}
                 {{ message }}

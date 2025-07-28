@@ -18,7 +18,7 @@ h1{
     height: 60em;
     z-index: 1;
 
-    background-image: url(../img/fondHome.jpg);
+    background-image: url(../img/fondHome.webp);
     filter: blur(8px) grayscale(100%) brightness(0.5) ;
     background-size: 100%;
     background-position:center;
@@ -34,14 +34,8 @@ h1{
     pointer-events: none;
 }
 
-.fondHomeCalque/* resulting css */
+.fondHomeCalque
 {
-  filter: contrast(100%) brightness(100%);
-  background: 
-	linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-	url(/👆/that/noise.svg);
-
-  
     height: 60em;
     transform: translate(0%, -100%);
 }
@@ -62,8 +56,46 @@ h1{
     align-items: center;
     width: fit-content;
     transform: translate(0, -70%);
+    a{
+        width: 100%;
+        text-align: center;
+    }
     .logo{
         width: 30%;
         margin-bottom: 3em;
     }
+}
+
+.nav{
+    width: 100%;
+    .burger{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+    .rec1{
+        width: 3em;
+        height: 0.6em;
+        background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+        border-radius: 20px;
+    }
+    .rec2{
+        width: 3em;
+        height: 0.6em;
+        border-radius: 20px;
+        background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+    }
+    .langue{
+        a{
+            width: 10%;
+        }
+        .drapeau{
+            width: 5%;
+        }
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: absolute;
 }

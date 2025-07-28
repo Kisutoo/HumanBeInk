@@ -19,6 +19,7 @@ class SecurityController extends AbstractController
 
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+        $blocked = Null;
 
         $limiter = $anonymousApiLimiter->create($request->getClientIp());
 
