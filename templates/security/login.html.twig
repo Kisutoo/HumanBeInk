@@ -21,8 +21,12 @@
         <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
         <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Se connecter
-        </button>
+        {% if blocked is not null %}     
+        {% else %}
+            <button class="btn btn-lg btn-primary" type="submit">
+                Se connecter
+            </button>
+        {% endif %}
+            
     </form>
 {% endblock %}

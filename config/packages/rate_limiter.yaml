@@ -1,0 +1,10 @@
+framework:
+    rate_limiter:
+        anonymous_api:
+            policy: 'fixed_window'
+            limit: 5
+            interval: '10 minutes'
+        register:
+            policy: 'fixed_window'
+            limit: 1
+            interval: '2 minutes'
