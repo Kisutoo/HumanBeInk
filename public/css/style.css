@@ -59,6 +59,55 @@ h1{
     }
 }
 
+.menu-burger{
+    visibility: hidden;
+    border-radius: 0 50px 50px 0;
+    position: absolute;
+    z-index: 7;
+    font-size: 2.2em;
+    font-family: "raleway";
+    padding: 0.5em;
+    li, ul, a{
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 1em;
+        list-style-type: none;
+        text-decoration: none;
+        color: white;
+    }
+    background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+    .userNav{
+        margin-top: 4em;
+    }
+
+    .rec1, .rec2{
+        background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+        height: 0.2em;
+        width: 1em;
+        border-radius: 50px;
+    }
+    .rec1{
+        rotate: 90deg;
+        transform: translate(20%, 0);
+    }
+    .croixCloseBurger{
+        rotate: 45deg;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.menu-burger2{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 0 50px 50px 0;
+    padding: 1em 1em 0.1em 1em;
+}
+
+
+
+
+
 .nav{
     margin: 3em;
     width: 95%;

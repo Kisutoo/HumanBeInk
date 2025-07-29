@@ -13,16 +13,44 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="nav">
-            <div class="burger">
-                <div class="rec1"></div>
-                <div class="rec2"></div>
-                <div class="rec1"></div>
+        <header>
+            <div class="menu-burger">
+                <div class="menu-burger2">
+                    <ul>
+                        <li>
+                            <div class="croixCloseBurger">
+                                <div class="rec1"></div>
+                                <div class="rec2"></div>
+                            </div>
+                        </li>
+                        <li><a href="{{ path("app_accueil")}}">Accueil</a></li>
+                        <li><a href="#">Flash</a></li>
+                        <li><a href="#">WannaDo</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li></li>
+                        {% if app.user %}
+                            <li class="userNav"><a href="#">Profil</a> | <a href="#">Déconnexion</a></li>
+                        {% else %}
+                            <li class="userNav"><a href="{{ path("app_register")}}">Inscription</a> | <a href="{{ path("app_login")}}">Connexion</a></li>
+                        {% endif %}
+                    </ul>
+                </div> 
             </div>
-            <div class="langue">
-                <a href=""><img class="drapeau" src="{{ asset("img/fr-flag.webp")}}" alt="Drapeau français"></a>
-            </div>
-        </nav>
+            <nav class="nav">
+                <div class="burger">
+                    <div class="rec1"></div>
+                    <div class="rec2"></div>
+                    <div class="rec1"></div>
+                </div>
+                
+                
+                <div class="langue">
+                    <a href=""><img class="drapeau" src="{{ asset("img/fr-flag.webp")}}" alt="Drapeau français"></a>
+                </div>
+            </nav> 
+        </header>
+        
         <div class="alertsuccess">
             {% for message in app.flashes("success") %}
                 {{ message }}
