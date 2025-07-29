@@ -27,7 +27,7 @@ class Flash
 
     #[ORM\ManyToOne(inversedBy: 'flash')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $categorie = null;
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -82,14 +82,14 @@ class Flash
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    public function getCategory(): ?Category
     {
-        return $this->categorie;
+        return $this->category;
     }
 
-    public function setCategorie(?Categorie $categorie): static
+    public function setCategory(?Category $category): static
     {
-        $this->categorie = $categorie;
+        $this->category = $category;
 
         return $this;
     }

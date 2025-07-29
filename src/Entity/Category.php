@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategorieRepository::class)]
-class Categorie
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,12 +16,12 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $nom = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Flash>
      */
-    #[ORM\OneToMany(targetEntity: Flash::class, mappedBy: 'categorie')]
+    #[ORM\OneToMany(targetEntity: Flash::class, mappedBy: 'category')]
     private Collection $flash;
 
     public function __construct()
@@ -34,14 +34,14 @@ class Categorie
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
@@ -58,7 +58,7 @@ class Categorie
     {
         if (!$this->flash->contains($flash)) {
             $this->flash->add($flash);
-            $flash->setCategorie($this);
+            $flash->setCategory($this);
         }
 
         return $this;
@@ -68,8 +68,8 @@ class Categorie
     {
         if ($this->flash->removeElement($flash)) {
             // set the owning side to null (unless already changed)
-            if ($flash->getCategorie() === $this) {
-                $flash->setCategorie(null);
+            if ($flash->getCategory() === $this) {
+                $flash->setCategory(null);
             }
         }
 

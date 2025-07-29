@@ -66,7 +66,7 @@ h1{
     z-index: 7;
     font-size: 2.2em;
     font-family: "raleway";
-    padding: 0.5em;
+    padding: 0.5em 0.5em 0.5em 0;
     li, ul, a{
         font-weight: 300;
         text-align: center;
@@ -91,11 +91,14 @@ h1{
         transform: translate(20%, 0);
     }
     .croixCloseBurger{
+        cursor: pointer;
         rotate: 45deg;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+    margin-left: -100%;
+    transition: all 0.9s ease;
 }
 
 .menu-burger2{
@@ -104,8 +107,10 @@ h1{
     padding: 1em 1em 0.1em 1em;
 }
 
-
-
+.letVisible{
+    visibility: visible;
+    margin-left: 0;
+}
 
 
 .nav{
@@ -115,6 +120,7 @@ h1{
         display: flex;
         flex-direction: column;
         gap: 0.5em;
+        cursor: pointer;
     }
     .rec1{
         width: 3em;
