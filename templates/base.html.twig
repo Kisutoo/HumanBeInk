@@ -14,6 +14,30 @@
     </head>
     <body>
         <header>
+            <div class="selectLangue">
+                <div class="selectLangue2">
+                    <div class="croixCloseLangue">
+                        <div class="rec1"></div>
+                        <div class="rec2"></div>
+                    </div>
+                    <a href="#">
+                        <img class="drapeauSelect" src="{{ asset("img/fr-flag2.webp")}}" alt="Drapeau Français">
+                        <p>Français</p>
+                    </a>
+                    <a href="#">
+                        <img class="drapeauSelect" src="{{ asset("img/en-flag.webp")}}" alt="Drapeau Anglais">
+                        <p>English</p>
+                    </a>
+                    <a href="#">
+                        <img class="drapeauSelect" src="{{ asset("img/sp-flag.webp")}}" alt="Drapeau Espagnol">
+                        <p>Español</p>
+                    </a>
+                    <a href="#">
+                        <img class="drapeauSelect de" src="{{ asset("img/de-flag.webp")}}" alt="Drapeau Allemand">
+                        <p>Deutsch</p>
+                    </a>
+                </div>
+            </div>
             <div class="menu-burger">
                 <div class="menu-burger2">
                     <ul>
@@ -24,7 +48,7 @@
                             </div>
                         </li>
                         <li><a href="{{ path("app_accueil")}}">Accueil</a></li>
-                        <li><a href="#">Flash</a></li>
+                        <li><a href="{{ path("app_flash")}}">Flash</a></li>
                         <li><a href="#">WannaDo</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Contact</a></li>
@@ -46,7 +70,7 @@
                 
                 
                 <div class="langue">
-                    <a href=""><img class="drapeau" src="{{ asset("img/fr-flag.webp")}}" alt="Drapeau français"></a>
+                    <img class="drapeau" src="{{ asset("img/fr-flag.webp")}}" alt="Drapeau français">
                 </div>
             </nav> 
         </header>

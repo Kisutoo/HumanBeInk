@@ -2,21 +2,22 @@
     padding: 0;
     margin: 0;
     vertical-align: top;
-    
+}
+
+body{
+    width: 100%;
+    overflow-x: hidden;
 }
 
 h1{
     font-family: "Great Vibes";
-    background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
-    color: transparent;
-    background-clip: text;
     text-align: center;
     font-size: 6em;
     font-weight: 200;
 }
 
 .fondHomePage{
-    height: 60em;
+    height: 59.5em;
     z-index: 1;
 
     background-image: url(../img/fondHome.webp);
@@ -24,6 +25,48 @@ h1{
     background-size: 100%;
     background-position:center;
 }
+
+.sousTitre{
+    margin-top: -7em;
+    font-size: 1.5em;
+    font-family: "Raleway";
+    font-weight: 800;
+}
+
+.btnHomePage{
+    display: flex;
+    justify-content: space-between;
+    width: 50em;
+    margin-top: 4em;
+}
+button{
+    border: none;
+}
+
+button:active {
+  border-style: none;
+}
+
+.btn{
+    width: 12em;
+    font-family: "Raleway";
+    font-weight: 800;
+    padding: 0.8em;
+    border-radius: 10px;
+    font-size: 1.5em;
+    background-color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.goldPolice{
+    background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+    color: transparent;
+    background-clip: text;
+}  
 
 .fondHomeCalque
 {
@@ -33,11 +76,16 @@ h1{
 
 .homePage{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 60em;
     background-color: rgba(0, 0, 0, 0.4);
     transform: translate(0%, -200%);
+}
+
+.homePageTotal{
+    height: 59.5em;
 }
 
 .divTitre{
@@ -46,19 +94,19 @@ h1{
     justify-content: center;
     align-items: center;
     width: fit-content;
+    margin-top: 6em;
     transform: translate(0, -70%);
     a{
         width: 100%;
         text-align: center;
     }
     .logo{
-        width: 30%;
-        margin-bottom: 3em;
+        width: 35%;
+        margin-bottom: 2em;
     }
 }
 
 .menu-burger{
-    visibility: hidden;
     border-radius: 0 50px 50px 0;
     position: absolute;
     z-index: 7;
@@ -96,7 +144,7 @@ h1{
         align-items: center;
     }
     margin-left: -100%;
-    transition: all 0.9s ease;
+    transition: all 0.6s ease;
 }
 
 .menu-burger2{
@@ -105,18 +153,20 @@ h1{
     padding: 1em 1em 0.1em 1em;
 }
 
-.letVisible{
+.letVisibleBurger{
     visibility: visible;
     margin-left: 0;
 }
 
 header{
     position: sticky;
+    z-index: 2;
+    top: 0px;
 }
 
 .nav{
     margin: 3em;
-    width: 95%;
+    width: 94.5%;
     position: absolute;
     .burger{
         display: flex;
@@ -138,6 +188,7 @@ header{
     }
     .langue{
         width: 3%;
+        cursor: pointer;
         img{
             width: 100%;
         }
@@ -150,4 +201,131 @@ header{
 
 main{
     background-color: rgb(24, 24, 27);
+}
+
+
+.scroll-down {
+  height: 50px;
+  width: 30px;
+  border-radius: 50px;
+  position: absolute;
+  left: 50%;
+  bottom: 8em;
+  cursor: pointer;
+}
+.scroll-down::before,
+.scroll-down::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  height: 10px;
+  width: 10px;
+  transform: translate(-50%, -100%) rotate(45deg);
+    border: 2px solid;
+  border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+  border-image-slice: 1;
+  border-top: transparent;
+  border-left: transparent;
+  animation: scroll-down 1s ease-in-out infinite;
+}
+.scroll-down::before {
+  top: 30%;
+  animation-delay: 0.3s;
+  /* animation: scroll-down 1s ease-in-out infinite; */
+}
+
+@keyframes scroll-down {
+  0% {
+    /* top:20%; */
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    top: 90%;
+    opacity: 0;
+  }
+}
+
+.progress-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgb(34, 34, 34);
+}
+
+#progress-bar {
+  height: 10px;
+  background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+  width: 0px;
+}
+
+
+
+.selectLangue{
+    visibility: hidden;
+    white-space:nowrap;
+    overflow: hidden;
+    margin-right: -100%;
+    z-index: 2;
+    position: absolute;
+    font-size: 1.5em;
+    border-radius: 50px 0 0px 50px;
+    padding: 0.5em 0 0.5em 0.5em;
+    background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+    right: 0px;
+    z-index: 2;
+    .drapeauSelect{
+        width: 2em;
+    }
+    .de{
+        margin-left: -3px;
+        width: 55px;
+    }
+    .fr{
+        margin-bottom: 0.4em;
+    }
+    a{
+        font-family: "Raleway";
+        color: white;
+        text-decoration: none;
+        display: flex;
+        gap: 2em;
+        align-items: center;
+    }
+    .selectLangue2{
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 2em 2em 2em 2em;
+        border-radius: 50px 0 0px 50px;
+    }
+    .rec1, .rec2{
+        background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+        height: 0.2em;
+        width: 1em;
+        border-radius: 50px;
+    }
+    .rec1{
+        rotate: 90deg;
+        transform: translate(20%, 0);
+    }
+    .croixCloseLangue{
+        margin-bottom: 1.5em;
+        cursor: pointer;
+        rotate: 45deg;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    transition: all 0.6s ease;
+}
+
+.letVisibleLangue{
+    visibility: visible;
+    margin-right: 0;
 }
