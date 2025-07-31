@@ -4,6 +4,7 @@
     vertical-align: top;
 }
 
+
 body{
     width: 100%;
     overflow-x: hidden;
@@ -27,7 +28,7 @@ h1{
 }
 
 .sousTitre{
-    margin-top: -7em;
+    margin-top: 3.5em;
     font-size: 1.5em;
     font-family: "Raleway";
     font-weight: 800;
@@ -37,7 +38,7 @@ h1{
     display: flex;
     justify-content: space-between;
     width: 50em;
-    margin-top: 4em;
+    margin-top: 2em;
 }
 button{
     border: none;
@@ -88,22 +89,10 @@ button:active {
     height: 59.5em;
 }
 
-.divTitre{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    margin-top: 6em;
-    transform: translate(0, -70%);
-    a{
-        width: 100%;
-        text-align: center;
-    }
-    .logo{
-        width: 35%;
-        margin-bottom: 2em;
-    }
+.logo{
+    width: 15em;
+    margin-top: -15em;
+    margin-bottom: 2em;
 }
 
 .menu-burger{
@@ -370,3 +359,77 @@ bold{
         border: 5px solid;
     }
 }
+
+@media screen and (width >= 2560px)
+{
+
+    .fondHomeCalque{
+        height: 81em;
+    }
+    .homePageTotal{
+        height: 81em;
+    }
+    .fondHomePage{
+        height: 81em;
+    }
+    .homePage{
+        height: 81em;
+    }
+    .logo{
+        margin-top: -20em;
+        width: 20em;
+    }
+    .sousTitre{
+        margin-top: 3em;
+        font-size: 2em;
+    }
+    h1{
+        font-size: 8em;
+    }
+    .btnHomePage{
+        width: 65em;
+    }
+    .nav{
+        width: 96%;
+    }
+    .flashDef{
+        height: 35em;
+        h2{
+            font-size: 7em;
+        }
+        .defFlash{
+            font-size: 2em;
+        }
+    }
+
+    .flashContainerTotal{
+        h2{
+            margin: 1em;
+            font-size: 7em;
+            text-align: center;
+            font-family: "Great Vibes";
+            font-weight: 200;
+        }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .flashContainer{
+            height: 80em;
+            z-index: 2;
+        }
+    }
+    .backgroundFlash{
+        margin-top: 20em;
+        position: absolute;
+        z-index: 1;
+        display: grid;
+
+        grid-template-columns:repeat(3, 40em);
+    }
+    .flash{
+        width: 40%;
+    }
+    
+}
+
+
