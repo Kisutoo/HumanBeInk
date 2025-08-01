@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="fondConnexion"></div>
+    <div class="fondNoise"></div>
+    <div class="connexion profil">
+        <div class="bloc2">
+            <div class="profileForm">
+                {{ form_start(registrationForm) }}
+                <div class="editDiv">
+                    {{ form_row(registrationForm.pseudonyme) }}
+                    <button class="btn btnEdit">
+                        <p class="goldPolice">Editer</p>
+                    </button>
+                </div>
+                <div>
+                    {{ form_row(registrationForm.email, {"attr": {"disabled":"disabled"} }) }}
+                </div>
+                {{ form_end(registrationForm, {"render_rest" : false}) }}
+
+                <button class="btn btnSuprCompte">
+                    <p class="gradientSupr">Supprimer mon compte</p>
+                </button>
+            </div>
+        </div>
+        <div class="likeContainer">
+            <h3 class="goldPolice">Flashs Likés</h3>
+        </div>
+    </div>
+{% endblock %}

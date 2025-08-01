@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\security;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -42,5 +45,26 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route(path: '/profile', name: 'app_profile')]
+    public function profile(Request $request): Response
+    {
+        $user = $this->getUser();
+        if($user)
+        {   
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
+
+            return $this->render("security/profile.html.twig", [
+                'registrationForm' => $form,
+            ]);
+        }
+        else
+        {
+            return back();
+        }
+
+        
     }
 }

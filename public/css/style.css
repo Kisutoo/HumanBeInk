@@ -2,6 +2,9 @@
     padding: 0;
     margin: 0;
     vertical-align: top;
+    user-drag: none;
+	-webkit-user-drag: none;
+	-moz-user-select: none;  
 }
 
 
@@ -34,6 +37,15 @@ h1{
     background-size: 100%;
     background-position:center;
 }
+
+.gradientSupr
+{
+    background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(184, 0, 0) 100%);
+    color: transparent;
+    background-clip: text;
+}
+
+
 
 .sousTitre{
     margin-top: 3.5em;
@@ -75,6 +87,32 @@ button:active {
     background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
     color: transparent;
     background-clip: text;
+}
+
+.btnSuprCompte{
+    width: 15em;
+    height: 3.5em;
+}
+
+.profil{
+    .profileForm{
+        width: 50%;
+        div:nth-child(2){
+            input{
+                opacity: .5;
+            }
+        }
+        .editDiv{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+    .likeContainer{
+        width: 50%;
+    }
+    .btnEdit{
+        width: 5em;
+    }
 }
 
 .connexion{
@@ -173,7 +211,7 @@ button:active {
     }
 }
 .btnAddFlash{
-    
+    margin-top: -2em;
 }
 .connexionTotal{
         height: 100vh;
