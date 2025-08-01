@@ -5,10 +5,28 @@ let closeLangue = document.querySelector(".croixCloseLangue")
 let langue = document.querySelector(".langue")
 let popupLangue = document.querySelector(".selectLangue")
 let bar = document.getElementById("progress-bar") || null
-const pseudoProfil = document.getElementById("nickname_pseudonyme").value
+let pseudoProfilInput = document.getElementById("nickname_pseudonyme") || null
+let pseudoProfil = pseudoProfilInput.value || null
+var newPseudo = document.getElementById("nickname_pseudonyme") || null
+const editBtn = document.querySelector(".btnEdit") || null
 
-console.log(pseudoProfil);
 
+if(pseudoProfil && newPseudo && editBtn)
+{
+    newPseudo.addEventListener("change", () => {
+        
+        if(newPseudo.value == pseudoProfil)
+        {
+            editBtn.setAttribute("disabled", "");
+            editBtn.classList.add("disabled");
+        }
+        else
+        {
+            editBtn.removeAttribute("disabled", "");
+            editBtn.classList.remove("disabled");
+        }
+    })
+}
 
 
 

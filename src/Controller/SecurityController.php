@@ -26,14 +26,14 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $blocked = Null;
 
-        // $limiter = $anonymousApiLimiter->create($request->getClientIp());
+        $limiter = $anonymousApiLimiter->create($request->getClientIp());
 
-        // if (false === $limiter->consume(1)->isAccepted()) {
+        if (false === $limiter->consume(1)->isAccepted()) {
             
-        //     $this->addFlash("error", "Il y a eu trop de tentatives infructueuses, veuillez réessayer dans 10 minutes.");
+            $this->addFlash("error", "Il y a eu trop de tentatives infructueuses, veuillez réessayer dans 10 minutes.");
 
-        //     return $this->redirectToRoute("app_accueil");
-        // }
+            return $this->redirectToRoute("app_accueil");
+        }
 
 
         return $this->render('security/login.html.twig', [
@@ -62,13 +62,21 @@ class SecurityController extends AbstractController
         {   
             if ($form->isSubmitted() && $form->isValid()) {
 
-                $user->setPseudonyme($form->get("pseudonyme")->getData());
-
-                $entityManager->persist($user);
-                $entityManager->flush($user);
-        
-                $this->addFlash("success", "Votre pseudonyme a été modifié avec succès !");
-                return $this->redirectToRoute("app_profile");
+                if($user->getPseudonyme() == $form->get("pseudonyme")->getData())
+                {
+                    $this->addFlash("error", "Veuillez saisir un pseudonyme différent.");
+                    return $this->redirectToRoute("app_profile");
+                }
+                else
+                {
+                    $user->setPseudonyme($form->get("pseudonyme")->getData());
+    
+                    $entityManager->persist($user);
+                    $entityManager->flush($user);
+            
+                    $this->addFlash("success", "Votre pseudonyme a été modifié avec succès !");
+                    return $this->redirectToRoute("app_profile");
+                }
             }
 
             return $this->render("security/profile.html.twig", [
@@ -77,7 +85,7 @@ class SecurityController extends AbstractController
         }
         else
         {
-            return back();
+            return $this->redirectToRoute("app_accueil");
         }
 
         

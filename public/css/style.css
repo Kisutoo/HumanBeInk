@@ -112,6 +112,12 @@ button:active {
     height: 3.5em;
 }
 
+.disabled
+{
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 
 .connexion{
         display: flex;
