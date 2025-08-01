@@ -54,7 +54,7 @@
                         <li><a href="#">Contact</a></li>
                         <li></li>
                         {% if app.user %}
-                            <li class="userNav"><a href="#">Profil</a> | <a href="#">Déconnexion</a></li>
+                            <li class="userNav"><a href="#">Profil</a> | <a href="{{ path("app_logout")}}">Déconnexion</a></li>
                         {% else %}
                             <li class="userNav"><a href="{{ path("app_register")}}">Inscription</a> | <a href="{{ path("app_login")}}">Connexion</a></li>
                         {% endif %}

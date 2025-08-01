@@ -6,33 +6,46 @@
     <div class="connexionTotal">
         <div class="fondConnexion"></div>
         <div class="fondNoise"></div>
-        <div class="connexion">
-            <form method="post">
+        <div class="connexion login">
+            <div class="bloc1">
+                <a href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
                 <h1 class="goldPolice">Human Be Ink</h1>
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                <h2 class="goldPolice">Se connecter</h2>
+            </div>
+            <div class="bloc2">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+    
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <label for="username">Adresse email</label>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>  
                     </div>
-                {% endif %}
-                <h2 class="h3 mb-3 font-weight-normal">Se connecter</h2>
-                <label for="username">Adresse email</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-                <label for="password">Mot de passe</label>
-                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
-
-                {% if blocked is not null %}     
-                {% else %}
-                    <button class="btn " type="submit">
-                        Se connecter
-                    </button>
-                {% endif %}
-                
-            </form>
+                    <div>
+                        <label for="password">Mot de passe</label>
+                        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                    </div>
+                    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+                    <div class="lienslogin">
+                        <a href="#"><small>Mot de passe oublié</small></a>
+                        <a href="#"><small>Pas de compte ? Créez en un !</small></a>
+                    </div>
+    
+                    {% if blocked is not null %}     
+                    {% else %}
+                        <button class="btn " type="submit">
+                            <p class="goldPolice">Se connecter</p>
+                        </button>
+                    {% endif %}
+                    
+                </form>
+            </div>
         </div>
     </div>
     

@@ -30,6 +30,11 @@
 
     <div class="flashContainerTotal">
         <h2 class="goldPolice titreFlash">Flashs Disponibles</h2>
+        {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+            <button class="btn btnAddFlash">
+                <p class="goldPolice">Ajouter Flash</p>
+            </button>
+        {% endif %}
         <div class="backgroundFlash">
             <img class="flash" src="{{ asset("img/flashs/flash1.webp")}}" alt="">
             <img class="flash" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
@@ -45,7 +50,7 @@
             <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
         </div>
         <div class="flashContainer">
-            <img class="flash" src="{{ asset("img/flashs/flash1.webp")}}" alt="">
+            <a href="#"><img class="flash" src="{{ asset("img/flashs/flash1.webp")}}" alt=""></a>
             <img class="flash" src="{{ asset("img/flashs/flash9.webp")}}" alt="">
             <img class="flash" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
             <img class="flash" src="{{ asset("img/flashs/flash3.webp")}}" alt="">
