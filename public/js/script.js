@@ -6,13 +6,13 @@ let langue = document.querySelector(".langue")
 let popupLangue = document.querySelector(".selectLangue")
 let bar = document.getElementById("progress-bar") || null
 let pseudoProfilInput = document.getElementById("nickname_pseudonyme") || null
-let pseudoProfil = pseudoProfilInput.value || null
 var newPseudo = document.getElementById("nickname_pseudonyme") || null
 const editBtn = document.querySelector(".btnEdit") || null
 
 
-if(pseudoProfil && newPseudo && editBtn)
+if(pseudoProfilInput && newPseudo && editBtn)
 {
+    let pseudoProfil = pseudoProfilInput.value || null
     newPseudo.addEventListener("change", () => {
         
         if(newPseudo.value == pseudoProfil)
