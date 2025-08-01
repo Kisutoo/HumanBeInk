@@ -4,7 +4,16 @@ let closeBurger = document.querySelector(".croixCloseBurger")
 let closeLangue = document.querySelector(".croixCloseLangue")
 let langue = document.querySelector(".langue")
 let popupLangue = document.querySelector(".selectLangue")
+let bar = document.getElementById("progress-bar") || null
+const pseudoProfil = document.getElementById("nickname_pseudonyme").value
 
+console.log(pseudoProfil);
+
+
+
+
+
+// Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
 burgerIcon.addEventListener("click", () => {
     popupBurger.classList.toggle("letVisibleBurger")
 })
@@ -21,11 +30,20 @@ closeLangue.addEventListener("click", () => {
     popupLangue.classList.toggle("letVisibleLangue")
 })
 
-function myFunction() {
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (winScroll / height) * 100;
-    document.getElementById("progress-bar").style.width = scrolled + "%";
-}
 
+// Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
+function myFunction() {
+    if(bar)
+    {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + "%"; 
+    }
+    else
+    {
+        return null
+    }
+
+}
 window.onscroll = function() {myFunction()};

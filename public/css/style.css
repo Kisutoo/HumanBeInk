@@ -7,6 +7,23 @@
 	-moz-user-select: none;  
 }
 
+.alertsuccess, .alerterror
+{
+    padding-top: 1em;
+    width: 100%;
+    position: absolute;
+    justify-content: center;
+    z-index: 1;
+    color: green;
+    font-size: 2em;
+    font-family: "Raleway";
+    text-align: center;
+    background-color: rgba(0, 0,0,0);
+}
+.alerterror{
+    color: red;
+}
+
 
 body{
     width: 100%;
@@ -293,7 +310,7 @@ button:active {
 .menu-burger{
     border-radius: 0 50px 50px 0;
     position: absolute;
-    z-index: 7;
+    z-index: 999;
     font-size: 2.2em;
     font-family: "raleway";
     padding: 0.5em 0.5em 0.5em 0;
@@ -456,7 +473,7 @@ main{
     white-space:nowrap;
     overflow: hidden;
     margin-right: -100%;
-    z-index: 2;
+    z-index: 999;
     position: absolute;
     font-size: 1.5em;
     border-radius: 50px 0 0px 50px;
@@ -548,8 +565,8 @@ bold{
 }
 
 .profil{
-    margin-top: -30em;
-    padding: 10em;
+    transform: translate(0, -1800%);
+    padding: 0em 5em;
     height: fit-content;
     .profileForm{
         margin-left: 4em;
@@ -585,11 +602,14 @@ bold{
     }
     .likedFlash{
         margin-top: 2.5em;
-        height: 20em;
+        padding: 1em;
         border: 6px solid;
         border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
         border-image-slice: 1;
         background-color: rgba(0, 0, 0, .5);
+        display: grid;
+        grid-template-columns: repeat(3, 18em);
+        
     }
 }
 
@@ -613,16 +633,17 @@ bold{
         }
     }
     h2{
-        margin-top: -1em;
         font-size: 3.5em;
         font-family: "Raleway";
         text-align: center;
         font-weight: 800;
     }
     .headProfile{
-        transform: translate(0, -1070%);
+        transform: translate(0, -800%);
+        z-index: 8;
     }
 }
+
 
 
 @media screen and (width >= 2560px)
@@ -786,7 +807,7 @@ bold{
                 
             }
         }
-        input[type="text"], input[type="password"]{
+        input[type="text"], input[type="password"], input[type="email"]{
             width: 40em;
             margin-bottom: 2em;
             height: 3em;
@@ -815,6 +836,41 @@ bold{
         background-repeat: repeat;
         transform: translate(0, -100%);
     }
+
+    .registerDiv{
+        margin-top: -5em;
+    }
+
+    .allProfil{
+    .headProfile{
+        transform: translate(0, -1400%);
+    }
+    h2{
+        margin-top: -2em;
+    }
+}
+.login{
+    margin-top: -45em;
+    .btn{
+        height: 3.5em;
+        width: 10em;
+        font-size: 1.5em;
+    }
+    .lienslogin{
+        padding-top: 2em;
+        font-size: 1.2em;
+    }
+}
+.profil{
+    .profileForm{
+        margin-top: -4em;
+        margin-left: 12em;
+    }
+    transform: translate(0, -2550%);
+}
+
+
+
 }
 
 

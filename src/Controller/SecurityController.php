@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\NicknameType;
 use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,14 +26,14 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $blocked = Null;
 
-        $limiter = $anonymousApiLimiter->create($request->getClientIp());
+        // $limiter = $anonymousApiLimiter->create($request->getClientIp());
 
-        if (false === $limiter->consume(1)->isAccepted()) {
+        // if (false === $limiter->consume(1)->isAccepted()) {
             
-            $this->addFlash("error", "Il y a eu trop de tentatives infructueuses, veuillez réessayer dans 10 minutes.");
+        //     $this->addFlash("error", "Il y a eu trop de tentatives infructueuses, veuillez réessayer dans 10 minutes.");
 
-            return $this->redirectToRoute("app_accueil");
-        }
+        //     return $this->redirectToRoute("app_accueil");
+        // }
 
 
         return $this->render('security/login.html.twig', [
@@ -47,17 +49,30 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+
+
     #[Route(path: '/profile', name: 'app_profile')]
-    public function profile(Request $request): Response
+    public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
+
+        $form = $this->createForm(NicknameType::class);
+        $form->handleRequest($request);
         if($user)
         {   
-            $form = $this->createForm(RegistrationFormType::class, $user);
-            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $user->setPseudonyme($form->get("pseudonyme")->getData());
+
+                $entityManager->persist($user);
+                $entityManager->flush($user);
+        
+                $this->addFlash("success", "Votre pseudonyme a été modifié avec succès !");
+                return $this->redirectToRoute("app_profile");
+            }
 
             return $this->render("security/profile.html.twig", [
-                'registrationForm' => $form,
+                'nicknameForm' => $form,
             ]);
         }
         else

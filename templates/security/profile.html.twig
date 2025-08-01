@@ -4,10 +4,8 @@
 
 {% block body %}
     <div class="allProfil">
-        <div class="fond">
-            <div class="fondConnexion"></div>
-            <div class="fondNoise"></div>
-        </div>
+        <div class="fondConnexion"></div>
+        <div class="fondNoise"></div>
         <div class="headProfile">
             <div class="titreLogo">
                 <a  href="{{ path("app_accueil") }}"><img class="logo logoProfil" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
@@ -18,17 +16,17 @@
         <div class="connexion profil">
             <div class="bloc2">
                 <div class="profileForm">
-                    {{ form_start(registrationForm) }}
+                    {{ form_start(nicknameForm) }}
                     <div class="editDiv">
-                        {{ form_row(registrationForm.pseudonyme) }}
+                        {{ form_row(nicknameForm.pseudonyme, {"value": app.user.getPseudonyme() }) }}
                         <button class="btn btnEdit">
                             <p class="goldPolice">Editer</p>
                         </button>
                     </div>
                     <div>
-                        {{ form_row(registrationForm.email, {"attr": {"disabled":"disabled"} }) }}
+                        {{ form_row(nicknameForm.email, {"attr": {"disabled":"disabled", "value": app.user.getEmail() } }) }}
                     </div>
-                    {{ form_end(registrationForm, {"render_rest" : false}) }}
+                    {{ form_end(nicknameForm) }}
 
                     <button class="btn btnSuprCompte">
                         <p class="gradientSupr">Supprimer mon compte</p>
@@ -37,7 +35,12 @@
             </div>
             <div class="likeContainer">
                 <h3 class="goldPolice">Flashs Likés</h3>
-                <div class="likedFlash"></div>
+                <div class="likedFlash">            
+                    <img class="flash" src="{{ asset("img/flashs/flash4.webp")}}" alt="">
+                    <img class="flash" src="{{ asset("img/flashs/flash9.webp")}}" alt="">
+                    <img class="flash" src="{{ asset("img/flashs/flash6.webp")}}" alt="">
+                    <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
+                </div>
             </div>
         </div> 
     </div>
