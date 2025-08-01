@@ -53,7 +53,7 @@
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Contact</a></li>
                         <li></li>
-                        {% if app.user %}
+                        {% if app.user is defined and app.user is not null %}
                             <li class="userNav"><a href="{{ path("app_profile")}}">Profil</a> | <a href="{{ path("app_logout")}}">Déconnexion</a></li>
                         {% else %}
                             <li class="userNav"><a href="{{ path("app_register")}}">Inscription</a> | <a href="{{ path("app_login")}}">Connexion</a></li>

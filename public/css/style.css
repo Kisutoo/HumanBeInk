@@ -108,8 +108,10 @@ button:active {
 }
 
 .btnSuprCompte{
+    text-decoration: none;
+    margin-top: 3em;
     width: 15em;
-    height: 3.5em;
+
 }
 
 .disabled
@@ -874,6 +876,7 @@ bold{
     }
     transform: translate(0, -2550%);
 }
+
 
 
 

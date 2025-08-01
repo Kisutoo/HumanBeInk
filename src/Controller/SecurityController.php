@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\NicknameType;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,9 +86,31 @@ class SecurityController extends AbstractController
         }
         else
         {
+            $this->addFlash("error", "Vous devez vous connecter.");
+            return $this->redirectToRoute("app_accueil");
+        } 
+    }
+    
+
+    #[Route(path: "/delete", name: "app_delete_profile")]
+    public function deleteProfile(EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        $user = $this->getUser();
+        if($user)
+        {
+            $this->container->get('security.token_storage')->setToken(null);
+
+            $entityManager->remove($user);
+            $entityManager->flush();
+        
+            $this->addFlash("success", "Votre compte a été supprimé avec succès.");
             return $this->redirectToRoute("app_accueil");
         }
+        else
+        {
+            $this->addFlash("error", "Personne n'est connecté.");
+            return $this->redirectToRoute("app_accueil"); 
+        }
 
-        
     }
 }
