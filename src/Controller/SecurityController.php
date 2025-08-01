@@ -87,7 +87,7 @@ class SecurityController extends AbstractController
         else
         {
             $this->addFlash("error", "Vous devez vous connecter.");
-            return $this->redirectToRoute("app_accueil");
+            return $this->redirectToRoute("app_login");
         } 
     }
     
