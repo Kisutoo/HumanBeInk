@@ -83,6 +83,7 @@ button:active {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+
 .goldPolice{
     background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
     color: transparent;
@@ -94,26 +95,6 @@ button:active {
     height: 3.5em;
 }
 
-.profil{
-    .profileForm{
-        width: 50%;
-        div:nth-child(2){
-            input{
-                opacity: .5;
-            }
-        }
-        .editDiv{
-            display: flex;
-            flex-direction: row;
-        }
-    }
-    .likeContainer{
-        width: 50%;
-    }
-    .btnEdit{
-        width: 5em;
-    }
-}
 
 .connexion{
         display: flex;
@@ -565,6 +546,84 @@ bold{
     border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     border-image-slice: 1;
 }
+
+.profil{
+    margin-top: -30em;
+    padding: 10em;
+    height: fit-content;
+    .profileForm{
+        margin-left: 4em;
+        margin-top: -8em;
+        width: 50%;
+        div:nth-child(2){
+            input{
+                opacity: .5;
+            }
+        }
+        .editDiv{
+            margin-left: 8.4em;
+            display: flex;
+            flex-direction: row;
+            .btnEdit{
+                margin-top: 0.8em;
+                margin-left: 2em;
+            }
+        }
+    }
+    .likeContainer{
+        margin-top: -25em;
+        width: 50%;
+        text-align: center;
+        h3{
+            font-family: "Raleway";
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+    }
+    .btnEdit{
+        width: 5em;
+    }
+    .likedFlash{
+        margin-top: 2.5em;
+        height: 20em;
+        border: 6px solid;
+        border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+        border-image-slice: 1;
+        background-color: rgba(0, 0, 0, .5);
+    }
+}
+
+.allProfil{
+    height: 100vh;
+    .logoProfil{
+        width: 100%;
+    }
+    h1{
+        font-size: 5em;
+        text-align: left;
+    }
+    .titreLogo{
+        margin-left: 8em;
+        display: flex;
+        a{
+            width: 10%;
+            img{
+                margin-top: -3em;
+            }
+        }
+    }
+    h2{
+        margin-top: -1em;
+        font-size: 3.5em;
+        font-family: "Raleway";
+        text-align: center;
+        font-weight: 800;
+    }
+    .headProfile{
+        transform: translate(0, -1070%);
+    }
+}
+
 
 @media screen and (width >= 2560px)
 {

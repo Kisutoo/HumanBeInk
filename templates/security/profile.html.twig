@@ -3,30 +3,43 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-    <div class="fondConnexion"></div>
-    <div class="fondNoise"></div>
-    <div class="connexion profil">
-        <div class="bloc2">
-            <div class="profileForm">
-                {{ form_start(registrationForm) }}
-                <div class="editDiv">
-                    {{ form_row(registrationForm.pseudonyme) }}
-                    <button class="btn btnEdit">
-                        <p class="goldPolice">Editer</p>
+    <div class="allProfil">
+        <div class="fond">
+            <div class="fondConnexion"></div>
+            <div class="fondNoise"></div>
+        </div>
+        <div class="headProfile">
+            <div class="titreLogo">
+                <a  href="{{ path("app_accueil") }}"><img class="logo logoProfil" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
+                <h1 class="goldPolice">Human Be Ink</h1>
+            </div>
+            <h2 class="goldPolice">Mon Profil</h2>
+        </div>
+        <div class="connexion profil">
+            <div class="bloc2">
+                <div class="profileForm">
+                    {{ form_start(registrationForm) }}
+                    <div class="editDiv">
+                        {{ form_row(registrationForm.pseudonyme) }}
+                        <button class="btn btnEdit">
+                            <p class="goldPolice">Editer</p>
+                        </button>
+                    </div>
+                    <div>
+                        {{ form_row(registrationForm.email, {"attr": {"disabled":"disabled"} }) }}
+                    </div>
+                    {{ form_end(registrationForm, {"render_rest" : false}) }}
+
+                    <button class="btn btnSuprCompte">
+                        <p class="gradientSupr">Supprimer mon compte</p>
                     </button>
                 </div>
-                <div>
-                    {{ form_row(registrationForm.email, {"attr": {"disabled":"disabled"} }) }}
-                </div>
-                {{ form_end(registrationForm, {"render_rest" : false}) }}
-
-                <button class="btn btnSuprCompte">
-                    <p class="gradientSupr">Supprimer mon compte</p>
-                </button>
             </div>
-        </div>
-        <div class="likeContainer">
-            <h3 class="goldPolice">Flashs Likés</h3>
-        </div>
+            <div class="likeContainer">
+                <h3 class="goldPolice">Flashs Likés</h3>
+                <div class="likedFlash"></div>
+            </div>
+        </div> 
     </div>
+    
 {% endblock %}
