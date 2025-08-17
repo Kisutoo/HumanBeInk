@@ -28,6 +28,7 @@
 body{
     width: 100%;
     overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 h1{
@@ -120,6 +121,10 @@ button:active {
     cursor: not-allowed;
 }
 
+.pointer{
+    cursor: pointer;
+}
+
 
 .connexion{
         display: flex;
@@ -200,6 +205,20 @@ button:active {
         }
 
     }
+
+input[type="text"], input[type="password"], input[type="email"], select{
+    width: 20em;
+    margin-bottom: 2em;
+    height: 1.5em;
+    padding: 0.5em;
+    border-radius: 15px;
+    font-size: 1em;
+    background-color: rgba(49, 49, 49, 0.5);
+    color: white;
+    border: none;
+    font-family: "Raleway";
+    font-weight: 600;
+}
 
 .login{
     transform: translate(0, -470%);
@@ -621,6 +640,10 @@ bold{
     }
 }
 
+.disableScroll{
+    overflow: hidden;
+}
+
 .allProfil{
     height: 100vh;
     .logoProfil{
@@ -651,6 +674,98 @@ bold{
         z-index: 8;
     }
 }
+
+.popupAddFlash{
+    padding: 2em;
+    width: 50em;
+    height: 40em;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 30px;
+    border: 6px solid rgb(255, 231, 145, 1);
+    margin: auto;
+    color: white;
+    .rec1, .rec2{
+        background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+        height: 0.3em;
+        width: 1.5em;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+    .rec1{
+        rotate: 90deg;
+        transform: translate(20%, 0);
+    }
+    .croixPopupFlash{
+        margin-top: -2em;
+        margin-left: 48em;
+        rotate: 45deg;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+dialog::backdrop{
+    background: rgba(0, 0, 0, 0.9);
+}
+.flashForm{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    .flashFormSection{
+        gap: 7em;
+        margin-bottom: 3em;
+        display: flex;
+        font-family: "Raleway";
+        label{
+            font-size: 2em;
+            text-align: center;
+        }
+        div{
+            display: flex;
+            gap: 1em;
+            flex-direction: column;
+            input[type="text"],input[type="files"]{
+                height: 1em;
+                width: 15em;
+                padding: 0.4em;
+            }
+            select{
+                padding: 0.4em;
+                width: 16.1em;
+                height: 2.1em;
+            }
+        }
+    }
+    .divBtnAddFlashForm{
+        display: flex;
+        margin-top: 5em;
+        justify-content: center;
+    }
+    input, select{
+        border-radius: 7px;
+    }
+    button{
+        margin-top: 2em;
+        font-size: 1.2em;
+        background-color: rgb(20, 20, 20);
+    }
+}
+.hidden{
+    visibility: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

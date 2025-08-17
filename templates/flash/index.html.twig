@@ -3,6 +3,38 @@
 {% block title %}Flash | WannaDo {% endblock %}
 
 {% block body %}
+
+
+    {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+
+        <dialog class="popupAddFlash">
+            <div class="croixPopupFlash">
+                <div class="rec1"></div>
+                <div class="rec2"></div>
+            </div>
+            <div class="flashForm">
+                {{ form_start(flash_form) }}
+                <div class="flashFormSection">
+                    {{ form_row(flash_form.name) }}
+                    {{ form_row(flash_form.color) }}
+                </div>
+                <div class="flashFormSection">
+                    {{ form_row(flash_form.size) }}
+                    {{ form_row(flash_form.category) }}
+                </div>
+                <div class="flashFormSection">
+                    {{ form_row(flash_form.image) }}
+                </div>
+                <div class="divBtnAddFlashForm">
+                    <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+                </div>
+                {{ form_end(flash_form) }}
+            </div>
+        </dialog>
+    
+    {% endif %}
+
+
     <div class="homePageTotal">
         <div class="fondHomePage">
         </div>
@@ -28,6 +60,10 @@
         <p class="defFlash">Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué <bold>tel quel</bold>. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un <bold>tarif plus accessible</bold> qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’<bold>une seule fois par personne</bold>.</p>
     </div>
 
+
+ 
+
+
     <div class="flashContainerTotal">
         <h2 class="goldPolice titreFlash">Flashs Disponibles</h2>
         {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
@@ -50,14 +86,14 @@
             <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
         </div>
         <div class="flashContainer">
-            <a href="#"><img class="flash" src="{{ asset("img/flashs/flash1.webp")}}" alt=""></a>
-            <img class="flash" src="{{ asset("img/flashs/flash9.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash3.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash4.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash5.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash6.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
+            <img class="flash pointer" onclick="" src="{{ asset("img/flashs/flash1.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash9.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash3.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash4.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash5.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash6.webp")}}" alt="">
+            <img class="flash pointer" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
         </div>
 
 {% endblock %}

@@ -8,7 +8,30 @@ let bar = document.getElementById("progress-bar") || null
 let pseudoProfilInput = document.getElementById("nickname_pseudonyme") || null
 var newPseudo = document.getElementById("nickname_pseudonyme") || null
 const editBtn = document.querySelector(".btnEdit") || null
+let btnAddflash = document.querySelector(".btnAddFlash") || null
+let popupAddFlash = document.querySelector(".popupAddFlash") || null
+let body = document.querySelector("body")
+let closePopupFlash = document.querySelector(".croixPopupFlash")
 
+
+
+
+// Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
+function myFunction() {
+    if(bar)
+    {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        bar.style.width = scrolled + "%"; 
+    }
+    else
+    {
+        return null
+    }
+
+}
+window.onscroll = function() {myFunction()};
 
 if(pseudoProfilInput && newPseudo && editBtn)
 {
@@ -29,8 +52,6 @@ if(pseudoProfilInput && newPseudo && editBtn)
 }
 
 
-
-
 // Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
 burgerIcon.addEventListener("click", () => {
     popupBurger.classList.toggle("letVisibleBurger")
@@ -49,19 +70,28 @@ closeLangue.addEventListener("click", () => {
 })
 
 
-// Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
-function myFunction() {
-    if(bar)
-    {
-        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        var scrolled = (winScroll / height) * 100;
-        bar.style.width = scrolled + "%"; 
-    }
-    else
-    {
-        return null
-    }
-
+if(popupAddFlash && btnAddflash)
+{
+    btnAddflash.addEventListener("click", () => {
+        popupAddFlash.classList.remove("hidden")
+        popupAddFlash.showModal()
+        body.classList.add("disableScroll")
+        if(popupAddFlash.open)
+        {
+            addEventListener("keydown", (e) => {
+                if(e.key == "Escape")
+                {
+                    popupAddFlash.classList.add("hidden")
+                    body.classList.remove("disableScroll")
+                    return;
+                }
+            })
+            closePopupFlash.addEventListener("click", () => {
+                popupAddFlash.close()
+                body.classList.remove("disableScroll")
+                return;
+            })
+        }
+    });
 }
-window.onscroll = function() {myFunction()};
+
