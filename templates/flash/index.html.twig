@@ -86,14 +86,9 @@
             <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
         </div>
         <div class="flashContainer">
-            <img class="flash pointer" onclick="" src="{{ asset("img/flashs/flash1.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash9.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash3.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash4.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash5.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash6.webp")}}" alt="">
-            <img class="flash pointer" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
+            {% for flash in flashs %}
+                <img src="{{ asset( 'img/flashs/' ~ flash.image ) }}" alt="Tatouage de {{ flash.nom }}">
+            {% endfor %}o
         </div>
 
 {% endblock %}
