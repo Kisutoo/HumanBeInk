@@ -34,6 +34,30 @@
     
     {% endif %}
 
+        
+
+        <dialog class="popupAddFlash popupDetailFlash hidden">
+            <div class="croixPopupFlash croixFlash2">
+                <div class="rec1"></div>
+                <div class="rec2"></div>
+            </div>
+            <div class="divDetImage">
+                <img class="detImage" src="" alt="">
+            </div>
+            <div class="buttons">
+            {% if app.user is not null %}
+                <a href="#" class="btn">
+                    <p class="goldPolice">Ajouter aux favoris</p>
+                </a>
+            {% endif %}
+                <a href="#" class="btn">
+                    <p class="goldPolice">Contacter avec ce flash</p>
+                </a>
+            </div>
+        </dialog>
+    
+    
+
 
     <div class="homePageTotal">
         <div class="fondHomePage">
@@ -71,24 +95,11 @@
                 <p class="goldPolice">Ajouter Flash</p>
             </button>
         {% endif %}
-        <div class="backgroundFlash">
-            <img class="flash" src="{{ asset("img/flashs/flash1.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash2.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash3.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash4.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash5.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash6.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash7.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash8.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash7.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash8.webp")}}" alt="">
-            <img class="flash" src="{{ asset("img/flashs/flash10.webp")}}" alt="">
-        </div>
+
         <div class="flashContainer">
             {% for flash in flashs %}
-                <img src="{{ asset( 'img/flashs/' ~ flash.image ) }}" alt="Tatouage de {{ flash.nom }}">
-            {% endfor %}o
+                <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image ~'?fm=webp' ) }}" alt="Tatouage de {{ flash.nom }}">
+            {% endfor %}
         </div>
 
 {% endblock %}

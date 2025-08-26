@@ -12,6 +12,10 @@ let btnAddflash = document.querySelector(".btnAddFlash") || null
 let popupAddFlash = document.querySelector(".popupAddFlash") || null
 let body = document.querySelector("body")
 let closePopupFlash = document.querySelector(".croixPopupFlash")
+let closePopupFlash2 = document.querySelector(".croixFlash2")
+const flashs = document.getElementsByClassName('flash')
+let popupDetailFlash = document.querySelector(".popupDetailFlash") || null
+let detImage = document.querySelector(".detImage") || null
 
 
 
@@ -93,5 +97,47 @@ if(popupAddFlash && btnAddflash)
             })
         }
     });
+}
+
+
+for (let flash of flashs) {
+    flash.addEventListener('click', () => {
+
+        let img = flash.getAttribute("src")
+        let alt = flash.getAttribute("alt")
+
+        detImage.setAttribute("src", img)
+        detImage.setAttribute("alt", alt)
+
+        closePopupFlash2.classList.add("croixPopupFlash2")
+        popupDetailFlash.classList.remove("hidden")
+        popupDetailFlash.showModal()
+        body.classList.add("disableScroll")
+        if(popupDetailFlash.open)
+        {
+            addEventListener("keydown", (e) => {
+                if(e.key == "Escape")
+                {
+                    popupDetailFlash.classList.add("hidden")
+                    body.classList.remove("disableScroll")
+                    closePopupFlash2.classList.remove("croixPopupFlash2")
+                    detImage.setAttribute("alt", "")
+                    detImage.setAttribute("src", "")
+                    return;
+                }
+            })
+                closePopupFlash2.addEventListener("click", () => {
+                    console.log("test")
+                    popupDetailFlash.close()
+                    popupDetailFlash.classList.add("hidden")
+                    detImage.setAttribute("alt", "")
+                    detImage.setAttribute("src", "")
+
+                    closePopupFlash2.classList.remove("croixPopupFlash2")
+                    body.classList.remove("disableScroll")
+                    return;
+                })
+        }
+    })
 }
 

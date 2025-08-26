@@ -9,7 +9,7 @@
 
 .alertsuccess, .alerterror
 {
-    padding-top: 1em;
+    padding-top: 0.5em;
     width: 100%;
     position: absolute;
     justify-content: center;
@@ -262,12 +262,10 @@ input[type="text"], input[type="password"], input[type="email"], select{
         flex-direction: column;
         align-items: center;
         .flashContainer{
-            border: 5px solid;
-            border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+            border: 5px solid rgb(255, 231, 145);
             z-index: 3;
             backdrop-filter: blur(20px);
             border-radius: 20px;
-            border-image-slice: 1;
             background-color: rgba(0, 0, 0, .7);
         }
         border-bottom: 6px solid;
@@ -292,13 +290,15 @@ input[type="text"], input[type="password"], input[type="email"], select{
         width: 50%;
     }
     .flashContainer{
+        padding: 2em;
         min-height: 50em;
-        margin: 15em 0;
+        margin-bottom: 15em;
 
         height: fit-content;
         display: grid;
+        gap: 3em;
         justify-content: center;
-        grid-template-columns: repeat(4, 25em);
+        grid-template-columns: repeat(4, 20em);
         align-self: center;
         place-items: center;
         a{
@@ -682,7 +682,7 @@ bold{
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 30px;
     border: 6px solid rgb(255, 231, 145, 1);
-    margin: auto;
+    margin: auto;   
     color: white;
     .rec1, .rec2{
         background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
@@ -755,7 +755,34 @@ dialog::backdrop{
     visibility: hidden;
 }
 
-
+.popupDetailFlash
+{
+    display: flex;
+    padding: 1em;
+    flex-direction: column;
+    gap: 5em;
+    height: 30em;
+    .buttons{
+        a{
+            text-decoration: none;
+        }
+        display: flex;
+        gap: 2em;
+        text-align: center;
+    }
+    .divDetImage{
+        margin-bottom: 0.5em;
+        img{
+            scale: 130%;
+        }
+    }
+}
+.croixPopupFlash2{
+    position: absolute;
+    top: 2.5em;
+    z-index: 8;
+    padding-top: 2em;
+}
 
 
 
@@ -822,13 +849,6 @@ dialog::backdrop{
         display: flex;
         flex-direction: column;
         align-items: center;
-        .flashContainer{
-            border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
-            z-index: 3;
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border-image-slice: 1;
-        }
         border-bottom: 6px solid;
         border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
         border-image-slice: 1;
@@ -851,13 +871,14 @@ dialog::backdrop{
         width: 50%;
     }
     .flashContainer{
-        min-height: 50em;
-        margin: 15em 0;
-
+        min-height: 25em;
+        padding: 2em;
+        margin-bottom: 15em;
         height: fit-content;
         display: grid;
         justify-content: center;
-        grid-template-columns: repeat(4, 35em);
+        grid-template-columns: repeat(4, 22em);
+        gap: 5em;
         align-self: center;
         place-items: center;
     }
