@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -35,6 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 50)]
     private ?string $pseudonyme = null;
+
+    /**
+     * @var Collection<int, Flash>
+     */
+    #[ORM\ManyToMany(targetEntity: Flash::class, inversedBy: 'users')]
+    private Collection $flashs;
+
+    public function __construct()
+    {
+        $this->flashs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +138,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudonyme(string $pseudonyme): static
     {
         $this->pseudonyme = $pseudonyme;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Flash>
+     */
+    public function getFlashs(): Collection
+    {
+        return $this->flashs;
+    }
+
+    public function addFlash(Flash $flash): static
+    {
+        if (!$this->flashs->contains($flash)) {
+            $this->flashs->add($flash);
+        }
+
+        return $this;
+    }
+
+    public function removeFlash(Flash $flash): static
+    {
+        $this->flashs->removeElement($flash);
 
         return $this;
     }

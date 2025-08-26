@@ -51,7 +51,7 @@
                         <li><a href="{{ path("app_flash")}}">Flash</a></li>
                         <li><a href="#">WannaDo</a></li>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{ path("app_contact")}}">Contact</a></li>
                         <li></li>
                         {% if app.user is defined and app.user is not null %}
                             <li class="userNav"><a href="{{ path("app_profile")}}">Profil</a> | <a href="{{ path("app_logout")}}">Déconnexion</a></li>

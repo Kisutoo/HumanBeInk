@@ -755,6 +755,22 @@ dialog::backdrop{
     visibility: hidden;
 }
 
+input::file-selector-button{
+    border-style: none;
+    border-radius: 10px;
+    padding: 0.8em;
+    font-size: 1.5em;
+    font-family: "Raleway";
+    font-weight: 600;
+    cursor: pointer;
+    background-color: rgb(20, 20, 20);
+    color: rgba(190, 140, 37, 1);
+    transition: background-color 0.4s ease-in-out;
+}
+input::file-selector-button:hover{
+    background-color: rgb(10, 10, 10);
+}
+
 .popupDetailFlash
 {
     display: flex;
@@ -783,6 +799,89 @@ dialog::backdrop{
     z-index: 8;
     padding-top: 2em;
 }
+
+.formContact{
+    border-radius: 5px;
+    border: 4px solid rgba(190, 140, 37, 1);
+    padding: 5em;
+    width: 60%;
+    .divfiles{
+        input{
+            color: white;
+        }
+    }
+    div{
+        input:not(.files){
+            margin-bottom: 5em;
+            padding: 0.2;
+            height: 2em;
+            width: 25em;
+            border-radius: 5px;
+            border: 2px solid rgba(190, 140, 37, 1);
+        }
+        label{
+            padding-bottom: 0.5em;
+            color: white;
+            font-family: "Raleway";
+            text-align: center;
+            font-size: 2em;
+        }
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+        .textarea
+        {
+            background-color: rgb(20, 20, 20);
+            color: white;
+            font-size: 1em;
+            font-family: "Raleway";
+            padding: 1em;
+            width: 24em;
+            height: 15em;
+            border-radius: 5px;
+            border: 2px solid rgba(190, 140, 37, 1);
+            margin-bottom: 3em;
+        }
+        .files{
+            margin-top: 2em;
+            margin-bottom: 14em;
+        }
+    }
+    
+}
+
+.formContactTotal{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    padding-top: 5em;
+    background-color: rgb(9, 9, 9);
+    h2{
+        margin-bottom: 1.5em;
+        font-family: "Great Vibes";
+        font-size: 7em;
+        text-align: center;
+        font-weight: 200;
+    }   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
