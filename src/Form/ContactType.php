@@ -30,7 +30,7 @@ class ContactType extends AbstractType
             ])
             ->add('image', FileType::class, [
                 'label' => 'Dessin du tatouage (inspirations)',
-                'attr' => ['class' => 'files']
+                'attr' => ['class' => 'files', 'onchange' => 'previewFiles()']
             ])
             ->add('area', TextType::class, [
                 'label' => 'Zone tatouée'

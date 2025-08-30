@@ -10,7 +10,7 @@
         <div class="fondHomeCalque fondNoise">
         </div>
         <div class="homePage">
-            <a  href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
+            <a  href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" loading="lazy" alt="Logo de l'entreprise Human Be Ink"></a>
             <h1 class="titre goldPolice">Human Be Ink</h1>
             <h2 class="sousTitre goldPolice">Formulaire de contact</h2>
         </div>
@@ -26,17 +26,21 @@
 
         <div class="formContact">
             {{ form_start(contactType) }}
-                {{ form_row(contactType.name) }}
-                {{ form_row(contactType.email) }}
+                <div class="contact1">
+                    {{ form_row(contactType.name) }}
+                    {{ form_row(contactType.email) }}
+                </div>
                 {{ form_row(contactType.project) }}
+                <div class="contact1">
+                    {{ form_row(contactType.area) }}
+                    {{ form_row(contactType.size) }}
+                </div>
                 <div class="divfiles">
                     {{ form_row(contactType.image) }}
-                    <img src="" alt="">
+                    <img class="previewImage" src="{% if previewImage is not null %}/img/flashs/{{ previewImage }}{% endif %}" loading="lazy" alt="">
                 </div>
-                {{ form_row(contactType.area) }}
-                {{ form_row(contactType.size) }}
-                <div class="divBtnAddFlashForm">
-                    <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+                <div class="buttonSendForm">
+                    <button type="submit" class="btn"><p class="goldPolice">Envoyer</p></button>
                 </div>
             {{ form_end(contactType) }}
         </div>

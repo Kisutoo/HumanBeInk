@@ -237,6 +237,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 .btnAddFlash{
     margin-top: -2em;
+    margin-bottom: 3em;
 }
 .connexionTotal{
         height: 100vh;
@@ -262,7 +263,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
         flex-direction: column;
         align-items: center;
         .flashContainer{
-            border: 5px solid rgb(255, 231, 145);
+            border: 2px solid rgb(255, 231, 145);
             z-index: 3;
             backdrop-filter: blur(20px);
             border-radius: 20px;
@@ -340,7 +341,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
     z-index: 999;
     font-size: 2.2em;
     font-family: "raleway";
-    padding: 0.5em 0.5em 0.5em 0;
+    padding: 0.1em 0.1em 0.1em 0;
     li, ul, a{
         font-weight: 300;
         text-align: center;
@@ -504,7 +505,7 @@ main{
     position: absolute;
     font-size: 1.5em;
     border-radius: 50px 0 0px 50px;
-    padding: 0.5em 0 0.5em 0.5em;
+    padding: 0.1em 0 0.1em 0.1em;
     background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     right: 0px;
     z-index: 2;
@@ -681,7 +682,7 @@ bold{
     height: 40em;
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 30px;
-    border: 6px solid rgb(255, 231, 145, 1);
+    border: 2px solid rgb(255, 231, 145, 1);
     margin: auto;   
     color: white;
     .rec1, .rec2{
@@ -748,7 +749,7 @@ dialog::backdrop{
     button{
         margin-top: 2em;
         font-size: 1.2em;
-        background-color: rgb(20, 20, 20);
+        background-color: rgb(25, 26, 27);
     }
 }
 .hidden{
@@ -777,7 +778,7 @@ input::file-selector-button:hover{
     padding: 1em;
     flex-direction: column;
     gap: 5em;
-    height: 30em;
+    min-height: 30em;
     .buttons{
         a{
             text-decoration: none;
@@ -823,7 +824,6 @@ input::file-selector-button:hover{
             padding-bottom: 0.5em;
             color: white;
             font-family: "Raleway";
-            text-align: center;
             font-size: 2em;
         }
         display: flex;
@@ -836,18 +836,29 @@ input::file-selector-button:hover{
             font-size: 1em;
             font-family: "Raleway";
             padding: 1em;
-            width: 24em;
-            height: 15em;
+            width: 53em;
+            height: 10em;
             border-radius: 5px;
             border: 2px solid rgba(190, 140, 37, 1);
-            margin-bottom: 3em;
+            margin-bottom: 5em;
         }
         .files{
             margin-top: 2em;
-            margin-bottom: 14em;
         }
     }
-    
+    .buttonSendForm{
+        margin-top: 5em;
+        button{
+            width: fit-content;
+            padding: 0.8em 2em;
+        }
+    }
+    .contact1{
+        justify-content: center;
+        display: flex;
+        gap: 3em;
+        flex-direction: row;
+    }
 }
 
 .formContactTotal{
@@ -855,14 +866,54 @@ input::file-selector-button:hover{
     flex-direction: column;
     place-items: center;
     padding-top: 5em;
+    padding-bottom: 10em;
     background-color: rgb(9, 9, 9);
     h2{
-        margin-bottom: 1.5em;
+        margin-bottom: 0.5em;
         font-family: "Great Vibes";
         font-size: 7em;
         text-align: center;
         font-weight: 200;
     }   
+}
+.previewImage{
+    margin-top: 2em;
+    width: 15%;
+}
+
+footer{
+    font-family: "Raleway";
+    background: linear-gradient(180deg,rgba(9, 9, 9, 1) 1%, rgba(3, 0, 0, 1) 100%);
+    .footerContainer{
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        color: white;
+        display: flex;
+        flex-direction: column;
+        place-items: center;
+    }
+    .lienlogoreseau{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3em;
+    }
+    .logofooter{
+        width: 50%;
+    }
+    .liencontact{
+        margin-bottom: 2em;
+    }
+    .numerotel{
+        margin-bottom: 0.5em;
+    }
+    .droitsreservees{
+        margin: 5em 0;
+    }
+    .mentionslegales{
+        margin: 2em 0;
+    }
 }
 
 

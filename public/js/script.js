@@ -16,9 +16,8 @@ let closePopupFlash2 = document.querySelector(".croixFlash2")
 const flashs = document.getElementsByClassName('flash')
 let popupDetailFlash = document.querySelector(".popupDetailFlash") || null
 let detImage = document.querySelector(".detImage") || null
-
-
-
+let imgInp = document.querySelector(".files") || null
+let contactImage = document.querySelector(".previewImage")
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -103,11 +102,26 @@ if(popupAddFlash && btnAddflash)
 for (let flash of flashs) {
     flash.addEventListener('click', () => {
 
+        let buttonContact = document.querySelector("#flashButtonContact")
+        let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") || null
         let img = flash.getAttribute("src")
         let alt = flash.getAttribute("alt")
+        let id = flash.getAttribute("index")
 
+        if(buttonDeleteFlash != null)
+        {
+            buttonDeleteFlash.setAttribute("href", "/deleteFlash/" + id)
+        }
+
+        // Sert à récupérer seulement le nom de l'image 
+        imageNameArray = img.split("/")
+        imageName = imageNameArray[3]
+
+        
         detImage.setAttribute("src", img)
         detImage.setAttribute("alt", alt)
+        buttonContact.setAttribute("href", "/contact/" + imageName)
+
 
         closePopupFlash2.classList.add("croixPopupFlash2")
         popupDetailFlash.classList.remove("hidden")
@@ -123,21 +137,43 @@ for (let flash of flashs) {
                     closePopupFlash2.classList.remove("croixPopupFlash2")
                     detImage.setAttribute("alt", "")
                     detImage.setAttribute("src", "")
+                    buttonContact.setAttribute("href", "")
+                    if(buttonDeleteFlash != null)
+                    {
+                        buttonDeleteFlash.setAttribute("href", "")
+                    }
+
                     return;
                 }
             })
                 closePopupFlash2.addEventListener("click", () => {
-                    console.log("test")
+
                     popupDetailFlash.close()
                     popupDetailFlash.classList.add("hidden")
                     detImage.setAttribute("alt", "")
                     detImage.setAttribute("src", "")
-
+                    buttonContact.setAttribute("href", "")
+                    if(buttonDeleteFlash != null)
+                    {
+                        buttonDeleteFlash.setAttribute("href", "")
+                    }
+                    
                     closePopupFlash2.classList.remove("croixPopupFlash2")
                     body.classList.remove("disableScroll")
+
                     return;
                 })
         }
     })
+}
+
+if(imgInp != null)
+{
+    imgInp.onchange = evt => {
+      const [file] = imgInp.files
+      if (file) {
+        contactImage.src = URL.createObjectURL(file)
+      }
+    }
 }
 

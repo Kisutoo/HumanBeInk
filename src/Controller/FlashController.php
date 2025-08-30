@@ -62,6 +62,18 @@ final class FlashController extends AbstractController
             'flash_form' => $form,
             'flashs' => $flashs
         ]);
+    }
 
+    #[Route('/deleteFlash/{id}', name: 'delete_flash')]
+    public function deleteFlash(int $id, Request $request, EntityManagerInterface $em, FlashRepository $flashRepository)
+    {
+        $flash = $flashRepository->findOneBy(["id" => $id], []);
+
+        $em->remove($flash);
+        $em->flush();
+
+        $this->addFlash("success", "Le flash a bien été supprimé.");
+        return $this->redirectToRoute("app_flash");
+        
     }
 }
