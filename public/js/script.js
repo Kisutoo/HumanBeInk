@@ -17,7 +17,7 @@ const flashs = document.getElementsByClassName('flash')
 let popupDetailFlash = document.querySelector(".popupDetailFlash") || null
 let detImage = document.querySelector(".detImage") || null
 let imgInp = document.querySelector(".files") || null
-let contactImage = document.querySelector(".previewImage")
+let contactImage = document.querySelector(".previewImage") || null
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -169,10 +169,32 @@ for (let flash of flashs) {
 
 if(imgInp != null)
 {
+    if(contactImage.getAttribute("src") && imgInp.files.length == 0)
+    {
+        img = contactImage.getAttribute("src")
+
+        imageNameArray = img.split("/")
+        imageName = imageNameArray[3]
+        
+        const dataTransfer = new DataTransfer();
+        const myFile = new File(["Test"], imageName, {
+            type: 'text/plain',
+            lastModified: new Date(),
+        });
+        
+        dataTransfer.items.add(myFile);
+        imgInp.files = dataTransfer.files;
+    }
+
+
     imgInp.onchange = evt => {
       const [file] = imgInp.files
       if (file) {
         contactImage.src = URL.createObjectURL(file)
+      }
+      if(imgInp.files.length == 0)
+      {
+        contactImage.src = "";
       }
     }
 }
