@@ -25,7 +25,7 @@ class ContactType extends AbstractType
                 'label' => 'Adresse Email'
             ])
             ->add('project', TextareaType::class, [
-                'label' => 'Votre projet',
+                'label' => 'Votre projet (ou toute infos utiles)',
                 'attr' => ['class' => 'textarea']
             ])
             ->add('image', FileType::class, [

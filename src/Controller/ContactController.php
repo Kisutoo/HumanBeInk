@@ -3,15 +3,19 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mime\Part\File;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Mime\Email;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Mailer\Transport\TransportInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
 
 
 final class ContactController extends AbstractController
@@ -24,29 +28,67 @@ final class ContactController extends AbstractController
     EntityManagerInterface $em, 
     MailerInterface $mailer,
     #[Autowire(service: 'mailer.transport_factory')] $factory,
-    #[Autowire('%env(MAILER_DSN)%')] string $dsn
+    #[Autowire('%env(MAILER_DSN)%')] string $dsn,
+    Recaptcha3Validator $recaptcha3Validator
     ): Response
     {
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid())
         {
-            $transport = $factory->fromString($dsn);
-            $envoyeur = $form->get("email")->getData();
+            $score = $recaptcha3Validator->getLastResponse()->getScore();
 
-            $email = (new Email())
-            ->from($envoyeur)
-            ->to("poivron@humanbeink.com") // Email envoyé au tatoueur pour le projet du client
-            ->subject('Time for Symfony Mailer!')
-            ->text('Sending emails is fun again!')
-            ->html('<p>See Twig integration for better HTML integration!</p>');
+            if($score >= 0.5)
+            {
+                $transport = $factory->fromString($dsn);
+                
+                $envoyeur = $form->get("email")->getData();
+                $nomPrenom = $form->get("name")->getData();
+                $project = $form->get("project")->getData(); // On pourrait faire ça en une seule ligne en mettant tout dans un tableau associatif mais je trouve que faire de cette manière est plus lisible / représentatif
+                $taille = $form->get("size")->getData();
+                $zone = $form->get("area")->getData();
+                $imageForm = $form->get("image")->getData();
+                $imageUploadedPath = $imageForm->getPathname();
+                $imageMimeType = $imageForm->getMimetype();
+                $flashName = $imageForm->getClientOriginalName();
 
 
-            $transport->send($email);
+                $email = (new TemplatedEmail())
+                ->from($envoyeur)
+                ->to("poivron@humanbeink.com") // Email envoyé au tatoueur pour le projet du client
+                ->subject('Demande de tatouage/renseignements')
+                ->text('Sending emails is fun again!')
+                ->htmlTemplate("emails/contact.html.twig");
+                if($imageMimeType == "text/plain")
+                {
+                    $email->addPart((new DataPart(new File("../public/img/flashs/" . $flashName ), "inspiration", "image/webp"))->asInline());
+                }
+                else
+                {
+                    $email->addPart((new DataPart(new File($imageUploadedPath), "inspiration", $imageMimeType))->asInline());
+                }
+                $email->context([
+                    "envoyeur" => $envoyeur,
+                    "nomPrenom" => $nomPrenom,
+                    "project" => $project,
+                    "taille" => $taille,
+                    "zone" => $zone,
+                    "image" => $imageForm
+                ]);
 
-            $this->addFlash("success", "Email envoyé.");
-            return $this->redirectToRoute("app_contact");
+    
+                $transport->send($email);
+    
+                $this->addFlash("success", "Email envoyé.");
+                return $this->redirectToRoute("app_contact");
+            }
+            else
+            {
+                $this->addFlash("error", "Activité suspecte détectée.");
+                return $this->redirectToRoute("app_contact");
+            }
+            
         }
 
         if(!$image)

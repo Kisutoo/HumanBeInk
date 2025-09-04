@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lunasima:wght@400;700&family=Oswald:wght@200..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Tagesschrift&display=swap" rel="stylesheet">
+    <title>Demande de tatouage/renseignements</title>
+</head>
+<style>
+    body{
+        overflow-x: hidden;
+    }
+.mailContainer{
+    padding: 1.5em;
+    color: white;
+    font-weight: 500;
+    background-color: rgb(9, 9, 9);
+    font-family: "Raleway";
+
+}
+.imgMail{
+    width: 35vh;
+}
+
+.projet{
+    max-width: 35em;
+}
+
+bold{
+    font-weight: 800;
+}
+
+p{
+    font-size: 1em;
+}
+
+.txt{
+
+    font-size: 1.2em;
+    overflow-wrap: anywhere;
+    color: rgb(228, 228, 228);
+}
+
+div{
+    padding: 2em  4em;
+    display: flex;
+    flex-direction: column;
+}
+
+</style>
+<body>
+    
+    <div class="mailContainer">
+        <h1>Demande de contact</h1>
+        <div class="envoyeur">
+            <h2>De :</h2>
+            <p class="txt">{{ nomPrenom }}</p>
+        </div>
+
+        <div class="email">
+            <h2>Adresse email :</h2>
+            <p class="txt">{{ envoyeur }}</p>
+        </div>
+
+        <div class="zone">
+            <h2>Zone :</h2>
+            <p class="txt">{{ zone }}</p>
+        </div>
+
+        <div class="taille">
+            <h2>Taille :</h2>
+            <p class="txt">{{ taille }} cm</p>
+        </div>
+
+        <div class="projet">
+            <h2>Projet :</h2>
+            <p class="txt projet">{{ project }}</p>
+        </div>
+
+        <div class="inspi">
+            <h2>Inspirations :</h2>
+            <img class="imgMail" src="cid:inspiration" alt="Image d'inspiration">
+        </div>
+    </div>
+</body>
+</html>

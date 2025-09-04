@@ -90,8 +90,10 @@ class ConvertImageFormat {
             $IdFlash = $uniqueName . ".webp";
             //$affiche = 5f586bf96dcd38.73540086.webp
 
+            dd($newImg, $image);
             $flash->setImage($IdFlash);
-
+            
+            
             imagewebp($newImg, '../public/img/flashs/'. $IdFlash);
             // Déplace le fichier contenu dans le tableau file, au dossier public/img/flashs
 

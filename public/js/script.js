@@ -177,8 +177,8 @@ if(imgInp != null)
         imageName = imageNameArray[3]
         
         const dataTransfer = new DataTransfer();
-        const myFile = new File(["Test"], imageName, {
-            type: 'text/plain',
+        const myFile = new File(["image"], imageName, {
+            type: 'image/webp',
             lastModified: new Date(),
         });
         
