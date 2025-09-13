@@ -90,7 +90,6 @@ class ConvertImageFormat {
             $IdFlash = $uniqueName . ".webp";
             //$affiche = 5f586bf96dcd38.73540086.webp
 
-            dd($newImg, $image);
             $flash->setImage($IdFlash);
             
             

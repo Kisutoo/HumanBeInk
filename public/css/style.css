@@ -292,7 +292,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
     }
     .flashContainer{
         padding: 2em;
-        min-height: 50em;
+        min-height: 25em;
         margin-bottom: 15em;
 
         height: fit-content;
@@ -915,6 +915,47 @@ footer{
         margin: 2em 0;
     }
 }
+
+.pagination
+{
+    display: flex;
+    flex-direction: row;
+    place-items: center;
+    margin-bottom: 5em;
+    margin-left: 81em;
+    margin-top: -12em;
+    font-family: "Raleway";
+    span{
+        padding: 1em;
+        a{
+            cursor: pointer;
+            font-size: 2em;
+            background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
+            color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+        background-color: rgb(9,9,9);
+    }
+
+    .current{
+        font-size: 2em;
+        background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
+        color: transparent;
+        background-clip: text;
+    }
+
+    .first{
+        border-radius: 10px 0 0 10px;
+    }
+    .last{
+        border-radius:  0 10px 10px 0;
+    }
+}
+
+    .pagination .current{
+        background-color: aqua;
+    }
 
 
 

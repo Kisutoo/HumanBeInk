@@ -44,9 +44,19 @@ p{
 }
 
 div{
-    padding: 2em  4em;
     display: flex;
     flex-direction: column;
+}
+
+.div{
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+
+}
+
+.minidiv{
+    min-width: 10em;
 }
 
 </style>
@@ -54,32 +64,36 @@ div{
     
     <div class="mailContainer">
         <h1>Demande de contact</h1>
-        <div class="envoyeur">
-            <h2>De :</h2>
-            <p class="txt">{{ nomPrenom }}</p>
+        <div class="div ">
+           <div class="envoyeur minidiv">
+                <h2>De :</h2>
+                <p class="txt">{{ nomPrenom }}</p>
+            </div>
+
+            <div class="email minidiv">
+                <h2>Adresse email :</h2>
+                <p class="txt">{{ envoyeur }}</p>
+            </div> 
+        </div>
+        
+        <div class="div">
+            <div class="zone minidiv">
+                <h2>Zone :</h2>
+                <p class="txt">{{ zone }}</p>
+            </div>
+    
+            <div class="taille minidiv">
+                <h2>Taille :</h2>
+                <p class="txt">{{ taille }} cm</p>
+            </div>
         </div>
 
-        <div class="email">
-            <h2>Adresse email :</h2>
-            <p class="txt">{{ envoyeur }}</p>
-        </div>
-
-        <div class="zone">
-            <h2>Zone :</h2>
-            <p class="txt">{{ zone }}</p>
-        </div>
-
-        <div class="taille">
-            <h2>Taille :</h2>
-            <p class="txt">{{ taille }} cm</p>
-        </div>
-
-        <div class="projet">
+        <div class="projet minidiv">
             <h2>Projet :</h2>
             <p class="txt projet">{{ project }}</p>
         </div>
 
-        <div class="inspi">
+        <div class="inspi minidiv">
             <h2>Inspirations :</h2>
             <img class="imgMail" src="cid:inspiration" alt="Image d'inspiration">
         </div>

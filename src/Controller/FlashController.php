@@ -23,7 +23,17 @@ final class FlashController extends AbstractController
         $form = $this->createForm(FlashType::class);
         $form->handleRequest($request);
 
-        $flashs = $flashRepository->findAll([], []);
+        $page = $request->query->getInt("page", 1);
+        $flashs = $flashRepository->paginateFlashs($page);
+        $maxPages = ceil($flashs->getTotalItemCount() / 8);
+
+        if($request->get("ajax"))
+        {
+            return $this->render('flash/_flashContainer.html.twig', [
+                    "flashs" => $flashs,
+                    "maxPages" => $maxPages
+            ]);
+        }
 
         if($form->isSubmitted() && $form->isValid())
         {
@@ -58,9 +68,9 @@ final class FlashController extends AbstractController
 
 
         return $this->render('flash/index.html.twig', [
-            'controller_name' => 'FlashController',
             'flash_form' => $form,
-            'flashs' => $flashs
+            'flashs' => $flashs,
+            'maxPages' => $maxPages
         ]);
     }
 

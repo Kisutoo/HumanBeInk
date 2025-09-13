@@ -7,7 +7,7 @@
 
     {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
 
-        <dialog class="popupAddFlash">
+        <dialog class="popupAddFlash hidden">
             <div class="croixPopupFlash">
                 <div class="rec1"></div>
                 <div class="rec2"></div>
@@ -97,7 +97,7 @@
  
 
 
-    <div class="flashContainerTotal">
+    <div class="flashContainerTotal" data-maxpages={{ maxPages }}>
         <h2 class="goldPolice titreFlash">Flashs Disponibles</h2>
         {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
             <button class="btn btnAddFlash">
@@ -105,10 +105,11 @@
             </button>
         {% endif %}
 
-        <div class="flashContainer">
-            {% for flash in flashs %}
-                <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
-            {% endfor %}
+        <div id="flash-container">
+            {% include "flash/_flashContainer.html.twig" with { flashs: flashs, maxPages: maxPages } %}
         </div>
+    </div>
+    
 
+    {% include "_footer.html.twig" %}
 {% endblock %}

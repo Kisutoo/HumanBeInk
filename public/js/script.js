@@ -18,6 +18,8 @@ let popupDetailFlash = document.querySelector(".popupDetailFlash") || null
 let detImage = document.querySelector(".detImage") || null
 let imgInp = document.querySelector(".files") || null
 let contactImage = document.querySelector(".previewImage") || null
+let current = document.querySelector(".current") || null
+let pagination = document.querySelector(".pagination") || null
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -90,6 +92,7 @@ if(popupAddFlash && btnAddflash)
                 }
             })
             closePopupFlash.addEventListener("click", () => {
+                popupAddFlash.classList.add("hidden")
                 popupAddFlash.close()
                 body.classList.remove("disableScroll")
                 return;
@@ -98,74 +101,77 @@ if(popupAddFlash && btnAddflash)
     });
 }
 
+function clickFlash()
+{
+    for (let flash of flashs) {
+        flash.addEventListener('click', () => {
 
-for (let flash of flashs) {
-    flash.addEventListener('click', () => {
+            let buttonContact = document.querySelector("#flashButtonContact")
+            let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") || null
+            let img = flash.getAttribute("src")
+            let alt = flash.getAttribute("alt")
+            let id = flash.getAttribute("index")
 
-        let buttonContact = document.querySelector("#flashButtonContact")
-        let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") || null
-        let img = flash.getAttribute("src")
-        let alt = flash.getAttribute("alt")
-        let id = flash.getAttribute("index")
+            if(buttonDeleteFlash != null)
+            {
+                buttonDeleteFlash.setAttribute("href", "/deleteFlash/" + id)
+            }
 
-        if(buttonDeleteFlash != null)
-        {
-            buttonDeleteFlash.setAttribute("href", "/deleteFlash/" + id)
-        }
+            // Sert à récupérer seulement le nom de l'image 
+            imageNameArray = img.split("/")
+            imageName = imageNameArray[3]
 
-        // Sert à récupérer seulement le nom de l'image 
-        imageNameArray = img.split("/")
-        imageName = imageNameArray[3]
-
-        
-        detImage.setAttribute("src", img)
-        detImage.setAttribute("alt", alt)
-        buttonContact.setAttribute("href", "/contact/" + imageName)
+            
+            detImage.setAttribute("src", img)
+            detImage.setAttribute("alt", alt)
+            buttonContact.setAttribute("href", "/contact/" + imageName)
 
 
-        closePopupFlash2.classList.add("croixPopupFlash2")
-        popupDetailFlash.classList.remove("hidden")
-        popupDetailFlash.showModal()
-        body.classList.add("disableScroll")
-        if(popupDetailFlash.open)
-        {
-            addEventListener("keydown", (e) => {
-                if(e.key == "Escape")
-                {
-                    popupDetailFlash.classList.add("hidden")
-                    body.classList.remove("disableScroll")
-                    closePopupFlash2.classList.remove("croixPopupFlash2")
-                    detImage.setAttribute("alt", "")
-                    detImage.setAttribute("src", "")
-                    buttonContact.setAttribute("href", "")
-                    if(buttonDeleteFlash != null)
+            closePopupFlash2.classList.add("croixPopupFlash2")
+            popupDetailFlash.classList.remove("hidden")
+            popupDetailFlash.showModal()
+            body.classList.add("disableScroll")
+            if(popupDetailFlash.open)
+            {
+                addEventListener("keydown", (e) => {
+                    if(e.key == "Escape")
                     {
-                        buttonDeleteFlash.setAttribute("href", "")
+                        popupDetailFlash.classList.add("hidden")
+                        body.classList.remove("disableScroll")
+                        closePopupFlash2.classList.remove("croixPopupFlash2")
+                        detImage.setAttribute("alt", "")
+                        detImage.setAttribute("src", "")
+                        buttonContact.setAttribute("href", "")
+                        if(buttonDeleteFlash != null)
+                        {
+                            buttonDeleteFlash.setAttribute("href", "")
+                        }
+
+                        return;
                     }
-
-                    return;
-                }
-            })
-                closePopupFlash2.addEventListener("click", () => {
-
-                    popupDetailFlash.close()
-                    popupDetailFlash.classList.add("hidden")
-                    detImage.setAttribute("alt", "")
-                    detImage.setAttribute("src", "")
-                    buttonContact.setAttribute("href", "")
-                    if(buttonDeleteFlash != null)
-                    {
-                        buttonDeleteFlash.setAttribute("href", "")
-                    }
-                    
-                    closePopupFlash2.classList.remove("croixPopupFlash2")
-                    body.classList.remove("disableScroll")
-
-                    return;
                 })
-        }
-    })
+                    closePopupFlash2.addEventListener("click", () => {
+
+                        popupDetailFlash.close()
+                        popupDetailFlash.classList.add("hidden")
+                        detImage.setAttribute("alt", "")
+                        detImage.setAttribute("src", "")
+                        buttonContact.setAttribute("href", "")
+                        if(buttonDeleteFlash != null)
+                        {
+                            buttonDeleteFlash.setAttribute("href", "")
+                        }
+                        
+                        closePopupFlash2.classList.remove("croixPopupFlash2")
+                        body.classList.remove("disableScroll")
+
+                        return;
+                    })
+            }
+        })
+    }
 }
+clickFlash()
 
 if(imgInp != null)
 {
@@ -197,5 +203,57 @@ if(imgInp != null)
         contactImage.src = "";
       }
     }
+}
+
+function changeCurrentSpanToP()
+{
+    
+}
+
+
+function attachPaginationEvents() {
+    // récupère la pagination actuelle
+    let pagination = document.querySelector(".pagination");
+    if (!pagination) return;
+    for (let lienPagination of pagination.querySelectorAll("a")) {
+        lienPagination.addEventListener("click", (e) => {
+            e.preventDefault();
+            // ici, tu récupères le numéro de page
+            let page = 1;
+            if (lienPagination.innerText == ">" && nbPagination < maxPages)
+                page = nbPagination + 1;
+            else if (lienPagination.innerText == "<" && nbPagination > 1)
+                page = nbPagination - 1;
+            else if (lienPagination.innerText == "<<")
+                page = 1;
+            else if (lienPagination.innerText == ">>")
+                page = maxPages;
+            else if (!["<", ">", "<<", ">>"].includes(lienPagination.innerText))
+                page = parseInt(lienPagination.innerText);
+            // mets à jour la variable globale
+            nbPagination = page;
+            // fais l’appel AJAX
+            const url = new URL(window.location.href);
+            fetch(url.pathname + "?page=" + page + "&ajax=1", {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+            .then(r => r.text())
+            .then(html => {
+                document.querySelector("#flash-container").innerHTML = html;
+                // ⚠️ relance les events sur la nouvelle pagination
+                attachPaginationEvents();
+                clickFlash();
+                changeCurrentSpanToP()
+            })
+            .catch(e => console.error(e));
+        });
+    }
+}
+
+if(current && pagination)
+{
+    attachPaginationEvents()    
 }
 
