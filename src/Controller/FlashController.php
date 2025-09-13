@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Service\ConvertImageFormat;
 use App\Entity\Flash;
 use App\Form\FlashType;
 use League\Glide\ServerFactory;
 use App\Repository\FlashRepository;
+use App\Service\ConvertImageFormat;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,20 +19,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class FlashController extends AbstractController
 {
     #[Route('/flash', name: 'app_flash')]
-    public function index(Request $request, EntityManagerInterface $em, FlashRepository $flashRepository): Response
+    public function index(Request $request, EntityManagerInterface $em, FlashRepository $flashRepository, CategoryRepository $categoryRepository): Response
     {   
         $form = $this->createForm(FlashType::class);
         $form->handleRequest($request);
 
         $page = $request->query->getInt("page", 1);
         $flashs = $flashRepository->paginateFlashs($page);
+        $categories = $categoryRepository->findAll([], []);
         $maxPages = ceil($flashs->getTotalItemCount() / 8);
 
         if($request->get("ajax"))
         {
             return $this->render('flash/_flashContainer.html.twig', [
                     "flashs" => $flashs,
-                    "maxPages" => $maxPages
+                    "maxPages" => $maxPages,
+                    "categories" => $categories
             ]);
         }
 
@@ -70,7 +73,8 @@ final class FlashController extends AbstractController
         return $this->render('flash/index.html.twig', [
             'flash_form' => $form,
             'flashs' => $flashs,
-            'maxPages' => $maxPages
+            'maxPages' => $maxPages,
+            'categories' => $categories
         ]);
     }
 

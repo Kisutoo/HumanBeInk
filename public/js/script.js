@@ -20,6 +20,12 @@ let imgInp = document.querySelector(".files") || null
 let contactImage = document.querySelector(".previewImage") || null
 let current = document.querySelector(".current") || null
 let pagination = document.querySelector(".pagination") || null
+let flashContainerTotal = document.querySelector(".flashContainerTotal");
+let maxPagePagination = flashContainerTotal ? flashContainerTotal.getAttribute("data-maxpages") : null
+const categories = document.getElementsByClassName('btnFilter')
+let btnShowFilters = document.querySelector(".btnShowFilters") || null
+let popupFilters = document.querySelector(".popupFilters") || null
+let closePopupFilter = document.querySelector(".croixPopupFilter") || null
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -53,6 +59,48 @@ if(pseudoProfilInput && newPseudo && editBtn)
             editBtn.removeAttribute("disabled", "");
             editBtn.classList.remove("disabled");
         }
+    })
+}
+
+if(btnShowFilters)
+{
+    btnShowFilters.addEventListener("click", () => {
+        body.classList.add("disableScroll")
+        popupFilters.classList.remove("hidden")
+        popupFilters.showModal();
+
+        addEventListener("keydown", (e) => {
+            if(e.key == "Escape")
+            {
+                popupFilters.classList.add("hidden")
+                body.classList.remove("disableScroll")
+                return;
+            }
+        })
+        closePopupFilter.addEventListener("click", () => {
+                popupFilters.classList.add("hidden")
+                popupFilters.close()
+                body.classList.remove("disableScroll")
+                return;
+            })
+        console.log(categories)
+        for(let category of categories)
+        {
+            if(category.getAttribute("index") == "0")
+            {
+                category.addEventListener("click", () =>{
+                    category.classList.add("activeFilter")
+                    category.setAttribute("index", "1")
+                })
+            }
+            if(category.getAttribute("index") == "1")
+            {
+                category.addEventListener("click", () =>{
+                    category.classList.remove("activeFilter")
+                    category.setAttribute("index", "0")
+                })
+            }
+        };
     })
 }
 
@@ -100,6 +148,8 @@ if(popupAddFlash && btnAddflash)
         }
     });
 }
+
+
 
 function clickFlash()
 {
@@ -205,24 +255,39 @@ if(imgInp != null)
     }
 }
 
-function changeCurrentSpanToP()
+function changeCurrentSpanToP(maxPagePagination)
 {
-    
+    let current = document.querySelector(".current") || null
+
+    nbCurrent = current.innerText
+    current.innerHTML = "<p class=goldPolice >" + nbCurrent + "</p>"
+
+    if(nbCurrent == "1")
+        current.classList.add("first")
+    else if(nbCurrent == maxPagePagination)
+        current.classList.add("last")
 }
+if(maxPagePagination)
+    changeCurrentSpanToP(maxPagePagination)
 
 
-function attachPaginationEvents() {
+
+
+function attachPaginationEvents(maxPagePagination) {
     // récupère la pagination actuelle
     let pagination = document.querySelector(".pagination");
+    let nbPagination = parseInt(document.querySelector(".current").innerText)
+
     if (!pagination) return;
+
     for (let lienPagination of pagination.querySelectorAll("a")) {
         lienPagination.addEventListener("click", (e) => {
             e.preventDefault();
             // ici, tu récupères le numéro de page
             let page = 1;
-            if (lienPagination.innerText == ">" && nbPagination < maxPages)
+            if (lienPagination.innerText == ">")
                 page = nbPagination + 1;
-            else if (lienPagination.innerText == "<" && nbPagination > 1)
+            else if (lienPagination.innerText == "<")
                 page = nbPagination - 1;
             else if (lienPagination.innerText == "<<")
                 page = 1;
@@ -245,7 +310,7 @@ function attachPaginationEvents() {
                 // ⚠️ relance les events sur la nouvelle pagination
                 attachPaginationEvents();
                 clickFlash();
-                changeCurrentSpanToP()
+                changeCurrentSpanToP(maxPagePagination)
             })
             .catch(e => console.error(e));
         });
@@ -254,6 +319,6 @@ function attachPaginationEvents() {
 
 if(current && pagination)
 {
-    attachPaginationEvents()    
+    attachPaginationEvents(maxPagePagination)    
 }
 

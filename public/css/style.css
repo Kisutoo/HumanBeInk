@@ -927,7 +927,7 @@ footer{
     font-family: "Raleway";
     span{
         padding: 1em;
-        a{
+        a, p{
             cursor: pointer;
             font-size: 2em;
             background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
@@ -937,12 +937,11 @@ footer{
         }
         background-color: rgb(9,9,9);
     }
-
     .current{
-        font-size: 2em;
-        background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
-        color: transparent;
-        background-clip: text;
+        p{
+            cursor: default;
+        }
+        background-color: rgb(20, 20, 20);
     }
 
     .first{
@@ -953,9 +952,72 @@ footer{
     }
 }
 
-    .pagination .current{
-        background-color: aqua;
+.btnFilter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+    p{
+        font-size: 0.9em;
     }
+    min-width: 5em;
+    width: fit-content;
+    border-radius: 50px;
+}
+
+.btnShowFilters{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2em;
+    p{
+        text-align: center;   
+    }
+    width: 8em;
+}
+
+.categoryFilters
+{
+    justify-content: baseline;
+    align-items: baseline;
+    height: 5em;
+    display: grid;
+    grid-template-columns: repeat(4, 12em);
+    gap: 0.5em;
+    margin-bottom: 10em;
+}
+
+.filterIcon{
+    display: flex;
+    flex-direction: column;
+    .filterBarTop{
+        display: flex;
+        .rectangle{
+            background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
+            height: 0.2em;
+            width: 1.5em;
+            border-radius: 20px;
+        }
+        .carre{
+            transform: translate(-1.2em, -0.08em);
+            background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
+            padding: 0.2em;
+            border-radius: 50px;
+        }
+        .carre2{
+            transform: translate(-0.65em, -0.08em);
+        }
+    }
+    transform: translate(0, 0.1em);
+}
+
+.popupFilters{
+    height: 22em;
+}
+
+.activeFilter{
+    background-color: aquamarine;
+}
+
 
 
 
