@@ -28,13 +28,24 @@ final class FlashController extends AbstractController
         $flashs = $flashRepository->paginateFlashs($page);
         $categories = $categoryRepository->findAll([], []);
         $maxPages = ceil($flashs->getTotalItemCount() / 8);
+        
+        if($request->get("ajax") == "2")
+        {
+            $idCategories = $request->get("categories");
+            $filtredFlashs = $flashRepository->paginateFlashsWithCategories($page, $idCategories);
 
+            return $this->render("flash/_flashContainer.html.twig", [
+                "flashs" => $filtredFlashs,
+                "maxPages" => $maxPages,
+                "categories" => $categories,
+            ]);
+        }
         if($request->get("ajax"))
         {
             return $this->render('flash/_flashContainer.html.twig', [
                     "flashs" => $flashs,
                     "maxPages" => $maxPages,
-                    "categories" => $categories
+                    "categories" => $categories,
             ]);
         }
 
@@ -74,7 +85,7 @@ final class FlashController extends AbstractController
             'flash_form' => $form,
             'flashs' => $flashs,
             'maxPages' => $maxPages,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 

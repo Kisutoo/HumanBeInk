@@ -26,6 +26,7 @@ const categories = document.getElementsByClassName('btnFilter')
 let btnShowFilters = document.querySelector(".btnShowFilters") || null
 let popupFilters = document.querySelector(".popupFilters") || null
 let closePopupFilter = document.querySelector(".croixPopupFilter") || null
+const url = new URL(window.location.href);
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -59,48 +60,6 @@ if(pseudoProfilInput && newPseudo && editBtn)
             editBtn.removeAttribute("disabled", "");
             editBtn.classList.remove("disabled");
         }
-    })
-}
-
-if(btnShowFilters)
-{
-    btnShowFilters.addEventListener("click", () => {
-        body.classList.add("disableScroll")
-        popupFilters.classList.remove("hidden")
-        popupFilters.showModal();
-
-        addEventListener("keydown", (e) => {
-            if(e.key == "Escape")
-            {
-                popupFilters.classList.add("hidden")
-                body.classList.remove("disableScroll")
-                return;
-            }
-        })
-        closePopupFilter.addEventListener("click", () => {
-                popupFilters.classList.add("hidden")
-                popupFilters.close()
-                body.classList.remove("disableScroll")
-                return;
-            })
-        console.log(categories)
-        for(let category of categories)
-        {
-            if(category.getAttribute("index") == "0")
-            {
-                category.addEventListener("click", () =>{
-                    category.classList.add("activeFilter")
-                    category.setAttribute("index", "1")
-                })
-            }
-            if(category.getAttribute("index") == "1")
-            {
-                category.addEventListener("click", () =>{
-                    category.classList.remove("activeFilter")
-                    category.setAttribute("index", "0")
-                })
-            }
-        };
     })
 }
 
@@ -275,9 +234,10 @@ if(maxPagePagination)
 
 function attachPaginationEvents(maxPagePagination) {
     // récupère la pagination actuelle
+
     let pagination = document.querySelector(".pagination");
     let nbPagination = parseInt(document.querySelector(".current").innerText)
-
+    
     if (!pagination) return;
 
     for (let lienPagination of pagination.querySelectorAll("a")) {
@@ -298,8 +258,15 @@ function attachPaginationEvents(maxPagePagination) {
             // mets à jour la variable globale
             nbPagination = page;
             // fais l’appel AJAX
-            const url = new URL(window.location.href);
-            fetch(url.pathname + "?page=" + page + "&ajax=1", {
+
+
+
+
+
+
+            
+
+            fetch(url.pathname + "?page=" + nbPagination + "&ajax=1", {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
@@ -316,6 +283,84 @@ function attachPaginationEvents(maxPagePagination) {
         });
     }
 }
+
+function filterFlashContainer()
+{
+    btnShowFilters.addEventListener("click", () => {
+
+        let params = new URLSearchParams();
+        let submitFilter = document.querySelector(".submitFilterBtn")
+        url
+
+        body.classList.add("disableScroll");
+        popupFilters.classList.remove("hidden");
+        popupFilters.showModal();
+
+        addEventListener("keydown", (e) => {
+            if(e.key == "Escape")
+            {
+                popupFilters.classList.add("hidden");
+                body.classList.remove("disableScroll");
+                return;
+            }
+        })
+        closePopupFilter.addEventListener("click", () => {
+                popupFilters.classList.add("hidden");
+                popupFilters.close();
+                body.classList.remove("disableScroll");
+                return;
+            })
+        for(let category of categories)
+        {
+            category.addEventListener("click", () => {
+                if(category.getAttribute("index") == "0")
+                {
+                    let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+                    params.append("categories[]", catId)
+
+                    category.classList.add("activeFilter");
+                    category.setAttribute("index", "1");
+                    return;
+                }
+                if(category.getAttribute("index") == "1")
+                {
+                    let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+                    params.delete("categories[]", catId)
+
+                    category.classList.remove("activeFilter");
+                    category.setAttribute("index", "0");
+                    return;
+                }
+            })
+        };
+        submitFilter.addEventListener("click", () => {
+
+
+            fetch(url.pathname + "?" + params.toString() + "&ajax=2", {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+            .then(r => r.text())
+            .then(html => {
+                document.querySelector("#flash-container").innerHTML = html;
+
+                if(pagination) attachPaginationEvents(maxPagePagination);
+
+                clickFlash();
+                changeCurrentSpanToP(maxPagePagination)
+            })
+            .catch(e => console.error(e));
+
+            popupFilters.classList.add("hidden");
+            popupFilters.close();
+            body.classList.remove("disableScroll");
+        })
+    })
+}
+filterFlashContainer()
+
+
 
 if(current && pagination)
 {

@@ -7,11 +7,11 @@
     <div class="categoryFilters">
         {% for category in categories %}
             <div class="btnFilter btn" index="0">
-                <p class=" goldPolice" data-id="{{ category.id }}">{{ category }}</p>
+                <p id="btnFilter" class="goldPolice" data-id="{{ category.id }}">{{ category }}</p>
             </div>
         {% endfor %}
     </div>
-    <div class="btn">
+    <div class="btn submitFilterBtn">
         <p class="goldPolice">Filtrer</p>
     </div>
 </dialog>

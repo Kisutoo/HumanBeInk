@@ -32,6 +32,21 @@ class FlashRepository extends ServiceEntityRepository
         );
     }
 
+    public function paginateFlashsWithCategories(int $page, array $categoryArray): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->createQueryBuilder("r")
+            ->where("r.category IN (:categoryArray)")
+            ->setParameter("categoryArray", $categoryArray),
+            $page,
+            8,
+            [
+                "sort_field_name" => "category_id",
+                "sort_direction_name" => "ASC"
+            ]
+        );
+    }
+
     //    /**
     //     * @return Flash[] Returns an array of Flash objects
     //     */
