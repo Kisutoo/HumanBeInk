@@ -20,13 +20,14 @@ let imgInp = document.querySelector(".files") || null
 let contactImage = document.querySelector(".previewImage") || null
 let current = document.querySelector(".current") || null
 let pagination = document.querySelector(".pagination") || null
-let flashContainerTotal = document.querySelector(".flashContainerTotal");
-let maxPagePagination = flashContainerTotal ? flashContainerTotal.getAttribute("data-maxpages") : null
+let flashContainer = document.querySelector(".flashContainer");
+let maxPagePagination = flashContainer ? flashContainer.getAttribute("data-maxpages") : null
 const categories = document.getElementsByClassName('btnFilter')
 let btnShowFilters = document.querySelector(".btnShowFilters") || null
 let popupFilters = document.querySelector(".popupFilters") || null
 let closePopupFilter = document.querySelector(".croixPopupFilter") || null
 const url = new URL(window.location.href);
+let params = new URLSearchParams();
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -107,6 +108,61 @@ if(popupAddFlash && btnAddflash)
         }
     });
 }
+
+function openClosePopupFilter(params)
+{
+
+    btnShowFilters.addEventListener("click", () => {
+
+        body.classList.add("disableScroll");
+        popupFilters.classList.remove("hidden");
+        popupFilters.showModal();
+
+        addEventListener("keydown", (e) => {
+            if(e.key == "Escape")
+            {
+                popupFilters.classList.add("hidden");
+                body.classList.remove("disableScroll");
+                return;
+            }
+        })
+        closePopupFilter.addEventListener("click", () => {
+        popupFilters.classList.add("hidden");
+        popupFilters.close();
+        body.classList.remove("disableScroll");
+        return;
+        })
+    })
+    for(let category of categories)
+    {
+        category.addEventListener("click", () => {
+            console.log("test")
+
+            if(category.getAttribute("index") == "0")
+            {
+                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+
+                params.append("categories[]", catId)
+                category.classList.add("activeFilter");
+                category.setAttribute("index", "1");
+
+                return params;
+            }
+            if(category.getAttribute("index") == "1")
+            {
+                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+
+                params.delete("categories[]", catId)
+                category.classList.remove("activeFilter");
+                category.setAttribute("index", "0");
+
+                return params;
+            }
+
+        })
+    }
+}
+openClosePopupFilter(params)
 
 
 
@@ -214,8 +270,11 @@ if(imgInp != null)
     }
 }
 
+
 function changeCurrentSpanToP(maxPagePagination)
 {
+    if(maxPagePagination == "1" || maxPagePagination == "0") return;
+
     let current = document.querySelector(".current") || null
 
     nbCurrent = current.innerText
@@ -231,19 +290,49 @@ if(maxPagePagination)
 
 
 
-
-function attachPaginationEvents(maxPagePagination) {
+function attachPaginationEvents(maxPagePagination, params) {
     // récupère la pagination actuelle
+
+    if(parseInt(maxPagePagination) <= 1) return;
 
     let pagination = document.querySelector(".pagination");
     let nbPagination = parseInt(document.querySelector(".current").innerText)
+
+    let submitFilter = document.querySelector(".submitFilterBtn")
     
+
     if (!pagination) return;
+
+    submitFilter.addEventListener("click", () => {
+
+        fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajax=1", {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(r => r.text())
+        .then(html => {
+            document.querySelector("#flash-container").innerHTML = html
+
+            let flashContainer = document.querySelector(".flashContainer");
+            let newMaxPagePagination = flashContainer.getAttribute("data-maxpages")
+            console.log(newMaxPagePagination)
+
+            changeCurrentSpanToP(newMaxPagePagination)
+            attachPaginationEvents(newMaxPagePagination, params);
+            clickFlash();
+        })
+        .catch(e => console.error(e))
+        popupFilters.classList.add("hidden");
+        popupFilters.close();
+        body.classList.remove("disableScroll");
+    })
+
 
     for (let lienPagination of pagination.querySelectorAll("a")) {
         lienPagination.addEventListener("click", (e) => {
             e.preventDefault();
-            // ici, tu récupères le numéro de page
+            // ici, on récupères le numéro de page
             let page = 1;
             if (lienPagination.innerText == ">")
                 page = nbPagination + 1;
@@ -257,16 +346,9 @@ function attachPaginationEvents(maxPagePagination) {
                 page = parseInt(lienPagination.innerText);
             // mets à jour la variable globale
             nbPagination = page;
-            // fais l’appel AJAX
 
-
-
-
-
-
-            
-
-            fetch(url.pathname + "?page=" + nbPagination + "&ajax=1", {
+        
+            fetch(url.pathname + "?" + params.toString() + "&page=" + nbPagination + "&ajax=1", {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
@@ -274,96 +356,19 @@ function attachPaginationEvents(maxPagePagination) {
             .then(r => r.text())
             .then(html => {
                 document.querySelector("#flash-container").innerHTML = html;
-                // ⚠️ relance les events sur la nouvelle pagination
-                attachPaginationEvents();
+
+                // relance les events sur la nouvelle pagination
+                attachPaginationEvents(maxPagePagination, params);
                 clickFlash();
-                changeCurrentSpanToP(maxPagePagination)
+                changeCurrentSpanToP(maxPagePagination);
+                console.log(maxPagePagination)
             })
             .catch(e => console.error(e));
         });
     }
 }
 
-function filterFlashContainer()
-{
-    btnShowFilters.addEventListener("click", () => {
-
-        let params = new URLSearchParams();
-        let submitFilter = document.querySelector(".submitFilterBtn")
-        url
-
-        body.classList.add("disableScroll");
-        popupFilters.classList.remove("hidden");
-        popupFilters.showModal();
-
-        addEventListener("keydown", (e) => {
-            if(e.key == "Escape")
-            {
-                popupFilters.classList.add("hidden");
-                body.classList.remove("disableScroll");
-                return;
-            }
-        })
-        closePopupFilter.addEventListener("click", () => {
-                popupFilters.classList.add("hidden");
-                popupFilters.close();
-                body.classList.remove("disableScroll");
-                return;
-            })
-        for(let category of categories)
-        {
-            category.addEventListener("click", () => {
-                if(category.getAttribute("index") == "0")
-                {
-                    let catId = category.querySelector("#btnFilter").getAttribute("data-id")
-                    params.append("categories[]", catId)
-
-                    category.classList.add("activeFilter");
-                    category.setAttribute("index", "1");
-                    return;
-                }
-                if(category.getAttribute("index") == "1")
-                {
-                    let catId = category.querySelector("#btnFilter").getAttribute("data-id")
-                    params.delete("categories[]", catId)
-
-                    category.classList.remove("activeFilter");
-                    category.setAttribute("index", "0");
-                    return;
-                }
-            })
-        };
-        submitFilter.addEventListener("click", () => {
-
-
-            fetch(url.pathname + "?" + params.toString() + "&ajax=2", {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            })
-            .then(r => r.text())
-            .then(html => {
-                document.querySelector("#flash-container").innerHTML = html;
-
-                if(pagination) attachPaginationEvents(maxPagePagination);
-
-                clickFlash();
-                changeCurrentSpanToP(maxPagePagination)
-            })
-            .catch(e => console.error(e));
-
-            popupFilters.classList.add("hidden");
-            popupFilters.close();
-            body.classList.remove("disableScroll");
-        })
-    })
-}
-filterFlashContainer()
-
-
-
 if(current && pagination)
-{
-    attachPaginationEvents(maxPagePagination)    
-}
+    attachPaginationEvents(maxPagePagination, params)    
+
 

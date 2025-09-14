@@ -1,40 +1,4 @@
-
-<dialog class="popupAddFlash popupFilters hidden">
-    <div class="croixPopupFlash croixPopupFilter">
-        <div class="rec1"></div>
-        <div class="rec2"></div>
-    </div>
-    <div class="categoryFilters">
-        {% for category in categories %}
-            <div class="btnFilter btn" index="0">
-                <p id="btnFilter" class="goldPolice" data-id="{{ category.id }}">{{ category }}</p>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="btn submitFilterBtn">
-        <p class="goldPolice">Filtrer</p>
-    </div>
-</dialog>
-
-<div class="btn btnShowFilters">
-    <p class="goldPolice">Filtres</p>
-    <div class="filterIcon">
-        <div class="filterBarTop">
-            <div class="rectangle rectangleFilter1"></div>
-            <div class="carre"></div>
-        </div>
-        <div class="filterBarTop">
-            <div class="rectangle rectangleFilter1"></div>
-            <div class="carre carre2"></div>
-        </div>
-        <div class="filterBarTop">
-            <div class="rectangle rectangleFilter1"></div>
-            <div class="carre"></div>
-        </div>
-    </div>
-</div>
-
-<div class="flashContainer">
+<div class="flashContainer" data-maxpages={{ maxPages }}>
     {% for flash in flashs %}
         <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
     {% endfor %}
