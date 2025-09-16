@@ -4,15 +4,15 @@
             <img class="logofooter" src="{{ asset("img/instagram.webp")}}" alt="Logo Instagram">
         </a>
         <a class="liencontact" href="{{ path("app_contact") }}">
-            <p>Contactez-moi</p>
+            <p>{{ "footer.contact" | trans }}</p>
         </a>
-        <p class="numerotel">00 00 00 00 00</p>
+        <p class="numerotel">(+33) 00 00 00 00 00</p>
         <a href="mailto:hotmail@hotmail.fr">
             <p>blank@hotmail.fr</p>
         </a>
-        <small class="droitsreservees">© Tous droits réservés - Human Be Ink - 2025</small>
-        <a href="#">Politique de confidentialité</a>
-        <a class="mentionslegales" href="#">Mentions légales</a>
+        <small class="droitsreservees">© {{ "footer.droits" | trans }} - Human Be Ink - 2025</small>
+        <a href="#">{{ "footer.confidentialité" | trans }}</a>
+        <a class="mentionslegales" href="#">{{ "footer.mentions_légales" | trans }}</a>
     
     </div>
 </footer>

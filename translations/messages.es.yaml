@@ -1,0 +1,35 @@
+flash:
+  titre1: "¿Qué es un Flash?"
+  description_1: "Un tattoo flash es un diseño de tatuaje pre-dibujado, creado por el tatuador, listo para ser tatuado tal cual. Estos diseños suelen exhibirse en el estudio o publicarse en mis redes sociales, y permiten tatuarse de manera más rápida y a un precio más accesible que un tatuaje personalizado. Cabe destacar que son únicos y solo pueden tatuarse una vez por persona."
+  titre2: "Flashes Disponibles"
+  btnFiltre: "Filtros"
+
+footer:
+  contact: "Contáctame"
+  droits: "Todos los derechos reservados"
+  confidentialité: "Política de Privacidad"
+  mentions_légales: "Aviso Legal"
+
+contact:
+  titreHome: "Formulario de Contacto"
+  titre1: "Contactarme"
+  nom: "Apellido | Nombre"
+  email: "Dirección de Email"
+  projet: "Su Proyecto (o cualquier información útil)"
+  zone: "Zona Tatuada"
+  taille: "Tamaño del Tatuaje (cm)"
+  inspiration: "Diseño del Tatuaje (inspiraciones)"
+  submit: "Enviar"
+  choisirFichier: "test"
+
+base:
+  accueil: "Inicio"
+  contact: "Contacto"
+  inscription: "Registrarse"
+  deconnexion: "Cerrar Sesión"
+  connexion: "Iniciar Sesión"
+  profil: "Perfil"
+
+home:
+  btn1: "Mi Universo"
+  btn2: "Ponerse en Contacto"

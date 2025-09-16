@@ -1,0 +1,34 @@
+flash:
+  titre1: "Qu'est-ce qu'un Flash ?"
+  description_1: "Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué tel quel. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un tarif plus accessible qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’une seule fois par personne"
+  titre2: "Flashs Disponibles"
+  btnFiltre: "Filtres"
+
+footer:
+  contact: "Contactez-moi"
+  droits: "Tous droits réservés"
+  confidentialité: "Politique de confidentialité"
+  mentions_légales: "Mentions légales"
+
+contact:
+  titreHome: "Formulaire de contact"
+  titre1: "Me contacter"
+  nom: "Nom | Prénom"
+  email: "Adresse Email"
+  projet: "Votre projet (ou toute infos utiles)"
+  zone: "Zone tatouée"
+  taille: "Taille du tatouage (cm)"
+  inspiration: "Dessin du tatouage (inspirations)"
+  submit: "Envoyer"
+
+base:
+  accueil: "Accueil"
+  contact: "Flash"
+  inscription: "WannaDo"
+  deconnexion: "Déconnexion"
+  connexion: "Connexion"
+  profil: "Profil"
+
+home:
+  btn1: "Mon Univers"
+  btn2: "Prendre Contact"

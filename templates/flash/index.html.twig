@@ -16,8 +16,8 @@
             <h1 class="titre goldPolice">Human Be Ink</h1>
             <h2 class="sousTitre goldPolice">Flash | WannaDo</h2>
             <div class="btnHomePage">
-                <a href="#"><button class="btn"><p class="goldPolice">Mon Univers</p></button></a>
-                <a href="#"><button class="btn"><p class="goldPolice">Prendre Contact</p></button></a>
+                <a href="#"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
+                <a href="#"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
             </div>
         </div>
         <div class="scroll-down"></div>
@@ -27,15 +27,15 @@
     </div>
 
     <div class="flashDef">
-        <h2 class="goldPolice">Qu'est-ce qu'un Flash ?</h2>
-        <p class="defFlash">Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué <bold>tel quel</bold>. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un <bold>tarif plus accessible</bold> qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’<bold>une seule fois par personne</bold>.</p>
+        <h2 class="goldPolice">{{ "flash.titre1" | trans }}</h2>
+        <p class="defFlash">{{ "flash.description_1" | trans }}</p>
     </div>
 
 
 
     <div class="flashContainerTotal">
 
-        <h2 class="goldPolice titreFlash">Flashs Disponibles</h2>
+        <h2 class="goldPolice titreFlash">{{ "flash.titre2" | trans }}</h2>
 
         {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
             <button class="btn btnAddFlash">
@@ -45,7 +45,7 @@
 
 
         <div class="btn btnShowFilters">
-            <p class="goldPolice">Filtres</p>
+            <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
             <div class="filterIcon">
                 <div class="filterBarTop">
                     <div class="rectangle rectangleFilter1"></div>

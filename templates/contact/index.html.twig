@@ -12,7 +12,7 @@
         <div class="homePage">
             <a  href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" loading="lazy" alt="Logo de l'entreprise Human Be Ink"></a>
             <h1 class="titre goldPolice">Human Be Ink</h1>
-            <h2 class="sousTitre goldPolice">Formulaire de contact</h2>
+            <h2 class="sousTitre goldPolice">{{ "contact.titre1" | trans }}</h2>
         </div>
         <div class="scroll-down"></div>
     </div>
@@ -22,7 +22,7 @@
 
 
     <div class="formContactTotal">
-        <h2 class="titre goldPolice">Me contacter</h2>
+        <h2 class="titre goldPolice">{{ "contact.titre1" | trans }}</h2>
 
         <div class="formContact">
             {{ form_start(contactType) }}
@@ -40,7 +40,7 @@
                     <img class="previewImage" src="{% if previewImage is not null %}/img/flashs/{{ previewImage }}{% endif %}" loading="lazy" alt="">
                 </div>
                 <div class="buttonSendForm">
-                    <button type="submit" class="btn"><p class="goldPolice">Envoyer</p></button>
+                    <button type="submit" class="btn"><p class="goldPolice">{{ "contact.submit" | trans }}</p></button>
                 </div>
             {{ form_end(contactType) }}
         </div>

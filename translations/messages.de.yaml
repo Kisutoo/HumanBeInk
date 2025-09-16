@@ -1,0 +1,35 @@
+flash:
+  titre1: "Was ist ein Flash?"
+  description_1: "Ein Tattoo-Flash ist ein vorgezeichnetes Tattoo-Motiv, das vom Tätowierer entworfen wurde und sofort tätowiert werden kann. Diese Designs werden oft im Studio ausgestellt oder in meinen sozialen Netzwerken veröffentlicht, und sie ermöglichen es, sich schneller und zu einem günstigeren Preis als bei einem personalisierten Tattoo tätowieren zu lassen. Zu beachten ist, dass sie einzigartig sind und nur einmal pro Person tätowiert werden können."
+  titre2: "Verfügbare Flashes"
+  btnFiltre: "Filter"
+
+footer:
+  contact: "Kontaktieren Sie mich"
+  droits: "Alle Rechte vorbehalten"
+  confidentialité: "Datenschutzrichtlinie"
+  mentions_légales: "Impressum"
+
+contact:
+  titreHome: "Kontaktformular"
+  titre1: "Mich kontaktieren"
+  nom: "Name | Vorname"
+  email: "E-Mail-Adresse"
+  projet: "Ihr Projekt (oder alle nützlichen Informationen)"
+  zone: "Tätowierungsbereich"
+  taille: "Tattoo-Größe (cm)"
+  inspiration: "Tattoo-Design (Inspirationen)"
+  submit: "Senden"
+  choisirFichier: "test"
+
+base:
+  accueil: "Startseite"
+  contact: "Kontakt"
+  inscription: "Registrieren"
+  deconnexion: "Abmelden"
+  connexion: "Anmelden"
+  profil: "Profil"
+
+home:
+  btn1: "Meine Welt"
+  btn2: "Kontakt aufnehmen"

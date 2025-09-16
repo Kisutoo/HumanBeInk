@@ -20,19 +20,19 @@
                         <div class="rec1"></div>
                         <div class="rec2"></div>
                     </div>
-                    <a href="#">
+                    <a href="{{ path("change_language", {"_locale": "fr"}) }}">
                         <img class="drapeauSelect" src="{{ asset("img/fr-flag2.webp")}}" alt="Drapeau Français">
                         <p>Français</p>
                     </a>
-                    <a href="#">
+                    <a href="{{ path("change_language", {"_locale": "en"}) }}">
                         <img class="drapeauSelect" src="{{ asset("img/en-flag.webp")}}" alt="Drapeau Anglais">
                         <p>English</p>
                     </a>
-                    <a href="#">
+                    <a href="{{ path("change_language", {"_locale": "es"}) }}">
                         <img class="drapeauSelect" src="{{ asset("img/sp-flag.webp")}}" alt="Drapeau Espagnol">
                         <p>Español</p>
                     </a>
-                    <a href="#">
+                    <a href="{{ path("change_language", {"_locale": "de"}) }}">
                         <img class="drapeauSelect de" src="{{ asset("img/de-flag.webp")}}" alt="Drapeau Allemand">
                         <p>Deutsch</p>
                     </a>
@@ -47,16 +47,16 @@
                                 <div class="rec2"></div>
                             </div>
                         </li>
-                        <li><a href="{{ path("app_accueil")}}">Accueil</a></li>
+                        <li><a href="{{ path("app_accueil")}}">{{ "base.accueil" | trans }}</a></li>
                         <li><a href="{{ path("app_flash")}}">Flash</a></li>
                         <li><a href="#">WannaDo</a></li>
                         <li><a href="#">FAQ</a></li>
-                        <li><a href="{{ path("app_contact")}}">Contact</a></li>
+                        <li><a href="{{ path("app_contact")}}">{{ "base.contact" | trans }}</a></li>
                         <li></li>
                         {% if app.user is defined and app.user is not null %}
-                            <li class="userNav"><a href="{{ path("app_profile")}}">Profil</a> | <a href="{{ path("app_logout")}}">Déconnexion</a></li>
+                            <li class="userNav"><a href="{{ path("app_profile")}}">{{ "base.profil" | trans }}</a> | <a href="{{ path("app_logout")}}">{{ "base.deconnexion" | trans }}</a></li>
                         {% else %}
-                            <li class="userNav"><a href="{{ path("app_register")}}">Inscription</a> | <a href="{{ path("app_login")}}">Connexion</a></li>
+                            <li class="userNav"><a href="{{ path("app_register")}}">{{ "base.inscription" | trans }}</a> | <a href="{{ path("app_login")}}">{{ "base.connexion" | trans }}</a></li>
                         {% endif %}
                     </ul>
                 </div> 
@@ -70,7 +70,15 @@
                 
                 
                 <div class="langue">
-                    <img class="drapeau" src="{{ asset("img/fr-flag2.webp")}}" alt="Drapeau français">
+                    {% if app.request.locale == "es" %}
+                        <img class="drapeau" src="{{ asset("img/sp-flag.webp")}}" alt="Drapeau Espagnol">
+                    {% elseif app.request.locale == "en" %}
+                        <img class="drapeau" src="{{ asset("img/en-flag.webp")}}" alt="Drapeau Anglais">
+                    {% elseif app.request.locale == "de" %}
+                        <img class="drapeau" src="{{ asset("img/de-flag.webp")}}" alt="Drapeau Allemand">
+                    {% else %}
+                        <img class="drapeau" src="{{ asset("img/fr-flag2.webp")}}" alt="Drapeau Français">
+                    {% endif %}
                 </div>
             </nav> 
         </header>

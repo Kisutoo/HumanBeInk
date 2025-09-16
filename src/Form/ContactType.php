@@ -19,24 +19,24 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nom | Prénom'
+                'label' => 'contact.nom'
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Adresse Email'
+                'label' => 'contact.email'
             ])
             ->add('project', TextareaType::class, [
-                'label' => 'Votre projet (ou toute infos utiles)',
+                'label' => 'contact.projet',
                 'attr' => ['class' => 'textarea']
             ])
             ->add('image', FileType::class, [
-                'label' => 'Dessin du tatouage (inspirations)',
-                'attr' => ['class' => 'files', 'onchange' => 'previewFiles()']
+                'label' => 'contact.inspiration',
+                'attr' => ['class' => 'files translatedText', 'onchange' => 'previewFiles()', 'value' => 'contact.choisirFichier']
             ])
             ->add('area', TextType::class, [
-                'label' => 'Zone tatouée'
+                'label' => 'contact.zone'
             ])
             ->add('size', NumberType::class, [
-                'label' => 'Taille du tatouage (cm)'
+                'label' => 'contact.taille'
             ])
             ->add('captcha', Recaptcha3Type::class, [
             'constraints' => new Recaptcha3(),
