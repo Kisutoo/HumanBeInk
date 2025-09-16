@@ -35,6 +35,9 @@
                     <div class="lienslogin">
                         <a href="#"><small>Mot de passe oublié</small></a>
                         <a href="{{ path("app_register")}}"><small>Pas de compte ? Créez en un !</small></a>
+                        <a class="btn btnGoogleLogin" href="{{ path("auth_oauth_connect", {service: "google"}) }}">
+                            <img class="logoGoogle" src="{{ asset("img/googlelogo.webp")}}" alt="Logo de google">
+                            Se connecter avec Google</a>
                     </div>
     
                     {% if blocked is not null %}     

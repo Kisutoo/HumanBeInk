@@ -136,7 +136,6 @@ function openClosePopupFilter(params)
     for(let category of categories)
     {
         category.addEventListener("click", () => {
-            console.log("test")
 
             if(category.getAttribute("index") == "0")
             {
@@ -162,7 +161,8 @@ function openClosePopupFilter(params)
         })
     }
 }
-openClosePopupFilter(params)
+if(pagination)
+    openClosePopupFilter(params)
 
 
 
@@ -300,10 +300,10 @@ function attachPaginationEvents(maxPagePagination, params) {
 
     let submitFilter = document.querySelector(".submitFilterBtn")
     
-
+    console.log(params)
     if (!pagination) return;
 
-    submitFilter.addEventListener("click", () => {
+    submitFilter.onclick = () => {
 
         fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajax=1", {
             headers: {
@@ -313,24 +313,20 @@ function attachPaginationEvents(maxPagePagination, params) {
         .then(r => r.text())
         .then(html => {
             document.querySelector("#flash-container").innerHTML = html
-
             let flashContainer = document.querySelector(".flashContainer");
             let newMaxPagePagination = flashContainer.getAttribute("data-maxpages")
-            console.log(newMaxPagePagination)
-
-            changeCurrentSpanToP(newMaxPagePagination)
             attachPaginationEvents(newMaxPagePagination, params);
+            changeCurrentSpanToP(newMaxPagePagination)
             clickFlash();
         })
         .catch(e => console.error(e))
         popupFilters.classList.add("hidden");
         popupFilters.close();
         body.classList.remove("disableScroll");
-    })
-
+    }
 
     for (let lienPagination of pagination.querySelectorAll("a")) {
-        lienPagination.addEventListener("click", (e) => {
+        lienPagination.onclick = (e) => {
             e.preventDefault();
             // ici, on récupères le numéro de page
             let page = 1;
@@ -361,14 +357,13 @@ function attachPaginationEvents(maxPagePagination, params) {
                 attachPaginationEvents(maxPagePagination, params);
                 clickFlash();
                 changeCurrentSpanToP(maxPagePagination);
-                console.log(maxPagePagination)
+                return;
             })
             .catch(e => console.error(e));
-        });
+        };
     }
 }
 
 if(current && pagination)
     attachPaginationEvents(maxPagePagination, params)    
-
 

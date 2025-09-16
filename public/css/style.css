@@ -221,7 +221,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 
 .login{
-    transform: translate(0, -470%);
+    transform: translate(0, -390%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -232,8 +232,24 @@ input[type="text"], input[type="password"], input[type="email"], select{
                 font-family: "Raleway";
                 margin-top: 0.5em;
             }
+            .btnGoogleLogin
+            {
+                margin-top: 2em;
+            }
         }
     }
+}
+.logoGoogle{
+    width: 10%;
+    margin-right: 2em;
+}
+.btnGoogleLogin
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    width: 18em;
 }
 .btnAddFlash{
     margin-top: -2em;
@@ -1028,6 +1044,16 @@ footer{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.flashContainer {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
 }
 
 
