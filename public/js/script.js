@@ -165,19 +165,21 @@ if(pagination)
     openClosePopupFilter(params)
 
 
-
 function clickFlash()
 {
+    console.log(popupDetailFlash)
     for (let flash of flashs) {
         flash.addEventListener('click', () => {
 
             let buttonContact = document.querySelector("#flashButtonContact")
-            let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") || null
+            let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") 
             let img = flash.getAttribute("src")
             let alt = flash.getAttribute("alt")
             let id = flash.getAttribute("index")
+            let lienFavFlash = document.querySelector("#lienFavFlash")
+            
 
-            if(buttonDeleteFlash != null)
+            if(buttonDeleteFlash)
             {
                 buttonDeleteFlash.setAttribute("href", "/deleteFlash/" + id)
             }
@@ -191,6 +193,27 @@ function clickFlash()
             detImage.setAttribute("alt", alt)
             buttonContact.setAttribute("href", "/contact/" + imageName)
 
+            console.log(popupDetailFlash)
+            lienFavFlash.onclick = (e) => {
+                e.preventDefault();
+                fetch(url.pathname + "/addFav?id=" + id + "&ajax=1", {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+                })
+                .then(r => r.text())
+                .then(html => {
+                    
+                    document.querySelector(".dialogContainerDetailFlash").innerHTML = html;
+                })
+                .catch(e => console.error(e))
+                console.log(popupDetailFlash)
+                popupDetailFlash.classList.add("hidden")
+                popupDetailFlash.close()
+                body.classList.remove("disableScroll")
+            }
+            
+            
 
             closePopupFlash2.classList.add("croixPopupFlash2")
             popupDetailFlash.classList.remove("hidden")
@@ -236,7 +259,8 @@ function clickFlash()
         })
     }
 }
-clickFlash()
+if(flashs)
+    clickFlash()
 
 if(imgInp != null)
 {
@@ -300,7 +324,7 @@ function attachPaginationEvents(maxPagePagination, params) {
 
     let submitFilter = document.querySelector(".submitFilterBtn")
     
-    console.log(params)
+
     if (!pagination) return;
 
     submitFilter.onclick = () => {

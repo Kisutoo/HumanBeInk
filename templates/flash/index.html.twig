@@ -4,7 +4,17 @@
 
 {% block body %}
 
-    {% include "flash/_flashDialogs.html.twig" %}
+<div class="dialogContainerAddFlash">
+    {% include "flash/_flashDialogAddFlash.html.twig" %}
+</div>
+<div class="dialogContainerDetailFlash">
+    {% include "flash/_flashDialogDetailFlash.html.twig" %}
+</div>
+<div class="dialogContainerFilter">
+    {% include "flash/_flashDialogFilter.html.twig" %}
+</div>
+
+
 
     <div class="homePageTotal">
         <div class="fondHomePage">

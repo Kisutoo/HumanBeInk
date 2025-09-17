@@ -21,6 +21,7 @@ final class FlashController extends AbstractController
     #[Route('/flash', name: 'app_flash')]
     public function index(Request $request, EntityManagerInterface $em, FlashRepository $flashRepository, CategoryRepository $categoryRepository): Response
     {   
+
         $form = $this->createForm(FlashType::class);
         $form->handleRequest($request);
 
@@ -88,6 +89,7 @@ final class FlashController extends AbstractController
 
 
         return $this->render('flash/index.html.twig', [
+            "liked" => 0,
             'flash_form' => $form,
             'flashs' => $flashs,
             'maxPages' => $maxPages,
@@ -96,7 +98,7 @@ final class FlashController extends AbstractController
     }
 
     #[Route('/deleteFlash/{id}', name: 'delete_flash')]
-    public function deleteFlash(int $id, Request $request, EntityManagerInterface $em, FlashRepository $flashRepository)
+    public function deleteFlash(int $id, EntityManagerInterface $em, FlashRepository $flashRepository)
     {
         $flash = $flashRepository->findOneBy(["id" => $id], []);
 
@@ -107,4 +109,6 @@ final class FlashController extends AbstractController
         return $this->redirectToRoute("app_flash");
         
     }
+
+    
 }

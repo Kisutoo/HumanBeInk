@@ -82,68 +82,6 @@ class SecurityController extends AbstractController
     {
         return new Response(status: 200);
     }
-
-
-
-    #[Route(path: '/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-
-        $form = $this->createForm(NicknameType::class);
-        $form->handleRequest($request);
-        if($user)
-        {   
-            if ($form->isSubmitted() && $form->isValid()) {
-
-                if($user->getPseudonyme() == $form->get("pseudonyme")->getData())
-                {
-                    $this->addFlash("error", "Veuillez saisir un pseudonyme différent.");
-                    return $this->redirectToRoute("app_profile");
-                }
-                else
-                {
-                    $user->setPseudonyme($form->get("pseudonyme")->getData());
-    
-                    $entityManager->persist($user);
-                    $entityManager->flush($user);
-            
-                    $this->addFlash("success", "Votre pseudonyme a été modifié avec succès !");
-                    return $this->redirectToRoute("app_profile");
-                }
-            }
-
-            return $this->render("security/profile.html.twig", [
-                'nicknameForm' => $form,
-            ]);
-        }
-        else
-        {
-            $this->addFlash("error", "Vous devez vous connecter.");
-            return $this->redirectToRoute("app_login");
-        } 
-    }
     
 
-    #[Route(path: "/delete", name: "app_delete_profile")]
-    public function deleteProfile(EntityManagerInterface $entityManager, UserRepository $userRepository): Response
-    {
-        $user = $this->getUser();
-        if($user)
-        {
-            $this->container->get('security.token_storage')->setToken(null);
-
-            $entityManager->remove($user);
-            $entityManager->flush();
-        
-            $this->addFlash("success", "Votre compte a été supprimé avec succès.");
-            return $this->redirectToRoute("app_accueil");
-        }
-        else
-        {
-            $this->addFlash("error", "Personne n'est connecté.");
-            return $this->redirectToRoute("app_accueil"); 
-        }
-
-    }
 }

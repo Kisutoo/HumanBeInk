@@ -1,0 +1,32 @@
+<dialog class="popup popupDetailFlash hidden">
+    <div class="croix croixFlash2">
+        <div class="rec1"></div>
+        <div class="rec2"></div>
+    </div>
+    <div class="divDetImage">
+        <img class="detImage" src="" alt="">
+    </div>
+    <div class="buttons" data-fav="{{ liked }}">
+    {% if app.user is not null %}
+        {% if liked == 1 %}
+            <a id="lienFavFlash" href="#" class="btn">
+                <p class="goldPolice deleteFav">Supprimer des favoris</p>
+            </a>
+        {% else %}
+            <a id="lienFavFlash" href="#" class="btn">
+                <p class="goldPolice">Ajouter aux favoris</p>
+            </a>
+        {% endif %}
+    {% endif %}
+        <a id="flashButtonContact" href="" class="btn">
+            <p class="goldPolice">Prendre contact</p>
+        </a>
+    </div>
+    {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+        <div class="buttons">
+            <a id="deleteFlashBtn" href="" class="btn">
+                <p class="goldPolice">Supprimer le flash</p>
+            </a>
+        </div>
+    {% endif %}
+</dialog>

@@ -1,0 +1,27 @@
+{% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+    <dialog class="popup popupAddFlash hidden">
+        <div class="croixPopupFlash croix">
+            <div class="rec1"></div>
+            <div class="rec2"></div>
+        </div>
+        <div class="flashForm">
+            {{ form_start(flash_form) }}
+            <div class="flashFormSection">
+                {{ form_row(flash_form.name) }}
+                {{ form_row(flash_form.color) }}
+            </div>
+            <div class="flashFormSection">
+                {{ form_row(flash_form.size) }}
+                {{ form_row(flash_form.category) }}
+            </div>
+            <div class="flashFormSection">
+                {{ form_row(flash_form.image) }}
+            </div>
+            <div class="divBtnAddFlashForm">
+                <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+            </div>
+            {{ form_end(flash_form) }}
+        </div>
+    </dialog>
+
+{% endif %}

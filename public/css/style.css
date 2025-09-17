@@ -692,7 +692,7 @@ bold{
     }
 }
 
-.popupAddFlash{
+.popup{
     padding: 2em;
     width: 50em;
     height: 40em;
@@ -712,7 +712,7 @@ bold{
         rotate: 90deg;
         transform: translate(20%, 0);
     }
-    .croixPopupFlash{
+    .croix{
         margin-top: -2em;
         margin-left: 48em;
         rotate: 45deg;

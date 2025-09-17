@@ -1,0 +1,16 @@
+<dialog class="popup popupFilters hidden">
+    <div class="croix croixPopupFilter">
+        <div class="rec1"></div>
+        <div class="rec2"></div>
+    </div>
+    <div class="categoryFilters">
+        {% for category in categories %}
+            <div class="btnFilter btn" index="0">
+                <p id="btnFilter" class="goldPolice" data-id="{{ category.id }}">{{ category }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="btn submitFilterBtn">
+        <p class="goldPolice">Filtrer</p>
+    </div>
+</dialog>
