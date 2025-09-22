@@ -34,6 +34,8 @@ let croixDialogsColor = document.querySelector(".editSimuColor") || null
 let popupColor = document.querySelector(".popupSimuColor") || null
 let popupArea = document.querySelector(".popupSimuArea") || null
 let popupSize = document.querySelector(".popupSimuSize") || null
+const containerDialog = document.querySelector('.dialogContainerDetailFlash');
+
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
