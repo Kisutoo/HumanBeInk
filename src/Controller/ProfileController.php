@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfileController extends AbstractController
 {
     #[Route(path: '/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager, ): Response
+    public function profile(Request $request, EntityManagerInterface $entityManager, )
     {
         $user = $this->getUser();
 
@@ -23,6 +23,7 @@ class ProfileController extends AbstractController
         if($user)
         {   
             $likedFlashs = $user->getFlashs();
+
 
             if ($form->isSubmitted() && $form->isValid()) {
 
@@ -79,29 +80,87 @@ class ProfileController extends AbstractController
     }
 
     #[Route("flash/addFav", name: "add_fav")]
-    public function addFlashToFavorites(FlashRepository $flashRepository, Request $request)
+    public function addFlashToFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em)
     {
         $user = $this->getUser();
         $id = $request->get("id");
-        
+        $id = intval($id);
+
         $flash = $flashRepository->findOneBy(["id" => $id], []);
 
-        // $flashs = 
+        if($this->getUser())
+            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
+        
+
+        // Dans le cas ou l'id pris sur le flash via js est modifié grace à l'inspecteur du navigateur, intval (plus haut) reverra 0
+        if($id == 0)
+        {
+            return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+                "likedFlashs" => $likedFlashs ?: null,
+            ]);
+        }
 
         if($flash && $request->get("ajax") == '1')
         {
             $user->addFlash($flash);
+            $em->persist($user);
+            $em->flush();
+
+            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
 
             return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "liked" => 1,
+                "likedFlashs" => $likedFlashs ?: null,
             ]);
 
         }
 
         return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "liked" => 0,
+            "likedFlashs" => $likedFlashs ?: null,
         ]);
+    }
+
+
+
+
+
+
+
+    #[Route("flash/removeFav", name: "remove_fav")]
+    public function removeFlashFromFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em)
+    {
+        $user = $this->getUser();
+        $id = $request->get("id");
+
+        $id = intval($id);
+        $flash = $flashRepository->findOneBy(["id" => $id], []);
+        
+        if($this->getUser())
+            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
         
 
+        // Dans le cas ou l'id pris sur le flash via js est modifié grace à l'inspecteur du navigateur, intval (plus haut) reverra 0
+        if($id == 0)
+        {
+            return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+                "likedFlashs" => $likedFlashs ?: null,
+            ]);
+        }
+        if($flash && $request->get("ajax") == '1')
+        {
+            $user->removeFlash($flash);
+            $em->persist($user);
+            $em->flush();
+
+            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
+
+            return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+                "likedFlashs" => $likedFlashs ?: null,
+            ]);
+
+        }
+
+        return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+            "likedFlashs" => $likedFlashs ?: null,
+        ]);
     }
 }

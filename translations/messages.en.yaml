@@ -28,6 +28,7 @@ base:
   deconnexion: "Logout"
   connexion: "Login"
   profil: "Profile"
+  simulation:
 
 home:
   btn1: "My Universe"

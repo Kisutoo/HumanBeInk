@@ -23,11 +23,12 @@ contact:
 
 base:
   accueil: "Accueil"
-  contact: "Flash"
-  inscription: "WannaDo"
+  contact: "Contact"
+  inscription: "Inscription"
   deconnexion: "Déconnexion"
   connexion: "Connexion"
   profil: "Profil"
+  simulation: "Simulation"
 
 home:
   btn1: "Mon Univers"

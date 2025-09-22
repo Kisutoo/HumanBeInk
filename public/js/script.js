@@ -10,7 +10,7 @@ var newPseudo = document.getElementById("nickname_pseudonyme") || null
 const editBtn = document.querySelector(".btnEdit") || null
 let btnAddflash = document.querySelector(".btnAddFlash") || null
 let popupAddFlash = document.querySelector(".popupAddFlash") || null
-let body = document.querySelector("body")
+let body = document.body
 let closePopupFlash = document.querySelector(".croixPopupFlash")
 let closePopupFlash2 = document.querySelector(".croixFlash2")
 const flashs = document.getElementsByClassName('flash')
@@ -28,6 +28,8 @@ let popupFilters = document.querySelector(".popupFilters") || null
 let closePopupFilter = document.querySelector(".croixPopupFilter") || null
 const url = new URL(window.location.href);
 let params = new URLSearchParams();
+const containerDialog = document.querySelector('.dialogContainerDetailFlash');
+
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -45,6 +47,9 @@ function myFunction() {
 
 }
 window.onscroll = function() {myFunction()};
+
+
+
 
 if(pseudoProfilInput && newPseudo && editBtn)
 {
@@ -65,6 +70,10 @@ if(pseudoProfilInput && newPseudo && editBtn)
 }
 
 
+
+
+
+
 // Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
 burgerIcon.addEventListener("click", () => {
     popupBurger.classList.toggle("letVisibleBurger")
@@ -81,6 +90,9 @@ langue.addEventListener("click", () => {
 closeLangue.addEventListener("click", () => {
     popupLangue.classList.toggle("letVisibleLangue")
 })
+
+
+
 
 
 if(popupAddFlash && btnAddflash)
@@ -108,6 +120,9 @@ if(popupAddFlash && btnAddflash)
         }
     });
 }
+
+
+
 
 function openClosePopupFilter(params)
 {
@@ -165,102 +180,185 @@ if(pagination)
     openClosePopupFilter(params)
 
 
-function clickFlash()
-{
-    console.log(popupDetailFlash)
-    for (let flash of flashs) {
-        flash.addEventListener('click', () => {
 
-            let buttonContact = document.querySelector("#flashButtonContact")
-            let buttonDeleteFlash = document.querySelector("#deleteFlashBtn") 
-            let img = flash.getAttribute("src")
-            let alt = flash.getAttribute("alt")
-            let id = flash.getAttribute("index")
-            let lienFavFlash = document.querySelector("#lienFavFlash")
-            
 
-            if(buttonDeleteFlash)
-            {
-                buttonDeleteFlash.setAttribute("href", "/deleteFlash/" + id)
-            }
 
-            // Sert à récupérer seulement le nom de l'image 
-            imageNameArray = img.split("/")
-            imageName = imageNameArray[3]
 
-            
-            detImage.setAttribute("src", img)
-            detImage.setAttribute("alt", alt)
-            buttonContact.setAttribute("href", "/contact/" + imageName)
+function getDialogEls() {
+  const dlg = containerDialog.querySelector('dialog');        // <dialog class="popup popupDetailFlash hidden">
+  const detImage = dlg?.querySelector('.detImage');
+  const closeBtn = dlg?.querySelector('.croixFlash2');
+  const buttonContact = dlg?.querySelector('#flashButtonContact');
+  const buttonDeleteFlash = dlg?.querySelector('#deleteFlashBtn');
+  const lienFavFlash = dlg?.querySelector('#lienFavFlash');
 
-            console.log(popupDetailFlash)
-            lienFavFlash.onclick = (e) => {
-                e.preventDefault();
-                fetch(url.pathname + "/addFav?id=" + id + "&ajax=1", {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-                })
-                .then(r => r.text())
-                .then(html => {
-                    
-                    document.querySelector(".dialogContainerDetailFlash").innerHTML = html;
-                })
-                .catch(e => console.error(e))
-                console.log(popupDetailFlash)
-                popupDetailFlash.classList.add("hidden")
-                popupDetailFlash.close()
-                body.classList.remove("disableScroll")
-            }
-            
-            
+  return { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash };
+}
 
-            closePopupFlash2.classList.add("croixPopupFlash2")
-            popupDetailFlash.classList.remove("hidden")
-            popupDetailFlash.showModal()
-            body.classList.add("disableScroll")
-            if(popupDetailFlash.open)
-            {
-                addEventListener("keydown", (e) => {
-                    if(e.key == "Escape")
-                    {
-                        popupDetailFlash.classList.add("hidden")
-                        body.classList.remove("disableScroll")
-                        closePopupFlash2.classList.remove("croixPopupFlash2")
-                        detImage.setAttribute("alt", "")
-                        detImage.setAttribute("src", "")
-                        buttonContact.setAttribute("href", "")
-                        if(buttonDeleteFlash != null)
-                        {
-                            buttonDeleteFlash.setAttribute("href", "")
-                        }
 
-                        return;
-                    }
-                })
-                    closePopupFlash2.addEventListener("click", () => {
 
-                        popupDetailFlash.close()
-                        popupDetailFlash.classList.add("hidden")
-                        detImage.setAttribute("alt", "")
-                        detImage.setAttribute("src", "")
-                        buttonContact.setAttribute("href", "")
-                        if(buttonDeleteFlash != null)
-                        {
-                            buttonDeleteFlash.setAttribute("href", "")
-                        }
-                        
-                        closePopupFlash2.classList.remove("croixPopupFlash2")
-                        body.classList.remove("disableScroll")
 
-                        return;
-                    })
-            }
-        })
+
+function openDialogSafe(dlg) {
+  if (!dlg) return;
+  // si jamais il est détaché, on le rattache
+  if (!dlg.isConnected) document.body.appendChild(dlg);
+  dlg.classList.remove('hidden');
+  dlg.showModal();
+  body.classList.add('disableScroll');
+}
+
+
+
+
+
+
+function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
+  if (!dlg) return;
+  dlg.close();
+  dlg.classList.add('hidden');
+  body.classList.remove('disableScroll');
+  closeBtn?.classList.remove('croixPopupFlash2');
+  detImage?.setAttribute('src', '');
+  detImage?.setAttribute('alt', '');
+  buttonContact?.setAttribute('href', '');
+  buttonDeleteFlash?.setAttribute('href', '');
+}
+
+
+
+
+
+function bindDialogInteractions(id, img, alt, imageName) {
+  // Sélection fraîche après le dernier rendu
+  let { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
+
+
+  idLikedFlash = dlg.getAttribute("data-fav");
+
+  i = null;
+  if(idLikedFlash)
+    {
+      idLikedFlash = idLikedFlash.split(" ");
+
+      if(idLikedFlash.includes(id))
+      {
+            lienFavFlash.innerHTML = "<p class=goldPolice>Supprimer des favoris</p>"
+            lienFavFlash.firstChild.classList.add("deleteFavFlash")
+            i = 1
+      }
+      else
+      {
+            lienFavFlash.innerHTML = "<p class=goldPolice>Ajouter aux favoris</p>"
+            lienFavFlash.firstChild.classList.remove("deleteFavFlash")
+            i = 0
+      }
+  }
+
+  if (!dlg) return;
+
+  // remplir le contenu
+  detImage?.setAttribute('src', img);
+  detImage?.setAttribute('alt', alt);
+  buttonContact?.setAttribute('href', '/contact/' + imageName);
+  if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
+
+  // bouton favoris (rebind après chaque remplacement)
+  if (lienFavFlash && i == 0) {
+    lienFavFlash.onclick = (e) => {
+      e.preventDefault();
+      fetch(location.pathname + '/addFav?id=' + id + '&ajax=1', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(r => r.text())
+      .then(html => {
+        // remplace le HTML du dialog → les anciennes références deviennent caduques
+
+        containerDialog.innerHTML = html;
+
+        // re-sélectionner les éléments et éventuellement rouvrir si besoin
+        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+
+        bindDialogInteractions(id, img, alt, imageName)
+        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
+      })
+      .catch(console.error)
+      .finally(() => {
+        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
+        bindDialogInteractions(id, img, alt, imageName)
+        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+
+      });
+    };
+  }
+  else if(lienFavFlash && i == 1)
+  {
+    lienFavFlash.onclick = (e) => {
+      e.preventDefault();
+      fetch(location.pathname + '/removeFav?id=' + id + '&ajax=1', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(r => r.text())
+      .then(html => {
+        // remplace le HTML du dialog → les anciennes références deviennent caduques
+        containerDialog.innerHTML = html;
+
+        // re-sélectionner les éléments et éventuellement rouvrir si besoin
+        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+
+        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
+      })
+      .catch(console.error)
+      .finally(() => {
+        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
+        
+        bindDialogInteractions(id, img, alt, imageName)
+        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+
+      });
+    };
+  }
+
+  // fermeture via ESC
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
     }
+  });
+
+  // fermeture via croix
+  if (closeBtn) {
+    closeBtn.classList.add('croixPopupFlash2');
+    closeBtn.addEventListener('click', () => closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn }), { once: true });
+  }
+
+  // enfin, ouvrir
+  openDialogSafe(dlg);
+}
+
+
+
+
+
+function clickFlash() {
+  for (let flash of flashs) {
+    flash.addEventListener('click', () => {
+      const img = flash.getAttribute('src');
+      const alt = flash.getAttribute('alt') || '';
+      const id = flash.getAttribute('index');
+      const imageName = (img || '').split('/').pop() || '';
+
+      bindDialogInteractions(id, img, alt, imageName);
+    });
+  }
 }
 if(flashs)
     clickFlash()
+
+
+
+
+
 
 if(imgInp != null)
 {
@@ -293,6 +391,10 @@ if(imgInp != null)
       }
     }
 }
+
+
+
+
 
 
 function changeCurrentSpanToP(maxPagePagination)

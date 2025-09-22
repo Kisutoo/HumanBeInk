@@ -29,6 +29,7 @@ base:
   deconnexion: "Cerrar Sesión"
   connexion: "Iniciar Sesión"
   profil: "Perfil"
+  simulation:
 
 home:
   btn1: "Mi Universo"

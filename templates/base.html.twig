@@ -52,6 +52,7 @@
                         <li><a href="#">WannaDo</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="{{ path("app_contact")}}">{{ "base.contact" | trans }}</a></li>
+                        <li><a href="{{ path("app_simulation")}}">{{ "base.simulation" | trans }}</a></li>
                         <li></li>
                         {% if app.user is defined and app.user is not null %}
                             <li class="userNav"><a href="{{ path("app_profile")}}">{{ "base.profil" | trans }}</a> | <a href="{{ path("app_logout")}}">{{ "base.deconnexion" | trans }}</a></li>

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Flash;
 use App\Form\FlashType;
 use League\Glide\ServerFactory;
+use App\Repository\UserRepository;
 use App\Repository\FlashRepository;
 use App\Service\ConvertImageFormat;
 use App\Repository\CategoryRepository;
@@ -19,8 +20,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class FlashController extends AbstractController
 {
     #[Route('/flash', name: 'app_flash')]
-    public function index(Request $request, EntityManagerInterface $em, FlashRepository $flashRepository, CategoryRepository $categoryRepository): Response
+    public function index(
+        Request $request,
+        EntityManagerInterface $em,
+        FlashRepository $flashRepository,
+        CategoryRepository $categoryRepository,
+        UserRepository $userRepository): Response
     {   
+
+        if($this->getUser())
+            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
+        else
+            $likedFlashs = null;
+
 
         $form = $this->createForm(FlashType::class);
         $form->handleRequest($request);
@@ -89,8 +101,8 @@ final class FlashController extends AbstractController
 
 
         return $this->render('flash/index.html.twig', [
-            "liked" => 0,
             'flash_form' => $form,
+            "likedFlashs" => $likedFlashs,
             'flashs' => $flashs,
             'maxPages' => $maxPages,
             'categories' => $categories,

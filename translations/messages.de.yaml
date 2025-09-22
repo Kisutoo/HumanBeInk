@@ -29,6 +29,7 @@ base:
   deconnexion: "Abmelden"
   connexion: "Anmelden"
   profil: "Profil"
+  simulation:
 
 home:
   btn1: "Meine Welt"

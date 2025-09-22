@@ -47,6 +47,21 @@ class FlashRepository extends ServiceEntityRepository
         );
     }
 
+        public function likedFLashs(int $user): array
+        {
+            $em = $this->getEntityManager();
+
+            $subQb = $em->createQueryBuilder();
+            $subQb->select('s2')
+                ->from('App\Entity\Flash', 's2')
+                ->join('s2.users', 'se2')
+                ->where('se2.id = :userId')
+                ->setParameter("userId", $user);
+
+            return $subQb->getQuery()->getResult();
+        }
+
+
     //    /**
     //     * @return Flash[] Returns an array of Flash objects
     //     */
