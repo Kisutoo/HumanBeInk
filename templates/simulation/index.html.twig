@@ -42,7 +42,7 @@
             {{ form_start(form) }}
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
-                <div class="editSimu">
+                <div class="editSimuSize editSimu">
                     <div class="rec1"></div>
                     <div class="rec2"></div>
                 </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
-                    <div class="editSimu">
+                    <div class="editSimuColor editSimu">
                         <div class="rec1"></div>
                         <div class="rec2"></div>
                     </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="simuFormSection zoneSensiDiv">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
-                    <div class="editSimu">
+                    <div class="editSimuArea editSimu">
                         <div class="rec1"></div>
                         <div class="rec2"></div>
                     </div>

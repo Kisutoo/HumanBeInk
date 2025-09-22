@@ -405,5 +405,6 @@ if(croixDialogsArea)
     croixDialogsArea.addEventListener("click", () => {
         popupArea.classList.remove("hidden");
         popupArea.showModal();
+        body.classList.add("disableScroll")
     })
 }
