@@ -28,6 +28,12 @@ let popupFilters = document.querySelector(".popupFilters") || null
 let closePopupFilter = document.querySelector(".croixPopupFilter") || null
 const url = new URL(window.location.href);
 let params = new URLSearchParams();
+let croixDialogsArea = document.querySelector(".editSimuArea") || null
+let croixDialogsSize = document.querySelector(".editSimuSize") || null
+let croixDialogsColor = document.querySelector(".editSimuColor") || null
+let popupColor = document.querySelector(".popupSimuColor") || null
+let popupArea = document.querySelector(".popupSimuArea") || null
+let popupSize = document.querySelector(".popupSimuSize") || null
 
 // Cette fonction sert à faire progresser la progressebar quand on scroll sur la page
 function myFunction() {
@@ -81,6 +87,8 @@ langue.addEventListener("click", () => {
 closeLangue.addEventListener("click", () => {
     popupLangue.classList.toggle("letVisibleLangue")
 })
+
+
 
 
 if(popupAddFlash && btnAddflash)
@@ -391,3 +399,11 @@ function attachPaginationEvents(maxPagePagination, params) {
 if(current && pagination)
     attachPaginationEvents(maxPagePagination, params)    
 
+console.log(popupArea);
+if(croixDialogsArea)
+{
+    croixDialogsArea.addEventListener("click", () => {
+        popupArea.classList.remove("hidden");
+        popupArea.showModal();
+    })
+}

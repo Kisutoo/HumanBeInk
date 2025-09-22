@@ -20,9 +20,68 @@
         <div id="progress-bar"></div>
     </div>
 
+    {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
 
-    
+        <div class="addColorDialogContainer">
+            {% include "simulation/_dialogAddColor.html.twig" %}
+        </div>
+        <div class="addSizeDialogContainer">
+            {% include "simulation/_dialogAddSize.html.twig" %}
+        </div>
+        <div class="addAreaDialogContainer">
+            {% include "simulation/_dialogAddArea.html.twig" %}
+        </div>
+
+    {% endif %}
+
     <div class="simuContainer">
-        <h2 class="goldPolice titreFlash">Simuler une prestation</h2>
+
+    <div class="flashContainerTotal">
+        <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
+        <div class="simuForm flashContainer">
+            {{ form_start(form) }}
+            <div class="simuFormSection">
+                {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+                <div class="editSimu">
+                    <div class="rec1"></div>
+                    <div class="rec2"></div>
+                </div>
+                {% endif %}
+                {{ form_row(form.size) }}
+            </div>
+            <div class="simuFormSection">
+                {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+                    <div class="editSimu">
+                        <div class="rec1"></div>
+                        <div class="rec2"></div>
+                    </div>
+                {% endif %}
+                {{ form_row(form.color) }}
+            </div>
+            <div class="simuFormSection zoneSensiDiv">
+                {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+                    <div class="editSimu">
+                        <div class="rec1"></div>
+                        <div class="rec2"></div>
+                    </div>
+                {% endif %}
+                {{ form_row(form.area) }}
+                <div class="checkBoxSensi">
+                    {{ form_row(form.sensibility) }}
+                </div>
+            </div>
+
+                <div class="divBtnCalculerSimu">
+                    <button type="submit" class="btn"><p class="goldPolice">Calculer</p></button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+
+        <div class="simuResult">
+        </div>
     </div>
+
+    </div>
+
+    {% include "_footer.html.twig" %}
 {% endblock %}

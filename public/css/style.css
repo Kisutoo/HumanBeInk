@@ -7,6 +7,10 @@
 	-moz-user-select: none;  
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 .alertsuccess, .alerterror
 {
     padding-top: 0.5em;
@@ -221,7 +225,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 
 .login{
-    transform: translate(0, -390%);
+    transform: translate(0, -350%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -1056,9 +1060,124 @@ footer{
   animation: fadeIn 1s ease-in forwards;
 }
 
-.simuContainer{
-    height: 100vh;
+.titreSimu{
+    width: 50em;
+    margin: 1em;
 }
+
+.simuContainer{
+    .flashContainerTotal{
+        border-bottom: 0;
+        .flashContainer{
+            width: 50em;
+        }
+    }
+    padding-bottom: 10em;
+    h2{
+        font-size: 6em;
+        font-family: "Great Vibes";
+        font-weight: 400;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    div{
+        display: flex;
+        flex-direction: column;
+        color: whitesmoke;
+        font-family: "Raleway";
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        select{
+            padding: 1.2em;
+            border-radius: 5px;
+        }
+        .zoneSensiDiv{
+            margin-left: 12em;
+            margin-bottom: 3em;
+            margin-top: -2em;
+        }
+        input[type="checkbox"]
+        {
+            margin-top: 1em;
+            scale: 2.5;
+        }
+        .checkBoxSensi{
+            margin-left: 5em;
+        }
+    }
+    .simuFormSection{
+        label{
+            margin-bottom: 0.5em;
+            font-size: 1.5em
+        }
+        padding: 2em;
+        display: flex;
+        flex-direction: row;
+        
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none; 
+            width: 20rem;
+            height: 1rem;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 1rem;
+            border: 3px solid rgb(255, 250, 176);
+            background: rgb(44, 42, 42);
+        }
+
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 1rem;
+            background: rgb(54, 48, 48);
+            border-radius: 1rem;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none; 
+            height: 1rem;
+            width: 1rem;
+            background-color: white;
+            border-radius: 50%;
+        /*slider-thumb border color*/
+            border: 1px solid hsl(60, 100%, 81%);
+        /*Colors*/
+            box-shadow:
+            -50rem 0 5rem 20rem hsl(36, 100%, 58%),
+            -40rem 0 5rem 30rem hsl(39, 100%, 60%),
+            -30rem 0 2rem 25rem hsl(42, 100%, 72%),
+            -25.5rem 0 0 25rem hsl(45, 100%, 84%);
+        }
+        
+            .editSimu{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 2em;
+                .rec1, .rec2{
+                    cursor: pointer;
+                    background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+                    height: 0.5em;
+                    width: 1.5em;
+                    border-radius: 50px;
+                }
+                .rec1{
+                    rotate: 90deg;
+                }
+                .rec2{
+                    margin-top: -0.5em;
+                }
+            }
+    }
+}
+
 
 
 
