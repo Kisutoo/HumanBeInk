@@ -226,7 +226,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 
 .login{
-    transform: translate(0, -385%);
+    transform: translate(0, -355%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -1183,6 +1183,31 @@ footer{
                     margin-top: -0.5em;
                 }
             }
+    }
+}
+
+.popupSimu{
+    .croix{
+        margin-top: 0.5em;
+    }
+    height: fit-content;
+    padding: 2em;
+    justify-content: start;
+    div{
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    label{
+                font-size: 1.4em;
+        font-weight: 500;
+        font-family: "Raleway";
+        margin-bottom: 0.5em;
+    }
+    .btn{
+        margin-top: 2em;
     }
 }
 

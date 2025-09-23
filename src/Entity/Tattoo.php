@@ -15,7 +15,7 @@ class Tattoo
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $basePrice = null;
+    private ?float $basePrice = null;
 
     #[ORM\Column(length: 100)]
     private ?string $name = null;

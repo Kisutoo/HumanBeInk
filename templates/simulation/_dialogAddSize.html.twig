@@ -1,6 +1,14 @@
-<dialog class="popup popupSimu hidden">
-    <div class="croix croixFlash2">
+<dialog class="popup popupSimu popupSimuSize hidden">
+    <div class="croix croixFlash2 croixPopupSize">
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
+    {{ form_start(formSize) }}
+
+    {{ form_row(formSize.size) }}
+    {{ form_row(formSize.multiplicator) }}
+    <div class="divBtnCalculerSimu">
+        <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+    </div>
+    {{ form_end(formSize) }}
 </dialog>

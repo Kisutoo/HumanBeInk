@@ -17,10 +17,10 @@ class Size
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $size = null;
+    private ?float $size = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $multiplicator = null;
+    private ?float $multiplicator = null;
 
     /**
      * @var Collection<int, tattoo>
@@ -38,24 +38,24 @@ class Size
         return $this->id;
     }
 
-    public function getSize(): ?string
+    public function getSize(): ?float
     {
         return $this->size;
     }
 
-    public function setSize(string $size): static
+    public function setSize(float $size): static
     {
         $this->size = $size;
 
         return $this;
     }
 
-    public function getMultiplicator(): ?string
+    public function getMultiplicator(): ?float
     {
         return $this->multiplicator;
     }
 
-    public function setMultiplicator(string $multiplicator): static
+    public function setMultiplicator(float $multiplicator): static
     {
         $this->multiplicator = $multiplicator;
 
@@ -90,5 +90,10 @@ class Size
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getSize();
     }
 }

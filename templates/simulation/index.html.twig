@@ -31,6 +31,9 @@
         <div class="addAreaDialogContainer">
             {% include "simulation/_dialogAddArea.html.twig" %}
         </div>
+        <div class="addDetailDialogContainer">
+            {% include "simulation/_dialogAddDetail.html.twig" %}
+        </div>
 
     {% endif %}
 
@@ -39,7 +42,7 @@
     <div class="flashContainerTotal">
         <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
         <div class="simuForm flashContainer">
-            {{ form_start(form) }}
+            {{ form_start(formSimu) }}
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
                 <div class="editSimuSize editSimu">
@@ -47,7 +50,7 @@
                     <div class="rec2"></div>
                 </div>
                 {% endif %}
-                {{ form_row(form.size) }}
+                {{ form_row(formSimu.size) }}
             </div>
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
@@ -56,25 +59,31 @@
                         <div class="rec2"></div>
                     </div>
                 {% endif %}
-                {{ form_row(form.color) }}
+                {{ form_row(formSimu.color) }}
             </div>
-            <div class="simuFormSection zoneSensiDiv">
+            <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
                     <div class="editSimuArea editSimu">
                         <div class="rec1"></div>
                         <div class="rec2"></div>
                     </div>
                 {% endif %}
-                {{ form_row(form.area) }}
-                <div class="checkBoxSensi">
-                    {{ form_row(form.sensibility) }}
-                </div>
+                {{ form_row(formSimu.area) }}
+            </div>
+            <div class="simuFormSection">
+                {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
+                    <div class="editSimuDetail editSimu">
+                        <div class="rec1"></div>
+                        <div class="rec2"></div>
+                    </div>
+                {% endif %}
+                {{ form_row(formSimu.detail) }}
             </div>
 
                 <div class="divBtnCalculerSimu">
                     <button type="submit" class="btn"><p class="goldPolice">Calculer</p></button>
                 </div>
-            {{ form_end(form) }}
+            {{ form_end(formSimu) }}
         </div>
 
         <div class="simuResult">

@@ -2,8 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Area;
+use App\Entity\Color;
+use App\Entity\Detail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
@@ -18,15 +22,18 @@ class SimulationType extends AbstractType
             ->add('size', RangeType::class, [
                 'label' => 'Taille'
             ])
-            ->add('color', ChoiceType::class, [
+            ->add('color', EntityType::class, [
+                'class' => Color::class,
                 'label' => 'Couleur'
+                
             ])
-            ->add('area', ChoiceType::class, [
+            ->add('area', EntityType::class, [
+                'class' => Area::class,
                 'label' => 'Zone'
             ])
-            ->add('sensibility', CheckboxType::class, [
-                'label' => 'Sensibilité',
-                'required' => 'false'
+            ->add('detail', EntityType::class, [
+                'class' => Detail::class,
+                'label' => 'Détails'
             ])
         ;
     }

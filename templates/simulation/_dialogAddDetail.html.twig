@@ -1,0 +1,13 @@
+<dialog class="popup popupSimu popupSimuDetail hidden">
+    <div class="croix croixFlash2 croixPopupDetail">
+        <div class="rec1"></div>
+        <div class="rec2"></div>
+    </div>
+    {{ form_start(formDetail) }}
+    {{ form_row(formDetail.detailName) }}
+    {{ form_row(formDetail.multiplicator) }}
+    <div class="divBtnCalculerSimu">
+        <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+    </div>
+    {{ form_end(formDetail) }}
+</dialog>

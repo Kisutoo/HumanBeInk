@@ -1,6 +1,14 @@
 <dialog class="popup popupSimu popupSimuArea hidden">
-    <div class="croix croixFlash2">
+    <div class="croix croixFlash2 croixPopupArea">
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
+    {{ form_start(formArea) }}
+    {{ form_row(formArea.areaName) }}
+    {{ form_row(formArea.multiplicator) }}
+    {{ form_row(formArea.sensibility) }}
+    <div class="divBtnCalculerSimu">
+        <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+    </div>
+    {{ form_end(formArea) }}
 </dialog>

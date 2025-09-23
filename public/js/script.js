@@ -28,12 +28,19 @@ let popupFilters = document.querySelector(".popupFilters") || null
 let closePopupFilter = document.querySelector(".croixPopupFilter") || null
 const url = new URL(window.location.href);
 let params = new URLSearchParams();
-let croixDialogsArea = document.querySelector(".editSimuArea") || null
-let croixDialogsSize = document.querySelector(".editSimuSize") || null
-let croixDialogsColor = document.querySelector(".editSimuColor") || null
-let popupColor = document.querySelector(".popupSimuColor") || null
+let addDialogsArea = document.querySelector(".editSimuArea") || null
+let addDialogsSize = document.querySelector(".editSimuSize") || null
+let addDialogsDetail = document.querySelector(".editSimuDetail") || null
+let addDialogsColor = document.querySelector(".editSimuColor") || null
+let popupColor = document.querySelector(".popupSimuColor") || null 
+let popupDetail = document.querySelector(".popupSimuDetail") || null
 let popupArea = document.querySelector(".popupSimuArea") || null
 let popupSize = document.querySelector(".popupSimuSize") || null
+let closePopupSize = document.querySelector(".croixPopupSize") || null
+let closePopupArea = document.querySelector(".croixPopupArea") || null
+let closePopupColor = document.querySelector(".croixPopupColor") || null 
+let closePopupDetail = document.querySelector(".croixPopupDetail") || null
+
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
 
@@ -99,32 +106,35 @@ closeLangue.addEventListener("click", () => {
 
 
 
-
-if(popupAddFlash && btnAddflash)
+function openClosePopup(dialog, btnAdd, btnClose)
 {
-    btnAddflash.addEventListener("click", () => {
-        popupAddFlash.classList.remove("hidden")
-        popupAddFlash.showModal()
+    btnAdd.addEventListener("click", () => {
+        dialog.classList.remove("hidden")
+        dialog.showModal()
         body.classList.add("disableScroll")
-        if(popupAddFlash.open)
+        if(dialog.open)
         {
             addEventListener("keydown", (e) => {
                 if(e.key == "Escape")
                 {
-                    popupAddFlash.classList.add("hidden")
+                    dialog.classList.add("hidden")
                     body.classList.remove("disableScroll")
                     return;
                 }
             })
-            closePopupFlash.addEventListener("click", () => {
-                popupAddFlash.classList.add("hidden")
-                popupAddFlash.close()
+            btnClose.addEventListener("click", () => {
+                dialog.classList.add("hidden")
+                dialog.close()
                 body.classList.remove("disableScroll")
                 return;
             })
         }
     });
 }
+
+
+if(popupAddFlash && btnAddflash)
+    openClosePopup(popupAddFlash, btnAddflash, closePopupFlash)
 
 
 
@@ -498,12 +508,11 @@ function attachPaginationEvents(maxPagePagination, params) {
 if(current && pagination)
     attachPaginationEvents(maxPagePagination, params)    
 
-console.log(popupArea);
-if(croixDialogsArea)
+
+if(addDialogsArea)
 {
-    croixDialogsArea.addEventListener("click", () => {
-        popupArea.classList.remove("hidden");
-        popupArea.showModal();
-        body.classList.add("disableScroll")
-    })
+    openClosePopup(popupArea, addDialogsArea, closePopupArea)
+    openClosePopup(popupColor, addDialogsColor, closePopupColor)
+    openClosePopup(popupSize, addDialogsSize, closePopupSize)
+    openClosePopup(popupDetail, addDialogsDetail, closePopupDetail)
 }

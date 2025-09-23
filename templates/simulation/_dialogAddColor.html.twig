@@ -1,6 +1,13 @@
 <dialog class="popup popupSimu popupSimuColor hidden">
-    <div class="croix croixFlash2">
+    <div class="croix croixFlash2 croixPopupColor">
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
+    {{ form_start(formColor) }}
+    {{ form_row(formColor.colorType) }}
+    {{ form_row(formColor.multiplicator) }}
+    <div class="divBtnCalculerSimu">
+        <button type="submit" class="btn"><p class="goldPolice">Ajouter</p></button>
+    </div>
+    {{ form_end(formColor) }}
 </dialog>
