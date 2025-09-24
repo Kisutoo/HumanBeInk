@@ -6,7 +6,7 @@ use App\Entity\Flash;
 
 class ConvertImageFormat {
 
-	public function convertImageToWebp(array $files, Flash $flash): bool
+	public function convertImageToWebp(array $files, ?Flash $flash, ?bool $simulation): bool
     {
         $image = $files['name']['image'];
         $tmpName = $files['tmp_name']['image'];

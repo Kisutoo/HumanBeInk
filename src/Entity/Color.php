@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ColorRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ColorRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ColorRepository::class)]
 class Color
@@ -25,7 +25,7 @@ class Color
     /**
      * @var Collection<int, tattoo>
      */
-    #[ORM\OneToMany(targetEntity: tattoo::class, mappedBy: 'color')]
+    #[ORM\OneToMany(targetEntity: Tattoo::class, mappedBy: 'color')]
     private Collection $tattoo;
 
     public function __construct()
@@ -70,7 +70,7 @@ class Color
         return $this->tattoo;
     }
 
-    public function addTattoo(tattoo $tattoo): static
+    public function addTattoo(Tattoo $tattoo): static
     {
         if (!$this->tattoo->contains($tattoo)) {
             $this->tattoo->add($tattoo);
@@ -80,7 +80,7 @@ class Color
         return $this;
     }
 
-    public function removeTattoo(tattoo $tattoo): static
+    public function removeTattoo(Tattoo $tattoo): static
     {
         if ($this->tattoo->removeElement($tattoo)) {
             // set the owning side to null (unless already changed)

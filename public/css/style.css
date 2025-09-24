@@ -226,7 +226,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 
 .login{
-    transform: translate(0, -355%);
+    transform: translate(0, -385%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -1208,6 +1208,9 @@ footer{
     }
     .btn{
         margin-top: 2em;
+    }
+    select{
+        color: white;
     }
 }
 

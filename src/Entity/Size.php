@@ -25,7 +25,7 @@ class Size
     /**
      * @var Collection<int, tattoo>
      */
-    #[ORM\OneToMany(targetEntity: tattoo::class, mappedBy: 'size')]
+    #[ORM\OneToMany(targetEntity: Tattoo::class, mappedBy: 'size')]
     private Collection $tattoo;
 
     public function __construct()
@@ -70,7 +70,7 @@ class Size
         return $this->tattoo;
     }
 
-    public function addTattoo(tattoo $tattoo): static
+    public function addTattoo(Tattoo $tattoo): static
     {
         if (!$this->tattoo->contains($tattoo)) {
             $this->tattoo->add($tattoo);
@@ -80,7 +80,7 @@ class Size
         return $this;
     }
 
-    public function removeTattoo(tattoo $tattoo): static
+    public function removeTattoo(Tattoo $tattoo): static
     {
         if ($this->tattoo->removeElement($tattoo)) {
             // set the owning side to null (unless already changed)

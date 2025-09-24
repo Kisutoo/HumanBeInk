@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DetailRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,6 +21,17 @@ class Detail
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $multiplicator = null;
+
+    /**
+     * @var Collection<int, Tattoo>
+     */
+    #[ORM\OneToMany(targetEntity: Tattoo::class, mappedBy: 'detail')]
+    private Collection $tattoo;
+
+    public function __construct()
+    {
+        $this->tattoo = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -53,4 +66,34 @@ class Detail
     {
         return $this->getDetailName();
     }
+
+        /**
+         * @return Collection<int, Tattoo>
+         */
+        public function getTattoo(): Collection
+        {
+            return $this->tattoo;
+        }
+
+        public function addTattoo(Tattoo $tattoo): static
+        {
+            if (!$this->tattoo->contains($tattoo)) {
+                $this->tattoo->add($tattoo);
+                $tattoo->setDetail($this);
+            }
+
+            return $this;
+        }
+
+        public function removeTattoo(Tattoo $tattoo): static
+        {
+            if ($this->tattoo->removeElement($tattoo)) {
+                // set the owning side to null (unless already changed)
+                if ($tattoo->getDetail() === $this) {
+                    $tattoo->setDetail(null);
+                }
+            }
+
+            return $this;
+        }
 }

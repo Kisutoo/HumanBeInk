@@ -7,8 +7,10 @@ use App\Entity\Size;
 use App\Entity\Color;
 use App\Entity\Detail;
 use App\Form\AreaType;
+use App\Form\NameType;
 use App\Form\SizeType;
 use App\Form\ColorType;
+use App\Form\FilesType;
 use App\Form\DetailType;
 use App\Form\SimulationType;
 use App\Repository\AreaRepository;
@@ -34,9 +36,21 @@ final class SimulationController extends AbstractController
         TattooRepository $tattooRepository
         ): Response
     {   
+        $prixFinalTattoo = null;
+
+
+
         $formSimu = $this->createForm(SimulationType::class);
         $formSimu->handleRequest($request);
         
+        $formName = $this->createForm(NameType::class);
+        $formName->handleRequest($request);
+
+        $formFiles = $this->createForm(FilesType::class);
+        $formFiles->handleRequest($request);
+
+
+
         $formArea = $this->createForm(AreaType::class);
         $formArea->handleRequest($request);
 
@@ -49,6 +63,8 @@ final class SimulationController extends AbstractController
         $formDetail = $this->createForm(DetailType::class);
         $formDetail->handleRequest($request);
 
+
+        // Ajout data dans table Area
         if($formArea->isSubmitted() && $formArea->isValid())
         {
             $areaName = $formArea->get("areaName")->getData();
@@ -62,12 +78,17 @@ final class SimulationController extends AbstractController
 
             if($sensibility == true)
                 $area->setSensibility(1);
+            else
+                $area->setSensibility(0);
 
             $em->persist($area);
             $em->flush();
             
             return $this->redirectToRoute("app_simulation");
         }
+
+
+        // Ajout data dans table Color
         if($formColor->isSubmitted() && $formColor->isValid())
         {
             $colorType = $formColor->get("colorType")->getData();
@@ -83,6 +104,9 @@ final class SimulationController extends AbstractController
 
             return $this->redirectToRoute("app_simulation");
         }
+
+
+        // Ajout data dans table Size
         if($formSize->isSubmitted() && $formSize->isValid())
         {
             $sizeValue = $formSize->get("size")->getData();
@@ -98,6 +122,9 @@ final class SimulationController extends AbstractController
 
             return $this->redirectToRoute("app_simulation");
         }
+
+
+        // Ajout data dans table Detail
         if($formDetail->isSubmitted() && $formDetail->isValid())
         {
             $detailType = $formDetail->get("detailName")->getData();
@@ -114,13 +141,47 @@ final class SimulationController extends AbstractController
             return $this->redirectToRoute("app_simulation");
         }
 
+        // Calcul du prix d'un tatouage grace au formulaire
+        if($formSimu->isSubmitted() && $formSimu->isValid() && $request->get("ajax"))
+        {
+            $prixBaseTattoo = 93;
+            
+            $size = $formSimu->get("size")->getData();
+            $color = $formSimu->get("color")->getData();
+            $detail = $formSimu->get("detail")->getData();
+            $area = $formSimu->get("area")->getData();
+            
+            $trueSizePlus = $sizeRepository->getClosestSizePlus($size);
+            $trueSizeMinus = $sizeRepository->getClosestSizeMinus($size);
+            
+            dd($trueSizeMinus, $trueSizePlus);
+            $diffPlus = $trueSizePlus[0]->getSize() - $size;
+            $diffMinus = $size - $trueSizeMinus[0]->getSize();
+            // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
+
+            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche + de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
+            if($diffPlus > $diffMinus)
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
+            if($diffPlus < $diffMinus)
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+            else
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+
+
+            return $this->render('simulation/index.html.twig', [
+                'prixFinalTattoo' => $prixFinalTattoo,
+            ]);
+        }
+
         
         return $this->render('simulation/index.html.twig', [
             'formSimu' => $formSimu,
             'formSize' => $formSize,
             'formColor' => $formColor,
             'formArea' => $formArea,
-            'formDetail' => $formDetail
+            'formDetail' => $formDetail,
+            'prixFinalTattoo' => $prixFinalTattoo
         ]);
     }
 }

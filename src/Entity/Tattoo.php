@@ -17,17 +17,27 @@ class Tattoo
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?float $basePrice = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'tattoo')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Size $size = null;
 
     #[ORM\ManyToOne(inversedBy: 'tattoo')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Color $color = null;
 
     #[ORM\ManyToOne(inversedBy: 'tattoo')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Area $area = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tattoo')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Detail $detail = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -90,6 +100,30 @@ class Tattoo
     public function setArea(?Area $area): static
     {
         $this->area = $area;
+
+        return $this;
+    }
+
+    public function getDetail(): ?Detail
+    {
+        return $this->detail;
+    }
+
+    public function setDetail(?Detail $detail): static
+    {
+        $this->detail = $detail;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

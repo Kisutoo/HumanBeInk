@@ -16,6 +16,29 @@ class SizeRepository extends ServiceEntityRepository
         parent::__construct($registry, Size::class);
     }
 
+
+    public function getClosestSizePlus(int $size)
+    {
+        return $this->createQueryBuilder('s')
+               ->andWhere('s.size >= :size')
+               ->setParameter('size', $size)
+               ->orderBy('s.id', 'ASC')
+               ->setMaxResults(1)
+               ->getQuery()
+               ->getResult()
+           ;
+    }
+    public function getClosestSizeMinus(int $size)
+    {
+        return $this->createQueryBuilder('s')
+               ->andWhere('s.size <= :size')
+               ->setParameter('size', $size)
+               ->orderBy('s.id', 'ASC')
+               ->setMaxResults(1)
+               ->getQuery()
+               ->getResult()
+           ;
+    }
     //    /**
     //     * @return Size[] Returns an array of Size objects
     //     */

@@ -19,7 +19,7 @@ class Area
     #[ORM\Column(length: 50)]
     private ?string $nameArea = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $sensibility = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
@@ -28,7 +28,7 @@ class Area
     /**
      * @var Collection<int, tattoo>
      */
-    #[ORM\OneToMany(targetEntity: tattoo::class, mappedBy: 'area')]
+    #[ORM\OneToMany(targetEntity: Tattoo::class, mappedBy: 'area')]
     private Collection $tattoo;
 
     public function __construct()
@@ -85,7 +85,7 @@ class Area
         return $this->tattoo;
     }
 
-    public function addTattoo(tattoo $tattoo): static
+    public function addTattoo(Tattoo $tattoo): static
     {
         if (!$this->tattoo->contains($tattoo)) {
             $this->tattoo->add($tattoo);
@@ -95,7 +95,7 @@ class Area
         return $this;
     }
 
-    public function removeTattoo(tattoo $tattoo): static
+    public function removeTattoo(Tattoo $tattoo): static
     {
         if ($this->tattoo->removeElement($tattoo)) {
             // set the owning side to null (unless already changed)
