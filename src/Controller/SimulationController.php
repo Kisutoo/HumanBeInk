@@ -38,32 +38,32 @@ final class SimulationController extends AbstractController
     {   
         $prixFinalTattoo = null;
 
-
-
+        
+        
         $formSimu = $this->createForm(SimulationType::class);
         $formSimu->handleRequest($request);
         
         $formName = $this->createForm(NameType::class);
         $formName->handleRequest($request);
-
+        
         $formFiles = $this->createForm(FilesType::class);
         $formFiles->handleRequest($request);
-
-
-
+        
+        
+        
         $formArea = $this->createForm(AreaType::class);
         $formArea->handleRequest($request);
-
+        
         $formColor = $this->createForm(ColorType::class);
         $formColor->handleRequest($request);
-
+        
         $formSize = $this->createForm(SizeType::class);
         $formSize->handleRequest($request);
-
+        
         $formDetail = $this->createForm(DetailType::class);
         $formDetail->handleRequest($request);
 
-
+        
         // Ajout data dans table Area
         if($formArea->isSubmitted() && $formArea->isValid())
         {
@@ -141,11 +141,18 @@ final class SimulationController extends AbstractController
             return $this->redirectToRoute("app_simulation");
         }
 
+        // dd($_SESSION);
+
         // Calcul du prix d'un tatouage grace au formulaire
-        if($formSimu->isSubmitted() && $formSimu->isValid() && $request->get("ajax"))
+        if($request->getMethod() == "POST" && $request->get("ajax"))
         {
+            dd($request->get("simulation[_token]"));
+
+            dd($this->isCsrfTokenValid('token_id', ));
+
             $prixBaseTattoo = 93;
             
+            dd("test");
             $size = $formSimu->get("size")->getData();
             $color = $formSimu->get("color")->getData();
             $detail = $formSimu->get("detail")->getData();
@@ -169,7 +176,7 @@ final class SimulationController extends AbstractController
                 $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
 
 
-            return $this->render('simulation/index.html.twig', [
+            return $this->render('simulation/_simuResultContainer.html.twig', [
                 'prixFinalTattoo' => $prixFinalTattoo,
             ]);
         }

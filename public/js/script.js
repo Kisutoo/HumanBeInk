@@ -41,6 +41,7 @@ let closePopupArea = document.querySelector(".croixPopupArea") || null
 let closePopupColor = document.querySelector(".croixPopupColor") || null 
 let closePopupDetail = document.querySelector(".croixPopupDetail") || null
 let formCalcSimu = document.querySelector(".formCalcSimu") || null
+let token = document.querySelector('simulation[_token]')
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -524,6 +525,23 @@ if(formCalcSimu)
         e.preventDefault()
         
         const test = new FormData(formCalcSimu)
-        console.log(test)
+        test.append('page', 'pagename')
+        
+        console.log(Object.fromEntries(test))
+        fetch(url.pathname + "?ajax=1", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': token,
+                "Content-type": "application/json",
+            },
+            body: test
+        })
+        .then(r => r.text())
+        .then(html => {
+
+            document.querySelector(".simuResult").innerHTML = html;
+
+            return;
+        })
     })
 }
