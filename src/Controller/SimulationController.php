@@ -63,7 +63,50 @@ final class SimulationController extends AbstractController
         $formDetail = $this->createForm(DetailType::class);
         $formDetail->handleRequest($request);
 
-        
+
+
+        // Calcul du prix d'un tatouage grace au formulaire
+        if($request->getMethod() == "POST" && $request->get("ajax"))
+        {
+            $size = $request->request->get("simulation");
+            dd($request->request->all(), $size);
+
+            dd($this->isCsrfTokenValid('token_id', ));
+
+            $prixBaseTattoo = 93;
+            
+            dd("test");
+            $size = $formSimu->get("size")->getData();
+            $color = $formSimu->get("color")->getData();
+            $detail = $formSimu->get("detail")->getData();
+            $area = $formSimu->get("area")->getData();
+            
+            $trueSizePlus = $sizeRepository->getClosestSizePlus($size);
+            $trueSizeMinus = $sizeRepository->getClosestSizeMinus($size);
+            
+            dd($trueSizeMinus, $trueSizePlus);
+            $diffPlus = $trueSizePlus[0]->getSize() - $size;
+            $diffMinus = $size - $trueSizeMinus[0]->getSize();
+            // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
+
+            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche + de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
+            if($diffPlus > $diffMinus)
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
+            if($diffPlus < $diffMinus)
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+            else
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+
+
+            return $this->render('simulation/_simuResultContainer.html.twig', [
+                'prixFinalTattoo' => $prixFinalTattoo,
+            ]);
+        }
+
+
+
+
         // Ajout data dans table Area
         if($formArea->isSubmitted() && $formArea->isValid())
         {
@@ -143,43 +186,7 @@ final class SimulationController extends AbstractController
 
         // dd($_SESSION);
 
-        // Calcul du prix d'un tatouage grace au formulaire
-        if($request->getMethod() == "POST" && $request->get("ajax"))
-        {
-            dd($request->get("simulation[_token]"));
 
-            dd($this->isCsrfTokenValid('token_id', ));
-
-            $prixBaseTattoo = 93;
-            
-            dd("test");
-            $size = $formSimu->get("size")->getData();
-            $color = $formSimu->get("color")->getData();
-            $detail = $formSimu->get("detail")->getData();
-            $area = $formSimu->get("area")->getData();
-            
-            $trueSizePlus = $sizeRepository->getClosestSizePlus($size);
-            $trueSizeMinus = $sizeRepository->getClosestSizeMinus($size);
-            
-            dd($trueSizeMinus, $trueSizePlus);
-            $diffPlus = $trueSizePlus[0]->getSize() - $size;
-            $diffMinus = $size - $trueSizeMinus[0]->getSize();
-            // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
-
-            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche + de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
-            if($diffPlus > $diffMinus)
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
-            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
-            if($diffPlus < $diffMinus)
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
-            else
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
-
-
-            return $this->render('simulation/_simuResultContainer.html.twig', [
-                'prixFinalTattoo' => $prixFinalTattoo,
-            ]);
-        }
 
         
         return $this->render('simulation/index.html.twig', [

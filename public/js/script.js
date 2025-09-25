@@ -525,14 +525,12 @@ if(formCalcSimu)
         e.preventDefault()
         
         const test = new FormData(formCalcSimu)
-        test.append('page', 'pagename')
         
-        console.log(Object.fromEntries(test))
         fetch(url.pathname + "?ajax=1", {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': token,
-                "Content-type": "application/json",
+
             },
             body: test
         })
