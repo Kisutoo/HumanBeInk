@@ -40,6 +40,7 @@ let closePopupSize = document.querySelector(".croixPopupSize") || null
 let closePopupArea = document.querySelector(".croixPopupArea") || null
 let closePopupColor = document.querySelector(".croixPopupColor") || null 
 let closePopupDetail = document.querySelector(".croixPopupDetail") || null
+let formCalcSimu = document.querySelector(".formCalcSimu") || null
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -515,4 +516,14 @@ if(addDialogsArea)
     openClosePopup(popupColor, addDialogsColor, closePopupColor)
     openClosePopup(popupSize, addDialogsSize, closePopupSize)
     openClosePopup(popupDetail, addDialogsDetail, closePopupDetail)
+}
+
+if(formCalcSimu)
+{
+    formCalcSimu.addEventListener("submit", (e) => {
+        e.preventDefault()
+        
+        const test = new FormData(formCalcSimu)
+        console.log(test)
+    })
 }

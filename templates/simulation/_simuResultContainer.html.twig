@@ -1,15 +1,13 @@
 <div class="resultContainer flashContainer">
-    {% if prixFinalTattoo %}
-        {{ prixFinalTattoo }}
-    {% endif %}
+
     <div class="showFinalPrice">
-        <p>Prix estimé : </p>
-        <p>990€</p>
+        <p>Prix estimé pour ce tatouage : </p>
+        <p>{{ prixFinalTattoo }}</p>
     </div>
     <div class="btnSaveSimu">
-        <a id="flashButtonContact" href="" class="btn">
-            <p class="goldPolice">Enregistrer</p>
-        </a>
+           <div class="divBtnCalculerSimu">
+        <button type="submit" class="btn"><p class="goldPolice">Enregistrer</p></button>
+    </div>
         
     </div>
 </div>

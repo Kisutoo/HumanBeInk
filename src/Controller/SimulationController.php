@@ -181,6 +181,8 @@ final class SimulationController extends AbstractController
             'formColor' => $formColor,
             'formArea' => $formArea,
             'formDetail' => $formDetail,
+            'formName' => $formName,
+            'formFiles' => $formFiles,
             'prixFinalTattoo' => $prixFinalTattoo
         ]);
     }

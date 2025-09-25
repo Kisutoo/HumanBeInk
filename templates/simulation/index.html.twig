@@ -42,7 +42,7 @@
     <div class="flashContainerTotal">
         <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
         <div class="simuForm flashContainer">
-            {{ form_start(formSimu) }}
+            {{ form_start(formSimu, { 'attr' : { 'class': 'formCalcSimu' } }) }}
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
                 <div class="editSimuSize editSimu">
@@ -81,7 +81,7 @@
             </div>
 
                 <div class="divBtnCalculerSimu">
-                    <button type="submit" class="btn"><p class="goldPolice">Calculer</p></button>
+                    <button type="submit" class="btn btnCalcSimu"><p class="goldPolice">Calculer</p></button>
                 </div>
             {{ form_end(formSimu) }}
         </div>
