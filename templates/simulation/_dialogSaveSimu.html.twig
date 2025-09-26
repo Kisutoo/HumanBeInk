@@ -1,0 +1,19 @@
+<dialog class="popup popupSaveSimu hidden">
+    <div class="croixPopupSaveSimu croix">
+        <div class="rec1"></div>
+        <div class="rec2"></div>
+    </div>
+    <div class="flashForm">
+        {{ form_start(formSaveSimu, {'action': path("save_simu")}) }}
+        <div class="flashFormSection">
+            {{ form_row(formSaveSimu.name) }}
+        </div>
+        <div>
+            {{ form_row(formSaveSimu.image) }}
+        </div>
+        <div class="divBtnAddFlashForm">
+            <button type="submit" class="btn"><p class="goldPolice">Enregister</p></button>
+        </div>
+        {{ form_end(formSaveSimu) }}
+    </div>
+</dialog>

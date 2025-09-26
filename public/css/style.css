@@ -43,12 +43,12 @@ h1{
     font-weight: 200;
 }
 .fondNoise{
-    height: 100vh;
+    height: 102vh;
     background-color: black;
     background-image: url("https://www.transparenttextures.com/patterns/navy.png");;
     opacity: 0.8;
     background-repeat: repeat;
-    transform: translate(0, -100%);
+    transform: translate(0, -99%);
 }
 
 .fondHomePage{
@@ -130,6 +130,14 @@ button:active {
     cursor: pointer;
 }
 
+select{
+    background-color: rgba(49, 49, 49, 0.5);
+    color: white;
+    width: 19.2em;
+    padding: 0.5em;
+    border: none;
+
+}
 
 .connexion{
         display: flex;
@@ -210,11 +218,12 @@ button:active {
 
     }
 
-input[type="text"], input[type="password"], input[type="email"], select{
+input[type="text"], input[type="password"], input[type="email"]{
     width: 20em;
     margin-bottom: 2em;
+    padding: 0.5em;
     height: 1.5em;
-    border-radius: 15px;
+    border-radius: 10px;
     font-size: 1em;
     background-color: rgba(49, 49, 49, 0.5);
     color: white;
@@ -224,7 +233,7 @@ input[type="text"], input[type="password"], input[type="email"], select{
 }
 
 .login{
-    transform: translate(0, -385%);
+    transform: translate(0, -355%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -610,15 +619,40 @@ bold{
     border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     border-image-slice: 1;
 }
+.lienAncrage{
+    position: sticky;
+    top: 0;
+    margin-top: 3em;
+    margin-right: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    font-family: "Raleway";
+    font-size: 1em;
+    a{
+        padding: 0.5em;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+}
 
 .profil{
-    transform: translate(0, -3100%);
     padding: 0em 5em;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .likecontainerContainer{
+        transform: translate(0, -40%);
+        width: 100%;
+        display: flex;
+        justify-content: end;
+    }
     .profileForm{
-        margin-left: 4em;
-        margin-top: -8em;
-        width: 50%;
+
         div:nth-child(2){
             input{
                 opacity: .5;
@@ -634,9 +668,14 @@ bold{
             }
         }
     }
+    .bloc2{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        margin-top: 0;
+    }
     .likeContainer{
-        margin-top: -25em;
-        width: 50%;
+        margin-top: 10em;
         text-align: center;
         h3{
             font-family: "Raleway";
@@ -656,8 +695,15 @@ bold{
         background-color: rgba(0, 0, 0, .5);
         display: grid;
         grid-template-columns: repeat(3, 18em);
+        align-items: center;
+        justify-content: center;
+        
         
     }
+}
+.sousProfil{
+    height: 50em;
+    background: linear-gradient(180deg,rgb(0, 0, 0) 0%, rgb(24, 23, 23) 100%);
 }
 
 .disableScroll{
@@ -668,6 +714,9 @@ bold{
     height: 100vh;
     .logoProfil{
         width: 100%;
+    }
+    .connexion{
+        transform: translate(0,-175%);
     }
     h1{
         font-size: 5em;
@@ -690,7 +739,7 @@ bold{
         font-weight: 800;
     }
     .headProfile{
-        transform: translate(0, -700%);
+        transform: translate(0, -450%);
         z-index: 8;
     }
 }
@@ -749,11 +798,6 @@ dialog::backdrop{
                 height: 1em;
                 width: 15em;
                 padding: 0.4em;
-            }
-            select{
-                padding: 0.4em;
-                width: 16.1em;
-                height: 2.1em;
             }
         }
     }
@@ -1101,6 +1145,7 @@ footer{
         justify-content: center;
         align-items: center;
         select{
+            width: 23em;
             border-radius: 5px;
         }
         .zoneSensiDiv{
@@ -1208,6 +1253,7 @@ footer{
     }
     select{
         color: white;
+
     }
 }
 

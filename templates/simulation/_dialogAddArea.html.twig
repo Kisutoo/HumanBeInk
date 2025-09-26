@@ -3,7 +3,7 @@
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
-    {{ form_start(formArea) }}
+    {{ form_start(formArea, {'action': path("add_area")}) }}
     {{ form_row(formArea.areaName) }}
     {{ form_row(formArea.multiplicator) }}
     {{ form_row(formArea.sensibility) }}

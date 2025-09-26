@@ -15,7 +15,7 @@
             <h2 class="sousTitre goldPolice">Simulateur de prix</h2>
         </div>
         <div class="scroll-down"></div>
-    </div>
+</div>
     <div class="progress-container">
         <div id="progress-bar"></div>
     </div>
@@ -36,6 +36,9 @@
         </div>
 
     {% endif %}
+    <div class="SaveSimuDialogContainer">
+        {% include "simulation/_dialogSaveSimu.html.twig" %}
+    </div>
 
     <div class="simuContainer">
 
@@ -86,11 +89,21 @@
             {{ form_end(formSimu) }}
         </div>
 
-        <div class="simuResult">
+        <div class="resultContainer flashContainer hidden">
+
+            <div class="showFinalPrice">
+            </div>
+        {% if app.user is not null %}
+            <div class="btnSaveSimu">
+                <div class="divBtnCalculerSimu">
+                    <button type="submit" class="btn saveSimu"><p class="goldPolice">Enregistrer</p></button>
+                </div>
+            </div>
+        {% endif %}
         </div>
-    </div>
 
     </div>
+</div>
 
     {% include "_footer.html.twig" %}
 {% endblock %}

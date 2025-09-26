@@ -17,9 +17,14 @@
                 <h1 class="goldPolice">Human Be Ink</h1>
             </div>
             <h2 class="goldPolice">Mon Profil</h2>
+            <div class="lienAncrage">
+                <a href="#likes">Coordonnées</a>
+                <a href="#likes">Mes likes</a>
+                <a href="#">Mes simulations</a>
+            </div>
         </div>
         <div class="connexion profil">
-            <div class="bloc2">
+            <div class="bloc2" id="coordonnees">
                 <div class="profileForm">
                     {{ form_start(nicknameForm) }}
                     <div class="editDiv">
@@ -38,15 +43,22 @@
                     </a>
                 </div>
             </div>
-            <div class="likeContainer">
-                <h3 class="goldPolice">Flashs Likés</h3>
-                <div class="likedFlash">            
-                    {% for flash in likedFlashs %}
-                        <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
-                    {% endfor %}
+            <div class="likecontainerContainer">
+                <div class="likeContainer" id="likes">
+                    <h3  class="goldPolice">Flashs Likés</h3>
+                    <div class="likedFlash">            
+                        {% for flash in likedFlashs %}
+                            <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div> 
     </div>
+    <div class="sousProfil">
+        
+    </div>
+
+    {% include "_footer.html.twig" %}
     
 {% endblock %}

@@ -3,7 +3,7 @@
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
-    {{ form_start(formColor) }}
+    {{ form_start(formColor, {'action': path("add_color")}) }}
     {{ form_row(formColor.colorType) }}
     {{ form_row(formColor.multiplicator) }}
     <div class="divBtnCalculerSimu">
