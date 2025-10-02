@@ -695,7 +695,8 @@ bold{
         background-color: rgba(0, 0, 0, .5);
         display: grid;
         grid-template-columns: repeat(3, 18em);
-        align-items: center;
+
+        gap: 1em;
         justify-content: center;
         
         
