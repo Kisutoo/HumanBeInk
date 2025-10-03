@@ -6,13 +6,14 @@ use App\Entity\Area;
 use App\Entity\Size;
 use App\Entity\Color;
 use App\Entity\Detail;
+use App\Entity\Tattoo;
 use App\Form\AreaType;
-use App\Form\NameType;
 use App\Form\SizeType;
 use App\Form\ColorType;
-use App\Form\FilesType;
 use App\Form\DetailType;
+use App\Form\SaveSimuType;
 use App\Form\SimulationType;
+use App\Service\ConvertImageFormat;
 use App\Repository\AreaRepository;
 use App\Repository\SizeRepository;
 use App\Repository\ColorRepository;
@@ -36,19 +37,19 @@ final class SimulationController extends AbstractController
         TattooRepository $tattooRepository
         ): Response
     {   
+        if(isset($_SESSION["simulation"]))
+            unset($_SESSION["simulation"]);
+        
+
+        $prixBaseTattoo = 93;
         $prixFinalTattoo = null;
 
-        
         
         $formSimu = $this->createForm(SimulationType::class);
         $formSimu->handleRequest($request);
         
-        $formName = $this->createForm(NameType::class);
-        $formName->handleRequest($request);
-        
-        $formFiles = $this->createForm(FilesType::class);
-        $formFiles->handleRequest($request);
-        
+        $formSaveSimu = $this->createForm(SaveSimuType::class);
+        $formSaveSimu->handleRequest($request);
         
         
         $formArea = $this->createForm(AreaType::class);
@@ -66,46 +67,236 @@ final class SimulationController extends AbstractController
 
 
         // Calcul du prix d'un tatouage grace au formulaire
+        // dd($request->request->all());
         if($request->getMethod() == "POST" && $request->get("ajax"))
         {
-            $size = $request->request->get("simulation");
-            dd($request->request->all(), $size);
 
-            dd($this->isCsrfTokenValid('token_id', ));
+            $_SESSION["simulation"] = array();
 
-            $prixBaseTattoo = 93;
+
+            $_SESSION["simulation"]["basePrice"] = $prixBaseTattoo;
             
-            dd("test");
-            $size = $formSimu->get("size")->getData();
-            $color = $formSimu->get("color")->getData();
-            $detail = $formSimu->get("detail")->getData();
-            $area = $formSimu->get("area")->getData();
+
+            $size = floatval($request->request->all()["simulation"]["size"]);
+
+            $color = intval($request->request->all()["simulation"]["color"]);
+            $colorObj = $colorRepository->findOneBy(["id" => $color], []);
+            if($colorObj)
+                $_SESSION["simulation"]["color"] = $color;
+
+            $detail = intval($request->request->all()["simulation"]["detail"]);
+            $detailObj = $detailRepository->findOneBy(["id" => $detail], []);
+            if($detailObj)
+                $_SESSION["simulation"]["detail"] = $detail;
+
+            $area = intval($request->request->all()["simulation"]["area"]);
+            $areaObj = $areaRepository->findOneBy(["id" => $area], []);
+            if($areaObj)
+                $_SESSION["simulation"]["area"] = $area;
+
+
             
             $trueSizePlus = $sizeRepository->getClosestSizePlus($size);
             $trueSizeMinus = $sizeRepository->getClosestSizeMinus($size);
             
-            dd($trueSizeMinus, $trueSizePlus);
-            $diffPlus = $trueSizePlus[0]->getSize() - $size;
-            $diffMinus = $size - $trueSizeMinus[0]->getSize();
+
+            $diffPlus = $trueSizePlus ? $trueSizePlus[0]->getSize() - $size : null;
+            $diffMinus = $trueSizeMinus ? $size - $trueSizeMinus[0]->getSize() : null;
             // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
 
             // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche + de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
-            if($diffPlus > $diffMinus)
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
-            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
-            if($diffPlus < $diffMinus)
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
-            else
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($area->getMultiplicator() * $color->getMultiplicator() * $detail->getMultiplicator()));
+            if($diffPlus > $diffMinus || $diffPlus == null)
+            {
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                $_SESSION["simulation"]["size"] = $trueSizeMinus[0]->getId();
+                $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
 
+            }
+            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
+            elseif($diffPlus < $diffMinus || $diffMinus == null)
+            {
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                $_SESSION["simulation"]["size"] = $trueSizePlus[0]->getId();
+                $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
+            }
+            else
+            {
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                $_SESSION["simulation"]["size"] = $trueSizePlus[0]->getId();
+                $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
+            }
+            
+            
 
             return $this->render('simulation/_simuResultContainer.html.twig', [
                 'prixFinalTattoo' => $prixFinalTattoo,
+                'formSaveSimu' => $formSaveSimu,
             ]);
         }
 
+        // Vue retournée sans action, en accèdant à la page
+        return $this->render('simulation/index.html.twig', [
+            'formSimu' => $formSimu,
+            'formSize' => $formSize,
+            'formColor' => $formColor,
+            'formArea' => $formArea,
+            'formDetail' => $formDetail,
+            'formSaveSimu' => $formSaveSimu,
+            'prixFinalTattoo' => $prixFinalTattoo
+        ]);
+    }
 
 
+
+    #[Route('simulation/saveSimulation', name: 'save_simu')]
+    public function saveSimulation(Request $request, EntityManagerInterface $em,         DetailRepository $detailRepository,
+        ColorRepository $colorRepository,
+        AreaRepository $areaRepository,
+        SizeRepository $sizeRepository)
+    {
+        $formSaveSimu = $this->createForm(SaveSimuType::class);
+        $formSaveSimu->handleRequest($request);
+
+
+        if($formSaveSimu->isSubmitted() && $formSaveSimu->isValid() && $request->getMethod() == "POST" && isset($_SESSION["simulation"]))
+        {
+            $tattoo = new Tattoo();
+            $imageConverter = new ConvertImageFormat();
+
+
+            $files = $_FILES["save_simu"];
+
+            $tattoo->setBasePrice($_SESSION["simulation"]["basePrice"]);
+            $tattoo->setName($formSaveSimu->get("name")->getData());
+            $tattoo->setSize($sizeRepository->findOneBy(["id" => $_SESSION["simulation"]["size"]]));
+            $tattoo->setColor($colorRepository->findOneBy(["id" => $_SESSION["simulation"]["color"]]));
+            $tattoo->setArea($areaRepository->findOneBy(["id" => $_SESSION["simulation"]["area"]]));
+            $tattoo->setDetail($detailRepository->findOneBy(["id" => $_SESSION["simulation"]["detail"]]));
+            $tattoo->setFinalPrice($_SESSION["simulation"]["finalPrice"]);
+            $tattoo->setUser($this->getUser());
+            
+            $imageConverter->convertImageToWebp($files, null, $tattoo);
+
+            $em->persist($tattoo);
+            $em->flush();
+
+            $this->addFlash("success", "Votre simulation a bien été ajouté sur votre profil !");
+            return $this->redirectToRoute("app_simulation");
+        }
+        
+
+        return $this->redirectToRoute("app_simulation");
+    }
+
+
+
+
+
+
+
+
+
+    #[Route('admin/simulation/addSize', name: 'add_size')]
+    public function addSize(Request $request, EntityManagerInterface $em)
+    {  
+
+        $formSize = $this->createForm(SizeType::class);
+        $formSize->handleRequest($request);
+
+        // Ajout data dans table Size
+        if($formSize->isSubmitted() && $formSize->isValid())
+        {
+            $sizeValue = $formSize->get("size")->getData();
+            $multiplicatorSize = $formSize->get("multiplicator")->getData();
+
+            $size = new Size();
+
+            $size->setSize($sizeValue);
+            $size->setMultiplicator($multiplicatorSize);
+
+            $em->persist($size);
+            $em->flush();
+
+            return $this->redirectToRoute("app_simulation");
+        }
+
+        return $this->redirectToRoute("app_simulation");
+    }
+
+
+
+
+
+    #[Route('admin/simulation/addColor', name: 'add_color')]
+    public function addColor(Request $request, EntityManagerInterface $em)
+    {
+        
+        $formColor = $this->createForm(ColorType::class);
+        $formColor->handleRequest($request);
+
+
+        // Ajout data dans table Color
+        if($formColor->isSubmitted() && $formColor->isValid())
+        {
+            $colorType = $formColor->get("colorType")->getData();
+            $multiplicatorColor = $formColor->get("multiplicator")->getData();
+
+            $color = new Color();
+
+            $color->setTypeColor($colorType);
+            $color->setMultiplicator($multiplicatorColor);
+
+            $em->persist($color);
+            $em->flush();
+
+            return $this->redirectToRoute("app_simulation");
+        }
+
+        return $this->redirectToRoute("app_simulation");
+    }
+
+
+
+    
+
+
+    #[Route('admin/simulation/addDetail', name: 'add_detail')]
+    public function addDetail(Request $request, EntityManagerInterface $em)
+    {
+        
+        $formDetail = $this->createForm(DetailType::class);
+        $formDetail->handleRequest($request);
+
+
+        // Ajout data dans table Detail
+        if($formDetail->isSubmitted() && $formDetail->isValid())
+        {
+            $detailType = $formDetail->get("detailName")->getData();
+            $multiplicatorDetail = $formDetail->get("multiplicator")->getData();
+
+            $detail = new Detail();
+
+            $detail->setDetailName($detailType);
+            $detail->setMultiplicator($multiplicatorDetail);
+
+            $em->persist($detail);
+            $em->flush();
+
+            return $this->redirectToRoute("app_simulation");
+        }
+
+        return $this->redirectToRoute("app_simulation");
+    }
+
+
+
+
+
+    #[Route('admin/simulation/addArea', name: 'add_area')]
+    public function addArea(Request $request, EntityManagerInterface $em)
+    {
+        $formArea = $this->createForm(AreaType::class);
+        $formArea->handleRequest($request);
 
         // Ajout data dans table Area
         if($formArea->isSubmitted() && $formArea->isValid())
@@ -130,74 +321,6 @@ final class SimulationController extends AbstractController
             return $this->redirectToRoute("app_simulation");
         }
 
-
-        // Ajout data dans table Color
-        if($formColor->isSubmitted() && $formColor->isValid())
-        {
-            $colorType = $formColor->get("colorType")->getData();
-            $multiplicatorColor = $formColor->get("multiplicator")->getData();
-
-            $color = new Color();
-
-            $color->setTypeColor($colorType);
-            $color->setMultiplicator($multiplicatorColor);
-
-            $em->persist($color);
-            $em->flush();
-
-            return $this->redirectToRoute("app_simulation");
-        }
-
-
-        // Ajout data dans table Size
-        if($formSize->isSubmitted() && $formSize->isValid())
-        {
-            $sizeValue = $formSize->get("size")->getData();
-            $multiplicatorSize = $formSize->get("multiplicator")->getData();
-
-            $size = new Size();
-
-            $size->setSize($sizeValue);
-            $size->setMultiplicator($multiplicatorSize);
-
-            $em->persist($size);
-            $em->flush();
-
-            return $this->redirectToRoute("app_simulation");
-        }
-
-
-        // Ajout data dans table Detail
-        if($formDetail->isSubmitted() && $formDetail->isValid())
-        {
-            $detailType = $formDetail->get("detailName")->getData();
-            $multiplicatorDetail = $formDetail->get("multiplicator")->getData();
-
-            $detail = new Detail();
-
-            $detail->setDetailName($detailType);
-            $detail->setMultiplicator($multiplicatorDetail);
-
-            $em->persist($detail);
-            $em->flush();
-
-            return $this->redirectToRoute("app_simulation");
-        }
-
-        // dd($_SESSION);
-
-
-
-        
-        return $this->render('simulation/index.html.twig', [
-            'formSimu' => $formSimu,
-            'formSize' => $formSize,
-            'formColor' => $formColor,
-            'formArea' => $formArea,
-            'formDetail' => $formDetail,
-            'formName' => $formName,
-            'formFiles' => $formFiles,
-            'prixFinalTattoo' => $prixFinalTattoo
-        ]);
+        return $this->redirectToRoute("app_simulation");
     }
 }

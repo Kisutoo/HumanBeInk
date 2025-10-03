@@ -3,7 +3,7 @@
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
-    {{ form_start(formDetail) }}
+    {{ form_start(formDetail, {'action': path("add_detail")}) }}
     {{ form_row(formDetail.detailName) }}
     {{ form_row(formDetail.multiplicator) }}
     <div class="divBtnCalculerSimu">

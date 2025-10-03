@@ -3,10 +3,11 @@
 namespace App\Service;
 
 use App\Entity\Flash;
+use App\Entity\Tattoo;
 
 class ConvertImageFormat {
 
-	public function convertImageToWebp(array $files, ?Flash $flash, ?bool $simulation): bool
+	public function convertImageToWebp(array $files, ?Flash $flash, ?Tattoo $tattoo): bool
     {
         $image = $files['name']['image'];
         $tmpName = $files['tmp_name']['image'];
@@ -89,11 +90,18 @@ class ConvertImageFormat {
             //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
             $IdFlash = $uniqueName . ".webp";
             //$affiche = 5f586bf96dcd38.73540086.webp
+            if($flash)
+            {
+                $flash->setImage($IdFlash);
+                
+                imagewebp($newImg, '../public/img/flashs/'. $IdFlash);
+            }
+            elseif($tattoo)
+            {
+                $tattoo->setImage($IdFlash);
 
-            $flash->setImage($IdFlash);
-            
-            
-            imagewebp($newImg, '../public/img/flashs/'. $IdFlash);
+                imagewebp($newImg, '../public/img/simuImages/'. $IdFlash);
+            }
             // Déplace le fichier contenu dans le tableau file, au dossier public/img/flashs
 
             return true;

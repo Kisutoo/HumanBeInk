@@ -42,6 +42,9 @@ let closePopupColor = document.querySelector(".croixPopupColor") || null
 let closePopupDetail = document.querySelector(".croixPopupDetail") || null
 let formCalcSimu = document.querySelector(".formCalcSimu") || null
 let token = document.querySelector('simulation[_token]')
+let popupSaveSimu = document.querySelector(".popupSaveSimu") || null
+let closePopupSaveSimu = document.querySelector(".croixPopupSaveSimu") || null
+let showPopupSaveSimu = document.querySelector(".saveSimu") || null
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -377,7 +380,7 @@ if(flashs)
 
 
 
-if(imgInp != null)
+if(imgInp != null && contactImage)
 {
     if(contactImage.getAttribute("src") && imgInp.files.length == 0)
     {
@@ -521,6 +524,7 @@ if(addDialogsArea)
 
 if(formCalcSimu)
 {
+    let SimuResultContainer = document.querySelector(".resultContainer")
     formCalcSimu.addEventListener("submit", (e) => {
         e.preventDefault()
         
@@ -537,9 +541,14 @@ if(formCalcSimu)
         .then(r => r.text())
         .then(html => {
 
-            document.querySelector(".simuResult").innerHTML = html;
+            document.querySelector(".showFinalPrice").innerHTML = html;
+            SimuResultContainer.classList.add("flashContainer")
+            SimuResultContainer.classList.remove("hidden");
 
             return;
         })
     })
 }
+
+if(popupSaveSimu)
+    openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);

@@ -3,7 +3,7 @@
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
-    {{ form_start(formSize) }}
+    {{ form_start(formSize, {'action': path("add_size")}) }}
 
     {{ form_row(formSize.size) }}
     {{ form_row(formSize.multiplicator) }}

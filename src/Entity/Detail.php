@@ -62,38 +62,38 @@ class Detail
         return $this;
     }
 
-        public function __toString(): string
+
+    /**
+     * @return Collection<int, Tattoo>
+     */
+    public function getTattoo(): Collection
+    {
+        return $this->tattoo;
+    }
+
+    public function addTattoo(Tattoo $tattoo): static
+    {
+        if (!$this->tattoo->contains($tattoo)) {
+            $this->tattoo->add($tattoo);
+            $tattoo->setDetail($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTattoo(Tattoo $tattoo): static
+    {
+        if ($this->tattoo->removeElement($tattoo)) {
+            // set the owning side to null (unless already changed)
+            if ($tattoo->getDetail() === $this) {
+                $tattoo->setDetail(null);
+            }
+        }
+        return $this;
+    }
+
+    public function __toString(): string
     {
         return $this->getDetailName();
     }
-
-        /**
-         * @return Collection<int, Tattoo>
-         */
-        public function getTattoo(): Collection
-        {
-            return $this->tattoo;
-        }
-
-        public function addTattoo(Tattoo $tattoo): static
-        {
-            if (!$this->tattoo->contains($tattoo)) {
-                $this->tattoo->add($tattoo);
-                $tattoo->setDetail($this);
-            }
-
-            return $this;
-        }
-
-        public function removeTattoo(Tattoo $tattoo): static
-        {
-            if ($this->tattoo->removeElement($tattoo)) {
-                // set the owning side to null (unless already changed)
-                if ($tattoo->getDetail() === $this) {
-                    $tattoo->setDetail(null);
-                }
-            }
-
-            return $this;
-        }
 }

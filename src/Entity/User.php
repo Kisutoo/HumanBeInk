@@ -48,6 +48,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $googleId = null;
 
+    /**
+     * @var Collection<int, Tattoo>
+     */
+    #[ORM\OneToMany(targetEntity: Tattoo::class, mappedBy: 'user')]
+    private Collection $tattoos;
+
 
 
 
@@ -56,6 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->flashs = new ArrayCollection();
+        $this->tattoos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -184,6 +191,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGoogleId(?string $googleId): self
     {
         $this->googleId = $googleId;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tattoo>
+     */
+    public function getTattoos(): Collection
+    {
+        return $this->tattoos;
+    }
+
+    public function addTattoo(Tattoo $tattoo): static
+    {
+        if (!$this->tattoos->contains($tattoo)) {
+            $this->tattoos->add($tattoo);
+            $tattoo->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTattoo(Tattoo $tattoo): static
+    {
+        if ($this->tattoos->removeElement($tattoo)) {
+            // set the owning side to null (unless already changed)
+            if ($tattoo->getUser() === $this) {
+                $tattoo->setUser(null);
+            }
+        }
+
         return $this;
     }
 
