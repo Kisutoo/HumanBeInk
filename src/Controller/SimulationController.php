@@ -95,8 +95,9 @@ final class SimulationController extends AbstractController
                 $_SESSION["simulation"]["area"] = $area;
 
 
-            
+            // Récupère la taille la plus proche en base de données
             $trueSizePlus = $sizeRepository->getClosestSizePlus($size);
+            // Récupère la taille la plus proche en base de données
             $trueSizeMinus = $sizeRepository->getClosestSizeMinus($size);
             
 
@@ -166,8 +167,9 @@ final class SimulationController extends AbstractController
 
             $files = $_FILES["save_simu"];
 
-            $tattoo->setBasePrice($_SESSION["simulation"]["basePrice"]);
+            
             $tattoo->setName($formSaveSimu->get("name")->getData());
+            $tattoo->setBasePrice($_SESSION["simulation"]["basePrice"]);
             $tattoo->setSize($sizeRepository->findOneBy(["id" => $_SESSION["simulation"]["size"]]));
             $tattoo->setColor($colorRepository->findOneBy(["id" => $_SESSION["simulation"]["color"]]));
             $tattoo->setArea($areaRepository->findOneBy(["id" => $_SESSION["simulation"]["area"]]));
@@ -210,12 +212,14 @@ final class SimulationController extends AbstractController
             $multiplicatorSize = $formSize->get("multiplicator")->getData();
 
             $size = new Size();
+            // Création d'un nouvel objet size
 
             $size->setSize($sizeValue);
             $size->setMultiplicator($multiplicatorSize);
+            // On récupère les valeurs reçues du formulaire pour les attribuer aux propriété de l'objet fraichement instancié
 
             $em->persist($size);
-            $em->flush();
+            $em->flush(); // Correspond à "INSERT INTO size ..."
 
             return $this->redirectToRoute("app_simulation");
         }

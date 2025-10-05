@@ -1292,6 +1292,10 @@ footer{
 
 @media screen and (width >= 2560px)
 {
+    body{
+        background-color: black;
+    }
+}
 
     .fondHomeCalque{
         height: 82.5em;

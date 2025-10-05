@@ -14,12 +14,15 @@ class AreaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        // Ajout d'un champ texte pour le nom
             ->add('areaName', TextType::class, [
                 'label' => 'Nom de la zone'
             ])
+        // Ajout d'un champ de séléction pour le multiplicateur
             ->add('multiplicator', NumberType::class, [
                 'label' => 'Multiplicateur'
             ])
+        // Ajout d'un champ pour savoir si oui ou non il s'agit d'une zone sensible
             ->add('sensibility', CheckboxType::class, [
                 'label' => 'Sensible',
                 'required'   => false,

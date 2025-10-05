@@ -530,6 +530,7 @@ if(formCalcSimu)
         
         const test = new FormData(formCalcSimu)
         
+        // Ici, l'Url.pathname correspondra à "/simulation" auquel on vient ajouter "?ajax=1"
         fetch(url.pathname + "?ajax=1", {
             method: 'POST',
             headers: {

@@ -13,9 +13,11 @@ class SaveSimuType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        // Ajout d'un champ texte pour le nom d'une simulation
             ->add('name', TextType::class, [
                 'label' => 'Nom'
             ])
+        // Ajout d'un input file pour uploader une image (inspiration)
             ->add('image', FileType::class, [
                 'label' => 'contact.inspiration',
                 'attr' => ['class' => 'files translatedText', 'onchange' => 'previewFiles()', 'value' => 'contact.choisirFichier']

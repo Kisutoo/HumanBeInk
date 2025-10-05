@@ -13,9 +13,11 @@ class ColorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        // Ajout d'un champ texte pour la couleur
             ->add('colorType', TextType::class, [
                 'label' => 'Type de couleurs'
             ])
+        // Ajout d'un champ de séléction pour le multiplicateur
             ->add('multiplicator', NumberType::class, [
                 'label' => 'Multiplicateur'
             ])

@@ -5,8 +5,8 @@ namespace App\Service;
 use App\Entity\Flash;
 use App\Entity\Tattoo;
 
-class ConvertImageFormat {
-
+class ConvertImageFormat
+{
 	public function convertImageToWebp(array $files, ?Flash $flash, ?Tattoo $tattoo): bool
     {
         $image = $files['name']['image'];

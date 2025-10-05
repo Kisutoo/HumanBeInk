@@ -92,8 +92,11 @@
 
         <div class="resultContainer flashContainer hidden">
 
+            {# Conteneur permettant d'afficher le résultat final #}
             <div class="showFinalPrice">
             </div>
+
+            {# Bouton d'enregistrement seulement disponible pour un utilisateur authentifié #}
         {% if app.user is not null %}
             <div class="btnSaveSimu">
                 <div class="divBtnCalculerSimu">
