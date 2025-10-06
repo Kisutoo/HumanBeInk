@@ -902,9 +902,12 @@ input::file-selector-button:hover{
     padding: 0.5em 0 3em 0;
 }
 .logoNom{
-    margin-left: -50em;
+    margin-top: -2em;
     display: flex;
     align-items: center;
+}
+.burgerLogo{
+    display: flex;
 }
 .formContactTotal{
     display: flex;
@@ -927,37 +930,36 @@ input::file-selector-button:hover{
 }
 
 footer{
+    padding: 1em 0;
     font-family: "Raleway";
     background: linear-gradient(180deg,rgba(9, 9, 9, 1) 1%, rgba(3, 0, 0, 1) 100%);
+    
     .footerContainer{
         a{
+            width: fit-content;
             color: white;
             text-decoration: none;
         }
         color: white;
         display: flex;
         flex-direction: column;
-        place-items: center;
     }
     .lienlogoreseau{
         display: flex;
         justify-content: center;
-        margin-bottom: 3em;
     }
     .logofooter{
         width: 50%;
     }
-    .liencontact{
+    .lienInstaFooter{
         margin-bottom: 2em;
+        display: flex;
+        justify-content: center;
     }
-    .numerotel{
-        margin-bottom: 0.5em;
-    }
-    .droitsreservees{
-        margin: 5em 0;
-    }
-    .mentionslegales{
-        margin: 2em 0;
+    .liensFooter
+    {
+        display: flex;
+        justify-content: space-around;
     }
 }
 

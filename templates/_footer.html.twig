@@ -1,18 +1,22 @@
 <footer>
     <div class="footerContainer">
-        <a class="lienlogoreseau" target="_blank" href="https://www.instagram.com/human_beink">
-            <img class="logofooter" src="{{ asset("img/instagram.webp")}}" alt="Logo Instagram">
-        </a>
-        <a class="liencontact" href="{{ path("app_contact") }}">
-            <p>{{ "footer.contact" | trans }}</p>
-        </a>
-        <p class="numerotel">(+33) 00 00 00 00 00</p>
-        <a href="mailto:hotmail@hotmail.fr">
-            <p>blank@hotmail.fr</p>
-        </a>
-        <small class="droitsreservees">© {{ "footer.droits" | trans }} - Human Be Ink - 2025</small>
-        <a href="#">{{ "footer.confidentialité" | trans }}</a>
-        <a class="mentionslegales" href="#">{{ "footer.mentions_légales" | trans }}</a>
+        <div class="lienInstaFooter">
+            <a class="lienlogoreseau" target="_blank" href="https://www.instagram.com/human_beink">
+                <img class="logofooter" src="{{ asset("img/instagram.webp")}}" alt="Logo Instagram">
+            </a>
+        </div>
+        <div class="liensFooter">
+            <a class="liencontact" href="{{ path("app_contact") }}">
+                <p>{{ "footer.contact" | trans }}</p>
+            </a>
+            <p class="numerotel">(+33) 00 00 00 00 00</p>
+            <a href="mailto:hotmail@hotmail.fr">
+                <p>blank@hotmail.fr</p>
+            </a>
+            <small class="droitsreservees">© {{ "footer.droits" | trans }} - Human Be Ink - 2025</small>
+            <a href="#">{{ "footer.confidentialité" | trans }}</a>
+            <a class="mentionslegales" href="#">{{ "footer.mentions_légales" | trans }}</a>
+        </div>
     
     </div>
 </footer>
