@@ -36,30 +36,13 @@ body{
     overflow-y: scroll;
 }
 
-h1{
+.titre{
     font-family: "Great Vibes";
     text-align: center;
     font-size: 6em;
     font-weight: 200;
 }
-.fondNoise{
-    height: 102vh;
-    background-color: black;
-    background-image: url("https://www.transparenttextures.com/patterns/navy.png");;
-    opacity: 0.8;
-    background-repeat: repeat;
-    transform: translate(0, -99%);
-}
 
-.fondHomePage{
-    height: 59.5em;
-    z-index: 1;
-
-    background-image: url(../img/fondHome.webp);
-    filter: blur(8px) grayscale(100%) brightness(0.5) ;
-    background-size: 100%;
-    background-position:center;
-}
 
 .gradientSupr
 {
@@ -71,7 +54,9 @@ h1{
 
 
 .sousTitre{
-    margin-top: 3.5em;
+    text-align: center;
+    margin: 1em 0;
+    margin-bottom: 2em;
     font-size: 1.5em;
     font-family: "Raleway";
     font-weight: 800;
@@ -141,7 +126,6 @@ select{
 
 .connexion{
         display: flex;
-        transform: translate(0%, -310%);
         .bloc1, .bloc2{
             justify-content: center;
             text-align: center;
@@ -233,7 +217,6 @@ input[type="text"], input[type="password"], input[type="email"]{
 }
 
 .login{
-    transform: translate(0, -355%);
     .bloc2{
         padding-top: 10em;
         .lienslogin{
@@ -273,6 +256,7 @@ input[type="text"], input[type="password"], input[type="email"]{
 .fondConnexion{
     height: 100vh;
     background-image: url(../img/fondSecurity.webp);
+    background-image: url("https://www.transparenttextures.com/patterns/navy.png");
     background-size: 100%;
     background-position: center;
     filter: brightness(0.5) grayscale(200%) blur(10px);
@@ -337,12 +321,6 @@ input[type="text"], input[type="password"], input[type="email"]{
         }
     }
 
-.fondHomeCalque
-{
-    height: 60em;
-    transform: translate(0%, -100%);
-}
-
 .homePage{
     display: flex;
     flex-direction: column;
@@ -350,24 +328,15 @@ input[type="text"], input[type="password"], input[type="email"]{
     justify-content: center;
     height: 60em;
     background-color: rgba(0, 0, 0, 0.4);
-    transform: translate(0%, -200%);
-}
+    
 
-.homePageTotal{
-    height: 59.5em;
-}
-
-.logo{
-    width: 15em;
-    margin-top: -15em;
-    margin-bottom: 2em;
 }
 
 .menu-burger{
     border-radius: 0 50px 50px 0;
     position: absolute;
-    z-index: 999;
-    font-size: 2.2em;
+    z-index: 7;
+    font-size: 1.8em;
     font-family: "raleway";
     padding: 0.1em 0.1em 0.1em 0;
     li, ul, a{
@@ -417,7 +386,7 @@ input[type="text"], input[type="password"], input[type="email"]{
 
 header{
     position: sticky;
-    z-index: 6;
+    z-index: 5;
     top: 0px;
 }
 
@@ -529,14 +498,13 @@ main{
     white-space:nowrap;
     overflow: hidden;
     margin-right: -100%;
-    z-index: 999;
+    z-index: 7;
     position: absolute;
     font-size: 1.5em;
     border-radius: 50px 0 0px 50px;
     padding: 0.1em 0 0.1em 0.1em;
     background-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     right: 0px;
-    z-index: 2;
     .drapeauSelect{
         width: 2em;
     }
@@ -924,7 +892,20 @@ input::file-selector-button:hover{
         flex-direction: row;
     }
 }
-
+.homePage2{
+    background-image: url(../img/fondtest1.webp);
+    background-size: 100%;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0.5em 0 3em 0;
+}
+.logoNom{
+    margin-left: -50em;
+    display: flex;
+    align-items: center;
+}
 .formContactTotal{
     display: flex;
     flex-direction: column;
@@ -1085,13 +1066,6 @@ footer{
 .flashContainer.loading {
   opacity: 0.5;
   position: relative;
-}
-.flashContainer.loading::after {
-  content: "⏳";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 @keyframes fadeIn {
@@ -1257,7 +1231,10 @@ footer{
 
     }
 }
-
+.titreV2{
+    
+    font-size: 4em;
+}
 
 
 
@@ -1300,31 +1277,15 @@ footer{
     .fondHomeCalque{
         height: 82.5em;
     }
-    .homePageTotal{
-        height: 82.5em;
-    }
-    .fondHomePage{
-        height: 82.5em;
-    }
-    .homePage{
-        height: 82.5em;
-    }
-    .logo{
-        margin-top: -20em;
-        width: 20em;
-    }
     .sousTitre{
-        margin-top: 3em;
+        margin-top: 1.5em;
         font-size: 2em;
-    }
-    h1{
-        font-size: 8em;
     }
     .btnHomePage{
         width: 65em;
     }
     .nav{
-        width: 96%;
+        width: 95%;
     }
     .flashDef{
         height: 35em;
@@ -1381,9 +1342,9 @@ footer{
         place-items: center;
     }
     .fondConnexion{
-
         height: 100vh;
         background-image: url(../img/fondSecurity.webp);
+        background-image: url("https://www.transparenttextures.com/patterns/navy.png");
         background-size: 100%;
         background-position: center;
         filter: brightness(0.5) grayscale(200%) blur(10px);
@@ -1391,7 +1352,6 @@ footer{
     }
     .connexion{
         display: flex;
-        transform: translate(0%, -360%);
         .bloc1, .bloc2{
             justify-content: center;
             text-align: center;
@@ -1470,15 +1430,6 @@ footer{
     .connexionTotal{
         height: 100vh;
     }
-    .fondNoise{
-        height: 100vh;
-        background-color: black;
-        background-image: url("https://www.transparenttextures.com/patterns/navy.png");;
-        opacity: 0.8;
-        background-repeat: repeat;
-        transform: translate(0, -100%);
-    }
-
     .registerDiv{
         margin-top: -5em;
     }
@@ -1503,11 +1454,4 @@ footer{
         font-size: 1.2em;
     }
 }
-
-
-
-
-
-}
-
 
