@@ -64,7 +64,18 @@ function myFunction() {
     }
 
 }
-window.onscroll = function() {myFunction()};
+window.onscroll = function() {
+    console.log(window.pageYOffset)
+    myFunction()
+    var currentScrollPos = window.pageYOffset;
+    if (currentScrollPos < 272) {
+        document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
+    } else {
+        document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
+    }
+    prevScrollpos = currentScrollPos;
+
+};
 
 
 
@@ -553,3 +564,4 @@ if(formCalcSimu)
 
 if(popupSaveSimu)
     openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);
+
