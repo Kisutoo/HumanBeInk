@@ -7,8 +7,11 @@
 
 <div class="homePageContact">
         <div class="homePage2">
-            <h2 class="sousTitre goldPolice">Simulateur de prix</h2>
+            <div class="btnHomePageBlur">
+                <h2 class="sousTitre goldPolice">Simulateur de prix</h2>
+            </div>
         </div>
+        <a href="#simuler"><div class="scroll-down"></div></a>
 </div>
     <div class="progress-container">
         <div id="progress-bar"></div>
@@ -36,7 +39,7 @@
 
     <div class="simuContainer">
 
-    <div class="flashContainerTotal">
+    <div id="simuler" class="flashContainerTotal">
         <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
         <div class="simuForm flashContainer">
             {{ form_start(formSimu, { 'attr' : { 'class': 'formCalcSimu' } }) }}

@@ -183,6 +183,13 @@ function openClosePopupFilter(params)
         popupFilters.classList.add("hidden");
         popupFilters.close();
         body.classList.remove("disableScroll");
+        for(let category of categories)
+        {
+            category.classList.remove("activeFilter");
+            category.setAttribute("index", "0");
+        }
+        params.delete
+        console.log(params.value)
         return;
         })
     })
