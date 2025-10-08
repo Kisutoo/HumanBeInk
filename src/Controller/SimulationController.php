@@ -143,7 +143,9 @@ final class SimulationController extends AbstractController
             'formArea' => $formArea,
             'formDetail' => $formDetail,
             'formSaveSimu' => $formSaveSimu,
-            'prixFinalTattoo' => $prixFinalTattoo
+            'prixFinalTattoo' => $prixFinalTattoo,
+            "logoNom" => 1,
+            "footer" => 1,
         ]);
     }
 

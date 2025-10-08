@@ -19,19 +19,19 @@
 
     <div class="homePageTotal">
         <div class="homePage2">
-            <div class="btnHomePage">
-                <a href="#"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
+            <div class="btnHomePageBlur">
+                <a href="#"><button class="btnHome btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
                 <h2 class="sousTitre goldPolice">Flash | WannaDo</h2>
-                <a href="#"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
+                <a href="{{ path("app_contact")}}"><button class="btnHome btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
             </div>
         </div>
-        <div class="scroll-down"></div>
+        <a href="#defFlash"><div class="scroll-down"></div></a>
     </div>
     <div class="progress-container">
         <div id="progress-bar"></div>
     </div>
 
-    <article class="flashDef">
+    <article id="defFlash" class="flashDef">
         <div class="paragrapheFlash">
             <h2 class="goldPolice">{{ "flash.titre1" | trans }}</h2>
             <p class="defFlash">{{ "flash.description_1" | trans }}</p>

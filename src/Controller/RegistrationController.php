@@ -66,6 +66,8 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+            "logoNom" => 0,
+            "footer" => 0,
         ]);
     }
 }

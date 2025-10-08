@@ -45,6 +45,7 @@ let token = document.querySelector('simulation[_token]')
 let popupSaveSimu = document.querySelector(".popupSaveSimu") || null
 let closePopupSaveSimu = document.querySelector(".croixPopupSaveSimu") || null
 let showPopupSaveSimu = document.querySelector(".saveSimu") || null
+let logoNom = document.querySelector(".logoNom") || null
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -59,23 +60,29 @@ function myFunction() {
         bar.style.width = scrolled + "%"; 
     }
     else
-    {
-        return null
-    }
-
+        {
+            return null
+        }
 }
 window.onscroll = function() {
-    console.log(window.pageYOffset)
-    myFunction()
-    var currentScrollPos = window.pageYOffset;
-    if (currentScrollPos < 272) {
-        document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
-    } else {
-        document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
+    myFunction() }
+    
+if(logoNom)
+{
+    window.onscroll = function() {
+        myFunction()
+        var currentScrollPos = window.pageYOffset;
+        if (currentScrollPos < 272) {
+            document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
+        } else {
+            document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
+        }
+        prevScrollpos = currentScrollPos;
+        
     }
-    prevScrollpos = currentScrollPos;
+}
 
-};
+
 
 
 

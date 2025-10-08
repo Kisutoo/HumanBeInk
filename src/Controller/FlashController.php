@@ -106,6 +106,8 @@ final class FlashController extends AbstractController
             'flashs' => $flashs,
             'maxPages' => $maxPages,
             'categories' => $categories,
+            "logoNom" => 1,
+            "footer" => 1,
         ]);
     }
 

@@ -100,6 +100,8 @@ final class ContactController extends AbstractController
             'controller_name' => 'ContactController',
             'contactType' => $form,
             'previewImage' => $image,
+            "logoNom" => 1,
+            "footer" => 1,
         ]);
     }
 }

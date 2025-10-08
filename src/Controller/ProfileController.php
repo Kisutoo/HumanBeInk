@@ -47,6 +47,8 @@ class ProfileController extends AbstractController
             return $this->render("security/profile.html.twig", [
                 'nicknameForm' => $form,
                 "likedFlashs" => $likedFlashs,
+                "logoNom" => 1,
+                "footer" => 0,
             ]);
         }
         else
