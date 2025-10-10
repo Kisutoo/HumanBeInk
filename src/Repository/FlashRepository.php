@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Flash;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -38,6 +39,45 @@ class FlashRepository extends ServiceEntityRepository
             $this->createQueryBuilder("r")
             ->where("r.category IN (:categoryArray)")
             ->setParameter("categoryArray", $categoryArray),
+            $page,
+            8,
+            [
+                "sort_field_name" => "category_id",
+                "sort_direction_name" => "ASC"
+            ]
+        );
+    }
+
+    public function paginateLikedFlashsWithCategories(int $page, int $user ,array $categoryArray): PaginationInterface
+    {
+        $params = new ArrayCollection([
+            "categoryArray" => $categoryArray, 
+            "userId" => $user,
+        ]);
+
+        return $this->paginator->paginate(
+            $this->createQueryBuilder("r")
+            ->join('r.users', 'se2')
+            ->where("r.category IN (:categoryArray)")
+            ->andWhere("se2.id = :userId")
+            ->setParameter("categoryArray", $categoryArray)
+            ->setParameter("userId", $user),
+            $page,
+            8,
+            [
+                "sort_field_name" => "category_id",
+                "sort_direction_name" => "ASC"
+            ]
+        );
+    }
+
+    public function paginateLikedFlashs(int $page, int $user): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->createQueryBuilder("s2")
+                ->join('s2.users', 'se2')
+                ->where('se2.id = :userId')
+                ->setParameter("userId", $user),
             $page,
             8,
             [

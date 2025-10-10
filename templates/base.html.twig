@@ -65,20 +65,20 @@
             </div>
             <nav class="nav {% if logoNom == 0 %} navPading {% endif %}">
                 <div class="burgerLogo">
-                    <div class="burger">
+                    <div class="burger" tabindex="1">
                         <div class="rec1"></div>
                         <div class="rec2"></div>
                         <div class="rec1"></div>
                     </div>
                     {% if logoNom == 1 %}
                         <div class="logoNom">
-                            <a  href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" loading="lazy" alt="Logo de l'entreprise Human Be Ink"></a>
+                            <a href="{{ path("app_accueil") }}" tabindex="2"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" loading="lazy" alt="Logo de l'entreprise Human Be Ink"></a>
                             <h1 class="titre goldPolice titreV2">Human Be Ink</h1>
                         </div>
                     {% endif %}
                 </div>
                 
-                <div class="langue">
+                <div class="langue" tabindex="3">
                     {% if app.request.locale == "es" %}
                         <img class="drapeau" src="{{ asset("img/sp-flag.webp")}}" alt="Drapeau Espagnol">
                     {% elseif app.request.locale == "en" %}
@@ -97,11 +97,11 @@
                 {{ message }}
             {% endfor %}
         </div>
-        {% for message in app.flashes("error") %}
-            <div class="alerterror">
+        <div class="alerterror">
+            {% for message in app.flashes("error") %}
                 {{ message }}
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
 
         <main>
             {% block body %}{% endblock %}

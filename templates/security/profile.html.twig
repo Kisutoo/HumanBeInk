@@ -7,21 +7,23 @@
 <div class="dialogContainerDetailFlash">
     {% include "flash/_flashDialogDetailFlash.html.twig" %}
 </div>
+<div class="dialogContainerFilter">
+    {% include "flash/_flashDialogFilter.html.twig" %}
+</div>
 
     <div class="allProfil homePageTotal">
         <div class="headProfile">
-            <h2 class="goldPolice">Mon Profil</h2>
             <div class="lienAncrage">
-                <a href="#likes">Coordonnées</a>
+                <a href="#coordonnees">Coordonnées</a>
                 <a href="#likes">Mes likes</a>
-                <a href="#">Mes simulations</a>
+                <a href="#simulations">Mes simulations</a>
             </div>
             <div class="fondBlur4 fondBlur">
                 <div class="fondNoise"></div>
             </div>
         </div>
-        <div class="connexion profil">
-            <div class="bloc2" id="coordonnees">
+        <div id="coordonnees" class="connexion profil">
+            <div class="bloc2">
                 <div class="profileForm">
                     {{ form_start(nicknameForm) }}
                     <div class="editDiv">
@@ -43,20 +45,45 @@
             <div class="likecontainerContainer">
                 <div class="likeContainer" id="likes">
                     <h3  class="goldPolice">Flashs Likés</h3>
-                    <div class="likedFlash">            
-                        {% for flash in likedFlashs %}
-                            <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
-                        {% endfor %}
+                    
+
+                    <div class="btnFiltresContainer" tabindex="7">
+                        <div class="btn btnShowFilters">
+                            <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
+                            <div class="filterIcon">
+                                <div class="filterBarTop">
+                                    <div class="rectangle rectangleFilter1"></div>
+                                    <div class="carre"></div>
+                                </div>
+                                <div class="filterBarTop">
+                                    <div class="rectangle rectangleFilter1"></div>
+                                    <div class="carre carre2"></div>
+                                </div>
+                                <div class="filterBarTop">
+                                    <div class="rectangle rectangleFilter1"></div>
+                                    <div class="carre"></div>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
+
+
+
+                    <div id="flash-container">
+                        {% include "security/_likedFlashContainer.html.twig" with { likedFlashs: likedFlashs, maxPages: maxPages } %}
+                    </div>
+
+
                 </div>
             </div>
         </div> 
     </div>
-    <div class="sousProfil">
-        
+    <div class="sousProfil" id="simulations">
+        <h3 class="titre goldPolice">Mes Simulations</h3>
     </div>
  
 {% endblock %}
+
 {% block footer %}
     {% include "_footer.html.twig" %}
 {% endblock %}

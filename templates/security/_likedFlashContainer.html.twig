@@ -1,0 +1,7 @@
+<div class="likedFlash flashContainer" data-maxpages={{ maxPages }}>            
+    {% for flash in likedFlashs %}
+        <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}">
+    {% endfor %}
+</div>
+
+{{ knp_pagination_render(likedFlashs) }}

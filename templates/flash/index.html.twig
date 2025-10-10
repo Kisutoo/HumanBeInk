@@ -20,13 +20,13 @@
     <div class="homePageTotal">
         <div class="homePage2">
             <div class="btnHomePageBlur">
-                <a class="btnHome" href="#"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
+                <a class="btnHome" href="#"><button class="btn" tabindex="4"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
                 <h2 class="sousTitre goldPolice">Flash | WannaDo</h2>
-                <a class="btnHome" href="{{ path("app_contact")}}"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
+                <a class="btnHome" href="{{ path("app_contact")}}" tabindex="5"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
             </div>
         </div>
-        <a href="#defFlash"><div class="scroll-down"></div></a>
-        <div class="fondBlur2 fondBlur">
+        <a href="#defFlash" tabindex="6"><div class="scroll-down"></div></a>
+        <div class="fondBlur2 fondBlur" loading="lazy">
             <div class="fondNoise"></div>
         </div>
     </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="illustrationFlash">
             <tilt-card>
-                <img src="{{ asset("../img/flash8.webp")}}" alt="Image d'un tatouage">
+                <img class="" src="{{ asset("../img/flash8.webp")}}" alt="Image d'un tatouage" loading="lazy">
             </tilt-card>
         </div>
     </article>
@@ -59,7 +59,7 @@
         {% endif %}
 
 
-        <div class="btnFiltresContainer">
+        <div class="btnFiltresContainer" tabindex="7">
             <div class="btn btnShowFilters">
                 <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
                 <div class="filterIcon">
@@ -90,7 +90,7 @@
             <h2 class="goldPolice titreDefWannaDo">{{ "flash.titre3" | trans }}</h2>
             <p class="defFlash">{{ "flash.description_1" | trans }}</p>
         </div>
-        <div class="fondBlur3 fondBlur">
+        <div class="fondBlur3 fondBlur" loading="lazy">
             <div class="fondNoise"></div>
         </div>
     </article>

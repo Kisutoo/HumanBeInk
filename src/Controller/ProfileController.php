@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\NicknameType;
 use App\Repository\UserRepository;
 use App\Repository\FlashRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,15 +15,55 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfileController extends AbstractController
 {
     #[Route(path: '/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager, )
+    public function profile(Request $request, EntityManagerInterface $entityManager, FlashRepository $flashRepository, CategoryRepository $categoryRepository)
     {
         $user = $this->getUser();
 
         $form = $this->createForm(NicknameType::class);
         $form->handleRequest($request);
+
         if($user)
         {   
-            $likedFlashs = $user->getFlashs();
+            $page = $request->query->getInt("page", 1);
+            $likedFlashs = $flashRepository->paginateLikedFlashs($page, $this->getUser()->getId());
+            
+            $maxPages = ceil($likedFlashs->getTotalItemCount() / 8);
+            $categories = $categoryRepository->findAll([], []);
+
+
+            if($request->get("ajax"))
+            {
+                $idCategories = $request->get("categories");
+
+                if($idCategories)
+                {
+                    $filtredLikedFlashs = $flashRepository->paginateLikedFlashsWithCategories($page, $this->getUser()->getId(), $idCategories);
+                    $maxPages = ceil($filtredLikedFlashs->getTotalItemCount() / 8);
+
+                    return $this->render("security/_likedFlashContainer.html.twig", [
+                    "likedFlashs" => $filtredLikedFlashs,
+                    "maxPages" => $maxPages,
+                    "categories" => $categories,
+                    ]);
+                }
+                else
+                {
+                    return $this->render('security/_likedFlashContainer.html.twig', [
+                        "likedFlashs" => $likedFlashs,
+                        "maxPages" => $maxPages,
+                        "categories" => $categories,
+                    ]);
+                }
+            }
+            
+
+
+
+
+
+
+
+
 
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -47,8 +88,10 @@ class ProfileController extends AbstractController
             return $this->render("security/profile.html.twig", [
                 'nicknameForm' => $form,
                 "likedFlashs" => $likedFlashs,
+                "categories" => $categories,
+                "maxPages" => $maxPages,
                 "logoNom" => 1,
-                "footer" => 0,
+                "footer" => 1,
             ]);
         }
         else
