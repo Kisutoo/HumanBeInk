@@ -36,10 +36,14 @@ final class ContactController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid())
+        // Si le formulaire est soumis et valide
         {
             $score = $recaptcha3Validator->getLastResponse()->getScore();
+            // RecaptchaV3 analyse le comportement de la souris, du clavier etc puis attribut un score à ce comportement.
+            // C'est ce qu'on vient récupérer ici.
 
             if($score >= 0.5)
+                // L'utilisateur est probablement humain
             {
                 $transport = $factory->fromString($dsn);
                 
@@ -84,8 +88,11 @@ final class ContactController extends AbstractController
                 return $this->redirectToRoute("app_contact");
             }
             else
+                // L'utilisateur est surement un robot
             {
+                // Ajout et affichage d'un message d'erreur
                 $this->addFlash("error", "Activité suspecte détectée.");
+                // Redirection vers la page de contact
                 return $this->redirectToRoute("app_contact");
             }
             

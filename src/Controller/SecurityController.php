@@ -28,25 +28,35 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils, RateLimiterFactoryInterface $anonymousApiLimiter, Request $request): Response
     {
         if($this->getUser())
+        // Si un utilisateur est connecté
         {
             return $this->redirectToRoute("app_accueil");
+            // Redirection vers la page d'accueil
         }
 
-        // get the login error if there is one
+        // Stocke l'erreur de connexion si il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // Dernier nom d'utilisateur entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
         $blocked = Null;
 
+        // Create prend un identifiant unique (ici l'ip du client) pour suivre le nombre de requêtes ou tentatives pour chaque utilisateur séparément
         $limiter = $anonymousApiLimiter->create($request->getClientIp());
 
         if($error)
+        // Si il y a une erreur lors de la tentative de connexion (identifiant et mot de passe non correspondants)
         {
             if (false === $limiter->consume(1)->isAccepted()) {
+                // consume(1) : on tente de consommer 1 unité du quota du limiteur.
+                // isAccepted() : renvoie true si la consommation est autorisée (quota non dépassé), sinon false. 
+                // Donc, si le retour est false, cela signifie que l’IP a dépassé le nombre autorisé de tentatives échouées.
+
                 
+                // On ajoute un message flash pour informer l’utilisateur qu’il doit attendre.
                 $this->addFlash("error", "Il y a eu trop de tentatives infructueuses, veuillez réessayer dans 10 minutes.");
     
+                // On redirige l’utilisateur vers la page d’accueil.
                 return $this->redirectToRoute("app_accueil");
             }
         }

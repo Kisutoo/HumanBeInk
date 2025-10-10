@@ -1,3 +1,5 @@
+
+
 *{
     padding: 0;
     margin: 0;
@@ -64,7 +66,7 @@ body{
 .btnHomePageBlur{
     width: 100%;
     height: 30em;
-    backdrop-filter: blur(6px);
+    z-index: 3;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     gap: 10em;
@@ -90,9 +92,9 @@ button:active {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     border: 3px solid rgba(0, 0, 0, 0);
-}
-.btnHome{
-    margin-top: 8em;
+    p{
+        transition: 0.3s ease-in-out;
+    }
 }
 
 .btn:hover{
@@ -103,7 +105,9 @@ button:active {
     }
 }
 
-
+.navPading{
+    padding-top: 2em;
+}
 .goldPolice{
     background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(255, 238, 175) 100%);
     color: transparent;
@@ -194,7 +198,7 @@ select{
                 
             }
         }
-        input[type="text"], input[type="password"], input[type="email"]{
+        /* input[type="text"], input[type="password"], input[type="email"]{
             width: 10em;
             margin-bottom: 2em;
             height: 1em;
@@ -205,7 +209,7 @@ select{
             border: none;
             font-family: "Raleway";
             font-weight: 600;
-        }
+        } */
         button{
             margin-top: 4em;
             font-size: 1.2em;
@@ -228,10 +232,17 @@ input[type="text"], input[type="password"], input[type="email"]{
 }
 
 .login{
+    height: 100vh;
+    background-image: url(../img/fondtest1.webp);
+    background-position: center;
+    display: flex;
+    align-items: center;
     .bloc2{
+        z-index: 3;
         .lienslogin{
-            margin-top: -1.5em;
+            margin-top: -1em;
             a{
+                
                 text-decoration: none;
                 color: white;
                 font-family: "Raleway";
@@ -244,13 +255,53 @@ input[type="text"], input[type="password"], input[type="email"]{
                 margin-top: 2em;
             }
         }
+        .btnSubmit{
+            margin: 2em 0;
+        }
+        
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    .bloc1{
+        z-index: 3;
+        img{
+            width: 30%;
+        }
+        padding-bottom: 10em;
+    }
+    .fondBlur {
+        background-color: rgba(0, 0, 0, 0.654);
+        position: fixed; /* couvre tout l'écran */
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2; /* plus grand que tous tes blocs */
+        backdrop-filter: blur(10px);
+        .fondNoise{
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/navy.png");
+        }
+    }
+    form{
+        justify-content: center;
     }
 }
+    
 .logoGoogle{
     width: 15%;
 }
+.registerDiv{
+    background-image: url(../img/fondtest1.webp);
+    background-size: 100%;
+}
 .btnGoogleLogin
 {
+    color: white;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -336,10 +387,39 @@ input[type="text"], input[type="password"], input[type="email"]{
     background-color: rgba(0, 0, 0, 0.4);
 }
 .homePageTotal{
+    position: relative;
     z-index: 1;
+    .fondBlur{
+        background-size: 100%;
+        background-position: center;
+        filter: grayscale(100%);
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        backdrop-filter: blur(6px);
+        width: 100%;
+        height: 100%;
+
+        .fondNoise{
+            height: 100%;
+            background-image: url("https://www.transparenttextures.com/patterns/navy.png");
+            background-color: rgba(0, 0, 0, 0.759);
+        }
+    }
+    .fondBlur2{
+        background-image: url(../img/fondSecurity.webp);
+    }
+    .fondBlur3{
+        background-image: url(../img/fondtest1.webp);
+    }
+    .fondBlur4{
+        background-image: url(../img/fondHome.webp);
+    }
 }
 
 .menu-burger{
+    visibility: hidden;
     border-radius: 0 50px 50px 0;
     position: absolute;
     z-index: 7;
@@ -437,14 +517,14 @@ main{
 
 
 .scroll-down {
-  height: 50px;
-  top: 43%;
-  width: 30px;
-  border-radius: 50px;
-  position: absolute;
-  left: 50%;
-  cursor: pointer;
-  scroll-behavior: smooth !important;
+    z-index: 3;
+    height: 50px;
+    top: 75%;
+    width: 30px;
+    border-radius: 50px;
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
 }
 .scroll-down::before,
 .scroll-down::after {
@@ -602,6 +682,9 @@ bold{
         width: 40%;
         display: flex;
         justify-content: center;
+        img{
+            width: 150%;
+        }
     }
 
 }
@@ -756,6 +839,8 @@ bold{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: opacity 1s ease;
+    
 }
 dialog::backdrop{
     background: rgba(0, 0, 0, 0.9);
@@ -799,6 +884,7 @@ dialog::backdrop{
     }
 }
 .hidden{
+    opacity: 0;
     visibility: hidden;
 }
 .zeroopacity{
@@ -838,9 +924,6 @@ input::file-selector-button:hover{
     }
     .divDetImage{
         margin-bottom: 0.5em;
-        img{
-            scale: 130%;
-        }
     }
 }
 .croixPopupFlash2{
@@ -849,7 +932,9 @@ input::file-selector-button:hover{
     z-index: 8;
     padding-top: 2em;
 }
-
+.btnHome{
+    margin-top: 8em;
+}
 .formContact{
     border-radius: 5px;
     border: 4px solid rgba(190, 140, 37, 1);
@@ -909,8 +994,11 @@ input::file-selector-button:hover{
         flex-direction: row;
     }
 }
-.homePage2{
+.fondImage
+{
     background-image: url(../img/fondtest1.webp);
+}
+.homePage2{
     height: 24em;
     background-size: 100%;
     background-position: center;
@@ -1294,6 +1382,40 @@ footer{
 .titreV2{
     font-size: 4em;
 }
+.defWannaDo{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    align-items: center;
+    .WannaDoTitre{
+        z-index: 3;
+        padding-bottom: 1em;
+    }
+    .divWannaDo{
+        z-index: 3;
+        width: 70%;
+        backdrop-filter: blur(50px);
+        padding: 2em;
+        border-radius: 25px;
+        h2{
+            font-size: 3.5em;
+        }
+        p{
+            text-align: center;
+            font-size: 1.2em;
+        }
+    }
+}
+
+.divDetImage {
+    place-items: center;
+    img {
+    object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
 
 
 
@@ -1466,6 +1588,7 @@ footer{
     }
 }
 .login{
+
     .btn{
         height: 3.5em;
         width: 10em;

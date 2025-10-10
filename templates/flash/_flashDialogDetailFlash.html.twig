@@ -3,9 +3,9 @@
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
-    <div class="divDetImage">
+    <tilt-card>
         <img class="detImage" src="" alt="">
-    </div>
+    </tilt-card>
     <div class="buttons">
     {% if app.user is not null %}
             <a id="lienFavFlash" href="#" class="btn">
@@ -19,7 +19,7 @@
     {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
         <div class="buttons">
             <a id="deleteFlashBtn" href="" class="btn">
-                <p class="goldPolice">Supprimer le flash</p>
+                <p class="gradientSupr">Supprimer le flash</p>
             </a>
         </div>
     {% endif %}

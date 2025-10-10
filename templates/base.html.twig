@@ -50,7 +50,7 @@
                         </li>
                         <li><a href="{{ path("app_accueil")}}">{{ "base.accueil" | trans }}</a></li>
                         <li><a href="{{ path("app_flash")}}">Flash</a></li>
-                        <li><a href="#">WannaDo</a></li>
+                        <li><a href="{{ path("app_flash")}}#wannaDo">WannaDo</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="{{ path("app_contact")}}">{{ "base.contact" | trans }}</a></li>
                         <li><a href="{{ path("app_simulation")}}">{{ "base.simulation" | trans }}</a></li>
@@ -63,7 +63,7 @@
                     </ul>
                 </div> 
             </div>
-            <nav class="nav">
+            <nav class="nav {% if logoNom == 0 %} navPading {% endif %}">
                 <div class="burgerLogo">
                     <div class="burger">
                         <div class="rec1"></div>
@@ -113,9 +113,9 @@
         {% endif %}
 
 
+        <script src="{{ asset('js/script.js') }}"></script>
         {% block javascripts %}
-            <script src="{{ asset('js/script.js') }}"></script>
-            
+
         {% endblock %}
         
     </body>

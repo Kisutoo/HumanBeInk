@@ -1,8 +1,9 @@
 flash:
   titre1: "Qu'est-ce qu'un Flash ?"
-  description_1: "Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué tel quel. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un tarif plus accessible qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’une seule fois par personne"
+  description_1: "Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué tel quel. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un tarif plus accessible qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’une seule fois par personne."
   titre2: "Flashs Disponibles"
   btnFiltre: "Filtres"
+  titre3: "Qu'est-ce qu'un WannaDo ?"
 
 footer:
   contact: "Contactez-moi"

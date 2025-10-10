@@ -4,13 +4,14 @@
 
 {% block body %}
     <div class="connexionTotal">
-        <div class="fondConnexion"></div>
-        <div class="fondNoise"></div>
-        <div class="connexion registerDiv">
+        <div class="connexion registerDiv login">
             <div class="bloc1">
-                <a href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
-                <h1 class="goldPolice">Human Be Ink</h1>
+                <img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink">
+                <h1 class="titre goldPolice">Human Be Ink</h1>
                 <h2 class="goldPolice">S'inscrire</h2>
+            </div>
+            <div class="fondBlur">
+                <div class="fondNoise"></div>
             </div>
             <div class="bloc2">
                 {{ form_errors(registrationForm) }}

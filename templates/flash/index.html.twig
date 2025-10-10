@@ -20,12 +20,15 @@
     <div class="homePageTotal">
         <div class="homePage2">
             <div class="btnHomePageBlur">
-                <a href="#"><button class="btnHome btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
+                <a class="btnHome" href="#"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
                 <h2 class="sousTitre goldPolice">Flash | WannaDo</h2>
-                <a href="{{ path("app_contact")}}"><button class="btnHome btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
+                <a class="btnHome" href="{{ path("app_contact")}}"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
             </div>
         </div>
         <a href="#defFlash"><div class="scroll-down"></div></a>
+        <div class="fondBlur2 fondBlur">
+            <div class="fondNoise"></div>
+        </div>
     </div>
     <div class="progress-container">
         <div id="progress-bar"></div>
@@ -37,7 +40,9 @@
             <p class="defFlash">{{ "flash.description_1" | trans }}</p>
         </div>
         <div class="illustrationFlash">
-            <img src="{{ asset("../img/flash8.webp")}}" alt="Image d'un tatouage">
+            <tilt-card>
+                <img src="{{ asset("../img/flash8.webp")}}" alt="Image d'un tatouage">
+            </tilt-card>
         </div>
     </article>
 
@@ -78,6 +83,17 @@
             {% include "flash/_flashContainer.html.twig" with { flashs: flashs, maxPages: maxPages } %}
         </div>
     </div>
+
+    <article id="wannaDo" class="homePageTotal flashDef defWannaDo">
+        <h2 class="titre goldPolice WannaDoTitre">WannaDo</h2>
+        <div class="divWannaDo">
+            <h2 class="goldPolice titreDefWannaDo">{{ "flash.titre3" | trans }}</h2>
+            <p class="defFlash">{{ "flash.description_1" | trans }}</p>
+        </div>
+        <div class="fondBlur3 fondBlur">
+            <div class="fondNoise"></div>
+        </div>
+    </article>
 
     
     

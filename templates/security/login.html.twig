@@ -6,9 +6,12 @@
     <div class="connexionTotal">
         <div class="connexion login">
             <div class="bloc1">
-                <a href="{{ path("app_accueil") }}"><img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink"></a>
-                <h1 class="goldPolice">Human Be Ink</h1>
+                <img class="logo" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink">
+                <h1 class="titre goldPolice">Human Be Ink</h1>
                 <h2 class="goldPolice">Se connecter</h2>
+            </div>
+            <div class="fondBlur">
+                <div class="fondNoise"></div>
             </div>
             <div class="bloc2">
                 <form method="post">
@@ -33,21 +36,22 @@
                     <div class="lienslogin">
                         <a href="#"><small>Mot de passe oublié</small></a>
                         <a href="{{ path("app_register")}}"><small>Pas de compte ? Créez en un !</small></a>
-                        <a class="btn btnGoogleLogin" href="{{ path("auth_oauth_connect", {service: "google"}) }}">
-                            <img class="logoGoogle" src="{{ asset("img/googlelogo.webp")}}" alt="Logo de google">
-                            Se connecter avec Google</a>
                     </div>
-    
                     {% if blocked is not null %}     
                     {% else %}
-                        <button class="btn " type="submit">
-                            <p class="goldPolice">Se connecter</p>
-                        </button>
+                    <button class="btn btnSubmit" type="submit">
+                        <p class="goldPolice">Se connecter</p>
+                    </button>
                     {% endif %}
+                    
+                    <a class="btn btnGoogleLogin" href="{{ path("auth_oauth_connect", {service: "google"}) }}">
+                        <img class="logoGoogle" src="{{ asset("img/googlelogo.webp")}}" alt="Logo de google">
+                        Se connecter avec Google</a>
                     
                 </form>
             </div>
         </div>
+        
     </div>
     
 {% endblock %}
