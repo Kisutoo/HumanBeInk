@@ -13,7 +13,7 @@
             </a>
     {% endif %}
         <a id="flashButtonContact" href="" class="btn">
-            <p class="goldPolice">Prendre contact</p>
+            <p class="goldPolice">{{ "home.btn2" | trans }}</p>
         </a>
     </div>
     {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}
