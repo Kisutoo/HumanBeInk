@@ -41,11 +41,13 @@ class SecurityController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $blocked = Null;
 
-        // Create prend un identifiant unique (ici l'ip du client) pour suivre le nombre de requêtes ou tentatives pour chaque utilisateur séparément
+        // Create prend un identifiant unique (ici l'ip du client) pour suivre 
+        // le nombre de requêtes ou tentatives pour chaque utilisateur séparément
         $limiter = $anonymousApiLimiter->create($request->getClientIp());
 
         if($error)
-        // Si il y a une erreur lors de la tentative de connexion (identifiant et mot de passe non correspondants)
+        // Si il y a une erreur lors de la tentative de connexion 
+        // (identifiant et mot de passe non correspondants)
         {
             if (false === $limiter->consume(1)->isAccepted()) {
                 // consume(1) : on tente de consommer 1 unité du quota du limiteur.

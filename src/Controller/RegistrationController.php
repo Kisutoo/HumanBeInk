@@ -23,24 +23,28 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         $limiter = $registerLimiter->create($request->getClientIp());
+        // Création d'un limiter avec l'adresse IP d'un utilisateur pour la création de compte
 
         
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
+            // On récupère le mot de passe saisi par l'utilisateur dans le formulaire
 
-            // encode the plain password
+            // Puis rentre dans l'entité user, ce même mot de passe que l'on va venir
+            // hacher afin qu'il ne soit pas stocké en clair dans la base de données
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+
             $score = $recaptcha3Validator->getLastResponse()->getScore();
+            // On récupère le score ReCaptcha d'un utilisateur sur une page afin de vérifier s'il s'agit d'un robot
 
             if(false === $limiter->consume(1)->isAccepted())
             {
+                // Ajout d'un message d'erreur pour l'utilisateur
                 $this->addFlash("error", "Un nouvel utilisateur vient déjà d'être créé, veuillez réessayer dans 2 minutes.");
+
+                // Redirection vers la page d'inscription
                 $this->redirectToRoute("app_register");
-                return $this->render('registration/register.html.twig', [
-                    'registrationForm' => $form,
-                ]);
-                
             }
             else
             {

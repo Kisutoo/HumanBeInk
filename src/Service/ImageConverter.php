@@ -19,7 +19,7 @@ class ConvertImageFormat
         $mime = mime_content_type($tmpName);
         // On sépare le nom du flash en plusieurs partie en fonction dès que l'on tombe sur le caractère rentré en paramètres, donc le "."
 
-        if(!in_array($mime, ['image/webp', 'image/jpeg', 'image/png', 'image/avif'])) {
+        if(!in_array($mime, ['image/webp', 'image/jpeg', 'image/png', 'image/avif', 'image/jpg'])) {
         // On vérifie également que le mime du fichier correspond bien à l'extension.
         // Cela empêche les fichiers non-images (ou scripts) de passer, même si l’extension est correcte.
         
@@ -27,7 +27,10 @@ class ConvertImageFormat
         }
 
         $imageString = file_get_contents($tmpName);
+        // Lit l'image et la transforme en chaine de caractères
+
         $image = imagecreatefromstring($imageString);
+        // Transforme la chaine de caractères en une image
         
         // Dans le cas ou l'image est au format paysage
         if($width > $height)
@@ -99,6 +102,7 @@ class ConvertImageFormat
         }
 
         $newImg = imagescale($image, $width, $height);
+        // Redimensionne l'image avec la taille et largeur calculée
 
         $extension = strtolower(end($tabExtension));
         // On met en minuscule le nom de l'extension pour pouvoir la comparer à l'extension du dessus, plus tard
@@ -108,26 +112,26 @@ class ConvertImageFormat
         {
             $uniqueName = uniqid('', true);
             //uniqid génère quelque chose comme ca : 5f586bf96dcd38.73540086
-            $IdFlash = $uniqueName . ".webp";
+            $idName = $uniqueName . ".webp";
             //$affiche = 5f586bf96dcd38.73540086.webp
 
             // Si un objet flash a été rentré en paramètres
             if($flash)
             {
                 // On ajoute l'unique ID dans le flash
-                $flash->setImage($IdFlash);
+                $flash->setImage($idName);
                 
-                // Puis on stocke l'imgage dans un dossier séparé des images du site
-                imagewebp($newImg, '../public/img/flashs/'. $IdFlash);
+                // Puis convertit et stocke l'imgage dans un dossier séparé des images du site
+                imagewebp($newImg, '../public/img/flashs/'. $idName);
             }
             // Si un objet tattoo a été rentré en paramètres
             elseif($tattoo)
             {
                 // On ajoute l'unique ID dans le tattoo
-                $tattoo->setImage($IdFlash);
+                $tattoo->setImage($idName);
 
                 // Puis on stocke l'imgage dans un dossier séparé des images du site ou des flashs
-                imagewebp($newImg, '../public/img/simuImages/'. $IdFlash);
+                imagewebp($newImg, '../public/img/simuImages/'. $idName);
             }
             // Déplace le fichier contenu dans le tableau file, au dossier public/img/flashs
 
