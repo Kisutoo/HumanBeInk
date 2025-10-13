@@ -82,7 +82,7 @@ final class FlashController extends AbstractController
             {
                 $convertImage = new ConvertImageFormat();
                 
-                if($convertImage->convertImageToWebp($_FILES['flash'], $flash) != false)
+                if($convertImage->convertImageToWebp($_FILES['flash'], $flash, null) != false)
                 {
                     $em->persist($flash);
                     $em->flush();

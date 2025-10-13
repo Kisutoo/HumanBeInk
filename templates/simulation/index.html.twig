@@ -53,7 +53,15 @@
                     <div class="rec2"></div>
                 </div>
                 {% endif %}
-                {{ form_row(formSimu.size) }}
+                <div class="totalSize">
+                    <div class="labelInfo">
+                        {{ form_label(formSimu.size) }}
+                        <p class="changeNumber">0</p>
+                    </div>
+                    {{ form_errors(formSimu.size) }}
+                    {{ form_widget(formSimu.size) }}
+                </div>
+
             </div>
             <div class="simuFormSection">
                 {% if app.user is not null and "ROLE_ADMIN" in app.user.roles %}

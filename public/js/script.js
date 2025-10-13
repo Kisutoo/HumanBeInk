@@ -20,7 +20,7 @@ let imgInp = document.querySelector(".files") || null
 let contactImage = document.querySelector(".previewImage") || null
 let current = document.querySelector(".current") || null
 let pagination = document.querySelector(".pagination") || null
-let flashContainer = document.querySelector(".flashContainer");
+let flashContainer = document.querySelector(".flashContainer") || null
 let maxPagePagination = flashContainer ? flashContainer.getAttribute("data-maxpages") : null
 const categories = document.getElementsByClassName('btnFilter')
 let btnShowFilters = document.querySelector(".btnShowFilters") || null
@@ -46,6 +46,8 @@ let popupSaveSimu = document.querySelector(".popupSaveSimu") || null
 let closePopupSaveSimu = document.querySelector(".croixPopupSaveSimu") || null
 let showPopupSaveSimu = document.querySelector(".saveSimu") || null
 let logoNom = document.querySelector(".logoNom") || null
+let numberRangeSimu = document.querySelector(".changeNumber") || null
+let inputRange = document.querySelector("#simulation_size") || null
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -90,7 +92,7 @@ if(logoNom)
 if(pseudoProfilInput && newPseudo && editBtn)
 {
     let pseudoProfil = pseudoProfilInput.value || null
-    newPseudo.addEventListener("change", () => {
+    newPseudo.addEventListener("drag", () => {
         
         if(newPseudo.value == pseudoProfil)
         {
@@ -105,479 +107,6 @@ if(pseudoProfilInput && newPseudo && editBtn)
     })
 }
 
-
-
-
-
-
-// Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
-burgerIcon.addEventListener("click", () => {
-    popupBurger.classList.toggle("letVisibleBurger")
-})
-
-closeBurger.addEventListener("click", () => {
-    popupBurger.classList.toggle("letVisibleBurger")
-})
-
-langue.addEventListener("click", () => {
-    popupLangue.classList.toggle("letVisibleLangue")
-})
-
-closeLangue.addEventListener("click", () => {
-    popupLangue.classList.toggle("letVisibleLangue")
-})
-
-
-
-function openClosePopup(dialog, btnAdd, btnClose)
-{
-    btnAdd.addEventListener("click", () => {
-        dialog.classList.remove("hidden")
-        dialog.showModal()
-        body.classList.add("disableScroll")
-        if(dialog.open)
-        {
-            addEventListener("keydown", (e) => {
-                if(e.key == "Escape")
-                {
-                    dialog.classList.add("hidden")
-                    body.classList.remove("disableScroll")
-                    return;
-                }
-            })
-            btnClose.addEventListener("click", () => {
-                dialog.classList.add("hidden")
-                dialog.close()
-                body.classList.remove("disableScroll")
-                return;
-            })
-        }
-    });
-}
-
-
-if(popupAddFlash && btnAddflash)
-    openClosePopup(popupAddFlash, btnAddflash, closePopupFlash)
-
-
-
-
-function openClosePopupFilter(params)
-{
-
-    btnShowFilters.addEventListener("click", () => {
-
-        body.classList.add("disableScroll");
-        popupFilters.classList.remove("hidden");
-        popupFilters.showModal();
-
-        addEventListener("keydown", (e) => {
-            if(e.key == "Escape")
-            {
-                popupFilters.classList.add("hidden");
-                body.classList.remove("disableScroll");
-                return;
-            }
-        })
-        closePopupFilter.addEventListener("click", () => {
-        popupFilters.classList.add("hidden");
-        popupFilters.close();
-        body.classList.remove("disableScroll");
-        for(let category of categories)
-        {
-            category.classList.remove("activeFilter");
-            category.setAttribute("index", "0");
-        }
-        params.delete
-        console.log(params.value)
-        return;
-        })
-    })
-    for(let category of categories)
-    {
-        category.addEventListener("click", () => {
-
-            if(category.getAttribute("index") == "0")
-            {
-                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
-
-                params.append("categories[]", catId)
-                category.classList.add("activeFilter");
-                category.setAttribute("index", "1");
-
-                return params;
-            }
-            if(category.getAttribute("index") == "1")
-            {
-                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
-
-                params.delete("categories[]", catId)
-                category.classList.remove("activeFilter");
-                category.setAttribute("index", "0");
-
-                return params;
-            }
-
-        })
-    }
-}
-if(pagination)
-    openClosePopupFilter(params)
-
-
-
-
-
-
-function getDialogEls() {
-  const dlg = containerDialog.querySelector('dialog');        // <dialog class="popup popupDetailFlash hidden">
-  const detImage = dlg?.querySelector('.detImage');
-  const closeBtn = dlg?.querySelector('.croixFlash2');
-  const buttonContact = dlg?.querySelector('#flashButtonContact');
-  const buttonDeleteFlash = dlg?.querySelector('#deleteFlashBtn');
-  const lienFavFlash = dlg?.querySelector('#lienFavFlash');
-
-  return { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash };
-}
-
-
-
-
-
-function openDialogSafe(dlg) {
-  if (!dlg) return;
-  // si jamais il est détaché, on le rattache
-  if (!dlg.isConnected) document.body.appendChild(dlg);
-  dlg.classList.remove('hidden');
-  dlg.showModal();
-  body.classList.add('disableScroll');
-}
-
-
-
-
-
-
-function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
-  if (!dlg) return;
-  dlg.close();
-  dlg.classList.add('hidden');
-  body.classList.remove('disableScroll');
-  closeBtn?.classList.remove('croixPopupFlash2');
-  detImage?.setAttribute('src', '');
-  detImage?.setAttribute('alt', '');
-  buttonContact?.setAttribute('href', '');
-  buttonDeleteFlash?.setAttribute('href', '');
-}
-
-
-
-
-
-function bindDialogInteractions(id, img, alt, imageName) {
-  // Sélection fraîche après le dernier rendu
-  let { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
-
-
-  idLikedFlash = dlg.getAttribute("data-fav");
-
-  i = null;
-  if(idLikedFlash)
-    {
-      idLikedFlash = idLikedFlash.split(" ");
-
-      if(idLikedFlash.includes(id))
-      {
-            lienFavFlash.innerHTML = "<p class=gradientSupr>Supprimer des favoris</p>"
-            lienFavFlash.firstChild.classList.add("deleteFavFlash")
-            i = 1
-      }
-      else
-      {
-            lienFavFlash.innerHTML = "<p class=goldPolice>Ajouter aux favoris</p>"
-            lienFavFlash.firstChild.classList.remove("deleteFavFlash")
-            i = 0
-      }
-  }
-
-  if (!dlg) return;
-
-  // remplir le contenu
-  detImage?.setAttribute('src', img);
-  detImage?.setAttribute('alt', alt);
-  buttonContact?.setAttribute('href', '/contact/' + imageName);
-  if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
-
-  // bouton favoris (rebind après chaque remplacement)
-  if (lienFavFlash && i == 0) {
-    lienFavFlash.onclick = (e) => {
-      e.preventDefault();
-      fetch(location.pathname + '/addFav?id=' + id + '&ajax=1', {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      })
-      .then(r => r.text())
-      .then(html => {
-        // remplace le HTML du dialog → les anciennes références deviennent caduques
-
-        containerDialog.innerHTML = html;
-
-        // re-sélectionner les éléments et éventuellement rouvrir si besoin
-        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
-
-        bindDialogInteractions(id, img, alt, imageName)
-        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
-      })
-      .catch(console.error)
-      .finally(() => {
-        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
-        bindDialogInteractions(id, img, alt, imageName)
-        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
-
-      });
-    };
-  }
-  else if(lienFavFlash && i == 1)
-  {
-    lienFavFlash.onclick = (e) => {
-      e.preventDefault();
-      fetch(location.pathname + '/removeFav?id=' + id + '&ajax=1', {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      })
-      .then(r => r.text())
-      .then(html => {
-        // remplace le HTML du dialog → les anciennes références deviennent caduques
-        containerDialog.innerHTML = html;
-
-        // re-sélectionner les éléments et éventuellement rouvrir si besoin
-        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
-
-        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
-      })
-      .catch(console.error)
-      .finally(() => {
-        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
-        
-        bindDialogInteractions(id, img, alt, imageName)
-        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
-
-      });
-    };
-  }
-
-  // fermeture via ESC
-  dlg.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
-    }
-  });
-
-  // fermeture via croix
-  if (closeBtn) {
-    closeBtn.classList.add('croixPopupFlash2');
-    closeBtn.addEventListener('click', () => closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn }), { once: true });
-  }
-
-  // enfin, ouvrir
-  openDialogSafe(dlg);
-}
-
-
-
-
-
-function clickFlash() {
-  for (let flash of flashs) {
-    flash.addEventListener('click', () => {
-      const img = flash.getAttribute('src');
-      const alt = flash.getAttribute('alt') || '';
-      const id = flash.getAttribute('index');
-      const imageName = (img || '').split('/').pop() || '';
-
-      bindDialogInteractions(id, img, alt, imageName);
-    });
-  }
-}
-if(flashs)
-    clickFlash()
-
-
-
-
-
-
-if(imgInp != null && contactImage)
-{
-    if(contactImage.getAttribute("src") && imgInp.files.length == 0)
-    {
-        img = contactImage.getAttribute("src")
-
-        imageNameArray = img.split("/")
-        imageName = imageNameArray[3]
-        
-        const dataTransfer = new DataTransfer();
-        const myFile = new File(["image"], imageName, {
-            type: 'image/webp',
-            lastModified: new Date(),
-        });
-        
-        dataTransfer.items.add(myFile);
-        imgInp.files = dataTransfer.files;
-    }
-
-
-    imgInp.onchange = evt => {
-      const [file] = imgInp.files
-      if (file) {
-        contactImage.src = URL.createObjectURL(file)
-      }
-      if(imgInp.files.length == 0)
-      {
-        contactImage.src = "";
-      }
-    }
-}
-
-
-
-
-
-
-function changeCurrentSpanToP(maxPagePagination)
-{
-    if(maxPagePagination == "1" || maxPagePagination == "0") return;
-
-    let current = document.querySelector(".current") || null
-
-    nbCurrent = current.innerText
-    current.innerHTML = "<p class=goldPolice >" + nbCurrent + "</p>"
-
-    if(nbCurrent == "1")
-        current.classList.add("first")
-    else if(nbCurrent == maxPagePagination)
-        current.classList.add("last")
-}
-if(maxPagePagination)
-    changeCurrentSpanToP(maxPagePagination)
-
-
-
-function attachPaginationEvents(maxPagePagination, params) {
-    // récupère la pagination actuelle
-
-    if(parseInt(maxPagePagination) <= 1) return;
-
-    let pagination = document.querySelector(".pagination");
-    let nbPagination = parseInt(document.querySelector(".current").innerText)
-
-    let submitFilter = document.querySelector(".submitFilterBtn")
-    
-
-    if (!pagination) return;
-
-    submitFilter.onclick = () => {
-
-        fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajax=1", {
-            headers: {
-                "X-Requested-With": "XMLHttpRequest"
-            }
-        })
-        .then(r => r.text())
-        .then(html => {
-            document.querySelector("#flash-container").innerHTML = html
-            let flashContainer = document.querySelector(".flashContainer");
-            let newMaxPagePagination = flashContainer.getAttribute("data-maxpages")
-            attachPaginationEvents(newMaxPagePagination, params);
-            changeCurrentSpanToP(newMaxPagePagination)
-            clickFlash();
-        })
-        .catch(e => console.error(e))
-        popupFilters.classList.add("hidden");
-        popupFilters.close();
-        body.classList.remove("disableScroll");
-    }
-
-    for (let lienPagination of pagination.querySelectorAll("a")) {
-        lienPagination.onclick = (e) => {
-            e.preventDefault();
-            // ici, on récupères le numéro de page
-            let page = 1;
-            if (lienPagination.innerText == ">")
-                page = nbPagination + 1;
-            else if (lienPagination.innerText == "<")
-                page = nbPagination - 1;
-            else if (lienPagination.innerText == "<<")
-                page = 1;
-            else if (lienPagination.innerText == ">>")
-                page = maxPages;
-            else if (!["<", ">", "<<", ">>"].includes(lienPagination.innerText))
-                page = parseInt(lienPagination.innerText);
-            // mets à jour la variable globale
-            nbPagination = page;
-
-        
-            fetch(url.pathname + "?" + params.toString() + "&page=" + nbPagination + "&ajax=1", {
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest"
-                }
-            })
-            .then(r => r.text())
-            .then(html => {
-                document.querySelector("#flash-container").innerHTML = html;
-
-                // relance les events sur la nouvelle pagination
-                attachPaginationEvents(maxPagePagination, params);
-                clickFlash();
-                changeCurrentSpanToP(maxPagePagination);
-                return;
-            })
-            .catch(e => console.error(e));
-        };
-    }
-}
-
-if(current && pagination)
-    attachPaginationEvents(maxPagePagination, params)    
-
-
-if(addDialogsArea)
-{
-    openClosePopup(popupArea, addDialogsArea, closePopupArea)
-    openClosePopup(popupColor, addDialogsColor, closePopupColor)
-    openClosePopup(popupSize, addDialogsSize, closePopupSize)
-    openClosePopup(popupDetail, addDialogsDetail, closePopupDetail)
-}
-
-if(formCalcSimu)
-{
-    let SimuResultContainer = document.querySelector(".resultContainer")
-    formCalcSimu.addEventListener("submit", (e) => {
-        e.preventDefault()
-        
-        const test = new FormData(formCalcSimu)
-        
-        // Ici, l'Url.pathname correspondra à "/simulation" auquel on vient ajouter "?ajax=1"
-        fetch(url.pathname + "?ajax=1", {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': token,
-
-            },
-            body: test
-        })
-        .then(r => r.text())
-        .then(html => {
-
-            document.querySelector(".showFinalPrice").innerHTML = html;
-            SimuResultContainer.classList.add("flashContainer")
-            SimuResultContainer.classList.remove("hidden");
-
-            return;
-        })
-    })
-}
-
-if(popupSaveSimu)
-    openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);
 
 
 class TiltCard extends HTMLElement {
@@ -668,5 +197,517 @@ class TiltCard extends HTMLElement {
     }
 }
 customElements.define("tilt-card", TiltCard);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
+burgerIcon.addEventListener("click", () => {
+    popupBurger.classList.toggle("letVisibleBurger")
+})
+
+closeBurger.addEventListener("click", () => {
+    popupBurger.classList.toggle("letVisibleBurger")
+})
+
+langue.addEventListener("click", () => {
+    popupLangue.classList.toggle("letVisibleLangue")
+})
+
+closeLangue.addEventListener("click", () => {
+    popupLangue.classList.toggle("letVisibleLangue")
+})
+
+
+
+function openClosePopup(dialog, btnAdd, btnClose)
+{
+    btnAdd.addEventListener("click", () => {
+        dialog.classList.add("transiOpacity")
+        dialog.classList.remove("hidden")
+        dialog.showModal()
+        body.classList.add("disableScroll")
+        if(dialog.open)
+        {
+            addEventListener("keydown", (e) => {
+                if(e.key == "Escape")
+                {
+                    dialog.classList.add("hidden")
+                    body.classList.remove("disableScroll")
+                    return;
+                }
+            })
+            btnClose.addEventListener("click", () => {
+                dialog.classList.remove("transiOpacity")
+                dialog.classList.add("hidden")
+                dialog.close()
+                body.classList.remove("disableScroll")
+                return;
+            })
+        }
+    });
+}
+
+
+if(popupAddFlash && btnAddflash)
+    openClosePopup(popupAddFlash, btnAddflash, closePopupFlash)
+
+
+
+
+function openClosePopupFilter(params)
+{
+
+    btnShowFilters.addEventListener("click", () => {
+
+        body.classList.add("disableScroll");
+        popupFilters.classList.remove("hidden");
+        popupFilters.showModal();
+
+        addEventListener("keydown", (e) => {
+            if(e.key == "Escape")
+            {
+                popupFilters.classList.add("hidden");
+                body.classList.remove("disableScroll");
+                return;
+            }
+        })
+        closePopupFilter.addEventListener("click", () => {
+        popupFilters.classList.add("hidden");
+        popupFilters.close();
+        body.classList.remove("disableScroll");
+        for(let category of categories)
+        {
+            category.classList.remove("activeFilter");
+            category.setAttribute("index", "0");
+        }
+        params.delete("categories");
+
+        return;
+        })
+    })
+    for(let category of categories)
+    {
+        category.addEventListener("click", () => {
+
+            if(category.getAttribute("index") == "0")
+            {
+                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+
+                params.append("categories[]", catId)
+                category.classList.add("activeFilter");
+                category.setAttribute("index", "1");
+
+                return params;
+            }
+            if(category.getAttribute("index") == "1")
+            {
+                let catId = category.querySelector("#btnFilter").getAttribute("data-id")
+
+                params.delete("categories[]", catId)
+                category.classList.remove("activeFilter");
+                category.setAttribute("index", "0");
+
+                return params;
+            }
+
+        })
+    }
+}
+if(maxPagePagination > 1)    
+    openClosePopupFilter(params)
+
+
+
+
+function getDialogEls() {
+  const dlg = containerDialog.querySelector('dialog');        // <dialog class="popup popupDetailFlash hidden">
+  const detImage = dlg?.querySelector('.detImage');
+  const closeBtn = dlg?.querySelector('.croixFlash2');
+  const buttonContact = dlg?.querySelector('#flashButtonContact');
+  const buttonDeleteFlash = dlg?.querySelector('#deleteFlashBtn');
+  const lienFavFlash = dlg?.querySelector('#lienFavFlash');
+
+  return { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash };
+}
+
+
+
+
+
+function openDialogSafe(dlg) {
+  if (!dlg) return;
+  // si jamais il est détaché, on le rattache
+  if (!dlg.isConnected) document.body.appendChild(dlg);
+  dlg.classList.remove('hidden');
+  dlg.showModal();
+  body.classList.add('disableScroll');
+}
+
+
+
+
+
+
+function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
+  if (!dlg) return;
+  dlg.close();
+  dlg.classList.add('hidden');
+  body.classList.remove('disableScroll');
+  closeBtn?.classList.remove('croixPopupFlash2');
+  detImage?.setAttribute('src', '');
+  detImage?.setAttribute('alt', '');
+  buttonContact?.setAttribute('href', '');
+  buttonDeleteFlash?.setAttribute('href', '');
+}
+
+
+
+function bindDialogInteractions(id, img, alt, imageName) {
+  // Sélection fraîche après le dernier rendu
+  let { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
+
+  idLikedFlash = dlg.getAttribute("data-fav");
+
+  i = null;
+
+idLikedFlash = idLikedFlash.split(" ");
+
+if(idLikedFlash.includes(id))
+{
+      lienFavFlash.innerHTML = "<p class=gradientSupr>Supprimer des favoris</p>"
+      lienFavFlash.firstChild.classList.add("deleteFavFlash")
+      i = 1
+}
+else
+{
+      lienFavFlash.innerHTML = "<p class=goldPolice>Ajouter aux favoris</p>"
+      lienFavFlash.firstChild.classList.remove("deleteFavFlash")
+      i = 0
+}
+
+if(location.pathname == "/flash")
+    actualPage = "Flash"
+else
+    actualPage = "Profile"
+
+
+  if (!dlg) return;
+
+  // remplir le contenu
+  detImage?.setAttribute('src', img);
+  detImage?.setAttribute('alt', alt);
+  buttonContact?.setAttribute('href', '/contact/' + imageName);
+  if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
+
+  // bouton favoris (rebind après chaque remplacement)
+  if (lienFavFlash && i == 0) {
+    lienFavFlash.onclick = (e) => {
+      e.preventDefault();
+      fetch(location.pathname + '/addFav?id=' + id + '&ajax=1', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(r => r.text())
+      .then(html => {
+        // remplace le HTML du dialog → les anciennes références deviennent caduques
+
+        document.querySelector(".dialogContainerDetailFlash").innerHTML = html;
+
+        // re-sélectionner les éléments et éventuellement rouvrir si besoin
+        let flashContainer = document.querySelector(".flashContainer");
+        let newMaxPagePagination = flashContainer.getAttribute("data-maxpages");
+        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+        attachPaginationEvents(newMaxPagePagination, params);
+        changeCurrentSpanToP(newMaxPagePagination)
+        clickFlash();
+
+        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
+      })
+      .catch(console.error)
+      .finally(() => {
+        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
+        
+        bindDialogInteractions(id, img, alt, imageName)
+        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+
+      });
+    };
+  }
+  else if(lienFavFlash && i == 1)
+  {
+    lienFavFlash.onclick = (e) => {
+      e.preventDefault();
+      fetch(location.pathname + '/removeFav' + actualPage + '?id=' + id + '&ajax=1', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(r => r.text())
+      .then(html => {
+        // remplace le HTML du dialog → les anciennes références deviennent caduques
+        if(actualPage == "Flash")
+            document.querySelector(".dialogContainerDetailFlash").innerHTML = html;
+        else    
+            document.querySelector("#flash-container").innerHTML = html;
+
+        // re-sélectionner les éléments et éventuellement rouvrir si besoin
+        let flashContainer = document.querySelector(".flashContainer");
+        let newMaxPagePagination = flashContainer.getAttribute("data-maxpages");
+        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+        attachPaginationEvents(newMaxPagePagination, params);
+        changeCurrentSpanToP(newMaxPagePagination)
+        clickFlash();
+
+        // (facultatif) rouvrir / remettre les handlers ici si tu veux garder le modal ouvert
+      })
+      .catch(console.error)
+      .finally(() => {
+        // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
+        
+        bindDialogInteractions(id, img, alt, imageName)
+        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+
+      });
+    };
+  }
+
+  // fermeture via ESC
+  dlg.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+    }
+  });
+
+  // fermeture via croix
+  if (closeBtn) {
+    closeBtn.classList.add('croixPopupFlash2');
+    closeBtn.addEventListener('click', () => closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn }), { once: true });
+  }
+
+  // enfin, ouvrir
+  openDialogSafe(dlg);
+}
+
+
+
+
+
+function clickFlash() {
+  for (let flash of flashs) {
+    flash.addEventListener('click', () => {
+    
+      const img = flash.getAttribute('src');
+      const alt = flash.getAttribute('alt') || '';
+      const id = flash.getAttribute('index');
+      const imageName = (img || '').split('/').pop() || '';
+
+      bindDialogInteractions(id, img, alt, imageName);
+    });
+  }
+}
+if(flashs)
+    clickFlash()
+
+
+
+
+
+
+if(imgInp != null && contactImage)
+{
+    if(contactImage.getAttribute("src") && imgInp.files.length == 0)
+    {
+        img = contactImage.getAttribute("src")
+
+        imageNameArray = img.split("/")
+        imageName = imageNameArray[3]
+        
+        const dataTransfer = new DataTransfer();
+        const myFile = new File(["image"], imageName, {
+            type: 'image/webp',
+            lastModified: new Date(),
+        });
+        
+        dataTransfer.items.add(myFile);
+        imgInp.files = dataTransfer.files;
+    }
+
+
+    imgInp.onchange = evt => {
+      const [file] = imgInp.files
+      if (file) {
+        contactImage.src = URL.createObjectURL(file)
+      }
+      if(imgInp.files.length == 0)
+      {
+        contactImage.src = "";
+      }
+    }
+}
+
+
+
+
+
+
+function changeCurrentSpanToP(maxPagePagination)
+{
+    if(maxPagePagination == "1" || maxPagePagination == "0") return;
+
+    let current = document.querySelector(".current") || null
+
+    nbCurrent = current.innerText
+    current.innerHTML = "<p class=goldPolice >" + nbCurrent + "</p>"
+
+    if(nbCurrent == "1")
+        current.classList.add("first")
+    else if(nbCurrent == maxPagePagination)
+        current.classList.add("last")
+}
+if(maxPagePagination)
+    changeCurrentSpanToP(maxPagePagination)
+
+
+
+function attachPaginationEvents(maxPagePagination, params) {
+    // récupère la pagination actuelle
+
+    if(parseInt(maxPagePagination) <= 1) return;
+
+    let pagination = document.querySelector(".pagination");
+    let nbPagination = parseInt(document.querySelector(".current").innerText)
+
+    let submitFilter = document.querySelector(".submitFilterBtn")
+    
+    submitFilter.onclick = () => {
+        fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajax=1", {
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        })
+        .then(r => r.text())
+        .then(html => {
+            document.querySelector("#flash-container").innerHTML = html
+            let flashContainer = document.querySelector(".flashContainer");
+            let newMaxPagePagination = flashContainer.getAttribute("data-maxpages")
+            attachPaginationEvents(newMaxPagePagination, params);
+            changeCurrentSpanToP(newMaxPagePagination)
+            clickFlash();
+        })
+        .catch(e => console.error(e))
+        popupFilters.classList.add("hidden");
+        popupFilters.close();
+        body.classList.remove("disableScroll");
+    }
+
+    for (let lienPagination of pagination.querySelectorAll("a")) {
+        lienPagination.onclick = (e) => {
+            e.preventDefault();
+            // ici, on récupères le numéro de page
+            let page = 1;
+            if (lienPagination.innerText == ">")
+                page = nbPagination + 1;
+            else if (lienPagination.innerText == "<")
+                page = nbPagination - 1;
+            else if (lienPagination.innerText == "<<")
+                page = 1;
+            else if (lienPagination.innerText == ">>")
+                page = maxPages;
+            else if (!["<", ">", "<<", ">>"].includes(lienPagination.innerText))
+                page = parseInt(lienPagination.innerText);
+            // mets à jour la variable globale
+            nbPagination = page;
+
+        
+            fetch(url.pathname + "?" + params.toString() + "&page=" + nbPagination + "&ajax=1", {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+            .then(r => r.text())
+            .then(html => {
+                document.querySelector("#flash-container").innerHTML = html;
+
+                // relance les events sur la nouvelle pagination
+
+
+                attachPaginationEvents(maxPagePagination, params);
+                clickFlash();
+                changeCurrentSpanToP(maxPagePagination);
+                return;
+            })
+            .catch(e => console.error(e));
+        };
+    }
+}
+if(flashContainer && maxPagePagination)
+    attachPaginationEvents(maxPagePagination, params)    
+
+
+if(addDialogsArea)
+{
+    openClosePopup(popupArea, addDialogsArea, closePopupArea)
+    openClosePopup(popupColor, addDialogsColor, closePopupColor)
+    openClosePopup(popupSize, addDialogsSize, closePopupSize)
+    openClosePopup(popupDetail, addDialogsDetail, closePopupDetail)
+}
+
+if(formCalcSimu)
+{
+    let SimuResultContainer = document.querySelector(".resultContainer")
+    formCalcSimu.addEventListener("submit", (e) => {
+        e.preventDefault()
+        
+        const test = new FormData(formCalcSimu)
+        
+        // Ici, l'Url.pathname correspondra à "/simulation" auquel on vient ajouter "?ajax=1"
+        fetch(url.pathname + "?ajax=1", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': token,
+
+            },
+            body: test
+        })
+        .then(r => r.text())
+        .then(html => {
+
+            document.querySelector(".showFinalPrice").innerHTML = html;
+            SimuResultContainer.classList.add("flashContainer")
+            SimuResultContainer.classList.remove("hidden");
+
+            return;
+        })
+    })
+}
+
+if(popupSaveSimu)
+    openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);
+
+function changeNumberRange(number, inputRange)
+{
+    inputRange.addEventListener("change", () => {
+        console.log("test");
+    })
+}
+changeNumberRange(numberRangeSimu, inputRange)
 
 

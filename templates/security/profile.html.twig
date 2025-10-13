@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="dialogContainerDetailFlash">
-    {% include "flash/_flashDialogDetailFlash.html.twig" %}
+    {% include "flash/_flashDialogDetailFlash.html.twig" with { likedFlashsId: likedFlashsId, maxPages: maxPages } %}
 </div>
 <div class="dialogContainerFilter">
     {% include "flash/_flashDialogFilter.html.twig" %}
@@ -47,26 +47,30 @@
                     <h3  class="goldPolice">Flashs Likés</h3>
                     
 
-                    <div class="btnFiltresContainer" tabindex="7">
-                        <div class="btn btnShowFilters">
-                            <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
-                            <div class="filterIcon">
-                                <div class="filterBarTop">
-                                    <div class="rectangle rectangleFilter1"></div>
-                                    <div class="carre"></div>
+                    {% if maxPages > 1 %}  
+                        <div class="btnFiltresContainer" tabindex="7">
+                            <div class="btn btnShowFilters">
+                                <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
+                                <div class="filterIcon">
+                                    <div class="filterBarTop">
+                                        <div class="rectangle rectangleFilter1"></div>
+                                        <div class="carre"></div>
+                                    </div>
+                                    <div class="filterBarTop">
+                                        <div class="rectangle rectangleFilter1"></div>
+                                        <div class="carre carre2"></div>
+                                    </div>
+                                    <div class="filterBarTop">
+                                        <div class="rectangle rectangleFilter1"></div>
+                                        <div class="carre"></div>
+                                    </div>
                                 </div>
-                                <div class="filterBarTop">
-                                    <div class="rectangle rectangleFilter1"></div>
-                                    <div class="carre carre2"></div>
-                                </div>
-                                <div class="filterBarTop">
-                                    <div class="rectangle rectangleFilter1"></div>
-                                    <div class="carre"></div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-
+                            </div> 
+                        </div>
+                    {% else %}
+                        <div class="space"></div>
+                    {% endif %}
+                    
 
 
                     <div id="flash-container">

@@ -62,7 +62,7 @@ body{
 .sousTitre{
     z-index: 3;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2em;
     font-family: "Raleway";
     font-weight: 800;
 }
@@ -919,6 +919,7 @@ dialog::backdrop{
     }
 }
 .hidden{
+    z-index: 0;
     opacity: 0;
     visibility: hidden;
 }
@@ -926,6 +927,9 @@ dialog::backdrop{
     opacity: 0;
 }
 
+.space{
+    padding: 4em 0;
+}
 input::file-selector-button{
     border-style: none;
     border-radius: 10px;
@@ -1265,12 +1269,8 @@ footer{
 }
 .simulationContainer{
     
+    width: 100%;
     height: 100vh;
-}
-
-.titreSimu{
-    width: 50em;
-    margin: 1em;
 }
 
 .simuContainer{
@@ -1282,7 +1282,7 @@ footer{
     }
     padding-bottom: 10em;
     h2{
-        font-size: 6em;
+        font-size: 5em;
         font-family: "Great Vibes";
         font-weight: 400;
     }
@@ -1383,7 +1383,17 @@ footer{
                     margin-top: -0.5em;
                 }
             }
+            
     }
+    .labelInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .changeNumber{
+        font-size: 1.5em;
+    }
+}
+
 }
 
 .popupSimu{
@@ -1535,6 +1545,10 @@ footer{
 }
 .grecaptcha-badge{
     z-index: 3;
+}
+
+#simuler{
+    width: 100%;
 }
 
 

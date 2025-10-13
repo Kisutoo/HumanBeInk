@@ -26,8 +26,10 @@ class ProfileController extends AbstractController
         {   
             $page = $request->query->getInt("page", 1);
             $likedFlashs = $flashRepository->paginateLikedFlashs($page, $this->getUser()->getId());
-            
             $maxPages = ceil($likedFlashs->getTotalItemCount() / 8);
+            
+            $likedFlashsId = $flashRepository->likedFLashs($this->getUser()->getId());
+
             $categories = $categoryRepository->findAll([], []);
 
 
@@ -56,16 +58,6 @@ class ProfileController extends AbstractController
                 }
             }
             
-
-
-
-
-
-
-
-
-
-
             if ($form->isSubmitted() && $form->isValid()) {
 
                 if($user->getPseudonyme() == $form->get("pseudonyme")->getData())
@@ -88,6 +80,7 @@ class ProfileController extends AbstractController
             return $this->render("security/profile.html.twig", [
                 'nicknameForm' => $form,
                 "likedFlashs" => $likedFlashs,
+                "likedFlashsId" => $likedFlashsId,
                 "categories" => $categories,
                 "maxPages" => $maxPages,
                 "logoNom" => 1,
@@ -141,7 +134,7 @@ class ProfileController extends AbstractController
         if($id == 0)
         {
             return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "likedFlashs" => $likedFlashs ?: null,
+                "likedFlashsId" => $likedFlashs ?: null,
             ]);
         }
 
@@ -154,13 +147,13 @@ class ProfileController extends AbstractController
             $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
 
             return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "likedFlashs" => $likedFlashs ?: null,
+                "likedFlashsId" => $likedFlashs ?: null,
             ]);
 
         }
 
         return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-            "likedFlashs" => $likedFlashs ?: null,
+            "likedFlashsId" => $likedFlashs ?: null,
         ]);
     }
 
@@ -169,43 +162,82 @@ class ProfileController extends AbstractController
 
 
 
-
-    #[Route("flash/removeFav", name: "remove_fav")]
-    public function removeFlashFromFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em)
+    #[Route("profile/removeFavProfile", name: "remove_fav_from_profile")]
+    #[Route("flash/removeFavFlash", name: "remove_fav_from_flash")]
+    public function removeFlashFromFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository)
     {
+
         $user = $this->getUser();
         $id = $request->get("id");
 
         $id = intval($id);
         $flash = $flashRepository->findOneBy(["id" => $id], []);
+        $categories = $categoryRepository->findAll([], []);
+
+        $page = $request->query->getInt("page", 1);
+        $flashs = $flashRepository->paginateFlashs($page);
+        $maxPages = ceil($flashs->getTotalItemCount() / 8);
         
         if($this->getUser())
-            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
+            $likedFlashsId = $flashRepository->likedFLashs($this->getUser()->getId());
         
 
         // Dans le cas ou l'id pris sur le flash via js est modifié grace à l'inspecteur du navigateur, intval (plus haut) reverra 0
         if($id == 0)
         {
-            return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "likedFlashs" => $likedFlashs ?: null,
-            ]);
+
+            if($request->get("_route") == "remove_fav_from_flash")
+            {
+
+                return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+                    "likedFlashs" => $likedFlashsId ?: null,
+
+                ]);
+            }
+            else
+            {
+                return $this->render('security/_likedFlashContainer.html.twig', [
+                    "likedFlashs" => $likedFlashsId,
+                    "maxPages" => $maxPages,
+                    "categories" => $categories,
+                ]);
+            }
         }
+
+
         if($flash && $request->get("ajax") == '1')
         {
             $user->removeFlash($flash);
             $em->persist($user);
             $em->flush();
 
-            $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
 
-            return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-                "likedFlashs" => $likedFlashs ?: null,
-            ]);
+            if($request->get("_route") == "remove_fav_from_flash")
+            {
+                $likedFlashs = $flashRepository->likedFLashs($this->getUser()->getId());
+                
+
+                return $this->render("flash/_flashDialogDetailFlash.html.twig", [
+                    "likedFlashsId" => $likedFlashs ?: null,
+                ]);
+            }
+            else
+            {
+                $page = $request->query->getInt("page", 1);
+
+                $likedFlashs = $flashRepository->paginateLikedFlashs($page, $this->getUser()->getId());
+
+                $maxPages = ceil($likedFlashs->getTotalItemCount() / 8);
+
+                return $this->render('security/_likedFlashContainer.html.twig', [
+                    "likedFlashs" => $likedFlashs,
+                    "maxPages" => $maxPages,
+                    "categories" => $categories,
+                ]);
+            }
+
 
         }
 
-        return $this->render("flash/_flashDialogDetailFlash.html.twig", [
-            "likedFlashs" => $likedFlashs ?: null,
-        ]);
     }
 }
