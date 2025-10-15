@@ -28,15 +28,26 @@ class SizeRepository extends ServiceEntityRepository
                ->getResult()
            ;
     }
+    
     public function getClosestSizeMinus(int $size)
+    // Fonction qui permet de retourner l'enregistement le plus proche de la taille fournie
+    // en paramètres (en allant chercher au dessus de celle-ci). 
     {
         return $this->createQueryBuilder('s')
+               // Prépare le moule de la requête SQL
                ->andWhere('s.size <= :size')
+               // On séléctionne les enregistrements dont la colonne taille est 
+               // inférieur ou égal à la taille rentrée en paramètres
                ->setParameter('size', $size)
+               // Lie le paramètre :size à la variable $size
+               // Doctrine se charge d’échapper et de typer correctement la valeur
                ->orderBy('s.size', 'DESC')
+               // Trie les résultats du plus grand au plus petit
                ->setMaxResults(1)
+               // Ne conserve qu’un seul enregistrement (le plus proche inférieur)
                ->getQuery()
                ->getResult()
+               // Exécute la requête compilée et renvoie le résultat
            ;
     }
     //    /**

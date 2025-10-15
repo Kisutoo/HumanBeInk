@@ -388,22 +388,24 @@ function bindDialogInteractions(id, img, alt, imageName) {
   let { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
 
   idLikedFlash = dlg.getAttribute("data-fav");
-
+  
   i = null;
 
-idLikedFlash = idLikedFlash.split(" ");
-
-if(idLikedFlash.includes(id))
+if(idLikedFlash.length > 0)
 {
-      lienFavFlash.innerHTML = "<p class=gradientSupr>Supprimer des favoris</p>"
-      lienFavFlash.firstChild.classList.add("deleteFavFlash")
-      i = 1
-}
-else
-{
-      lienFavFlash.innerHTML = "<p class=goldPolice>Ajouter aux favoris</p>"
-      lienFavFlash.firstChild.classList.remove("deleteFavFlash")
-      i = 0
+    idLikedFlash = idLikedFlash.split(" ");
+    if(idLikedFlash.includes(id))
+    {
+        lienFavFlash.innerHTML = "<p class=gradientSupr>Supprimer des favoris</p>"
+        lienFavFlash.firstChild.classList.add("deleteFavFlash")
+        i = 1
+    }
+    else
+    {
+        lienFavFlash.innerHTML = "<p class=goldPolice>Ajouter aux favoris</p>"
+        lienFavFlash.firstChild.classList.remove("deleteFavFlash")
+        i = 0
+    }
 }
 
 if(location.pathname == "/flash")
@@ -676,16 +678,17 @@ if(formCalcSimu)
     formCalcSimu.addEventListener("submit", (e) => {
         e.preventDefault()
         
-        const test = new FormData(formCalcSimu)
+        const FormSimu = new FormData(formCalcSimu)
         
         // Ici, l'Url.pathname correspondra à "/simulation" auquel on vient ajouter "?ajax=1"
         fetch(url.pathname + "?ajax=1", {
             method: 'POST',
+            // Permet d'envoyer la requête avec la methode POST
             headers: {
                 'X-CSRF-TOKEN': token,
 
             },
-            body: test
+            body: FormSimu
         })
         .then(r => r.text())
         .then(html => {
@@ -705,9 +708,9 @@ if(popupSaveSimu)
 function changeNumberRange(number, inputRange)
 {
     inputRange.addEventListener("change", () => {
-        console.log("test");
     })
 }
-changeNumberRange(numberRangeSimu, inputRange)
+if(numberRangeSimu)
+    changeNumberRange(numberRangeSimu, inputRange)
 
 

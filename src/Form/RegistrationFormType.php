@@ -34,14 +34,19 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('plainPassword', RepeatedType::class, [
                 "type" => PasswordType::class,
+                // Le Type ici fait référence au type d'input qui sera utilisé dans le formulaire (Ici un input Password)
                 'mapped' => false,
+                // Ceci signifie qu'à la soumission du formulaire, le mot de passe rentré ne sera pas automatiquement
+                // assigné à l'entité User
                 'attr' => ['autocomplete' => 'new-password'],
                 "invalid_message" => "Les mots de passent doivent être les mêmes.",
                 "first_options" => ["label" => "Mot de passe"],
                 "second_options" => ["label" => "Confirmer le mot de passe"],
+                // Assigne des labels aux deux champs mots de passe
                 'constraints' => [
                     new NotBlank([
                         "message" => "Veuillez saisir un mot de passe."
+                    // Ajoute une contrainte obligeant à saisir un mot de passe
                     ]),
                     new Length([
                         'min' => 12,
@@ -49,7 +54,10 @@ class RegistrationFormType extends AbstractType
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    // Ajoute une contrainte de taille obligeant l'utilisateur à saisir au minimum 12 caractères
                     new Regex("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%.^&*-]).{12,}$/")
+                    // Ajoute une contrainte de format sur le mot de passe obligeant celui-ci à contenir certains caractères
+
                 ],
                 
             ])

@@ -78,9 +78,14 @@ final class SimulationController extends AbstractController
             
 
             $size = floatval($request->request->all()["simulation"]["size"]);
+            // On s'assure que la valeur qu'on récupère du formulaire est bien un float (décimal)
 
             $color = intval($request->request->all()["simulation"]["color"]);
+            // On s'assure que la valeur qu'on récupère du formulaire est bien un int (entier)
             $colorObj = $colorRepository->findOneBy(["id" => $color], []);
+            // Puis on vient chercher en BD l'enregistrement dont l'id correspond à la couleur séléctionnée
+            // dans le formulaire
+
             if($colorObj)
                 $_SESSION["simulation"]["color"] = $color;
 
@@ -105,15 +110,20 @@ final class SimulationController extends AbstractController
             $diffMinus = $trueSizeMinus ? $size - $trueSizeMinus[0]->getSize() : null;
             // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
 
-            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche + de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
+            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche 
+            // plus de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
             if($diffPlus > $diffMinus || $diffPlus == null)
             {
-                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * 
+                ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                // On stocke le résultat du calcul dans prixFinalTattoo. Le résultat est arrondi grace à la fonction round()
+
                 $_SESSION["simulation"]["size"] = $trueSizeMinus[0]->getId();
                 $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
+                // Puis on stocke les différentes variables dans la session afin de les réutiliser lors de la sauvegarde de la simulation
 
             }
-            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée)
+            // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée). On utilisera donc diffPlus au lieu de diffMinus
             elseif($diffPlus < $diffMinus || $diffMinus == null)
             {
                 $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
@@ -130,6 +140,7 @@ final class SimulationController extends AbstractController
             
 
             return $this->render('simulation/_simuResultContainer.html.twig', [
+            // On renvoie un fragment twig avec le prix final du tatouage calculé préalablement
                 'prixFinalTattoo' => $prixFinalTattoo,
                 'formSaveSimu' => $formSaveSimu,
             ]);
@@ -151,8 +162,10 @@ final class SimulationController extends AbstractController
 
 
 
-    #[Route('simulation/saveSimulation', name: 'save_simu')]
-    public function saveSimulation(Request $request, EntityManagerInterface $em,         DetailRepository $detailRepository,
+    #[Route('/member/simulation/saveSimulation', name: 'save_simu')]
+    public function saveSimulation(Request $request, 
+        EntityManagerInterface $em,         
+        DetailRepository $detailRepository,
         ColorRepository $colorRepository,
         AreaRepository $areaRepository,
         SizeRepository $sizeRepository)
@@ -169,7 +182,6 @@ final class SimulationController extends AbstractController
 
             $files = $_FILES["save_simu"];
 
-            
             $tattoo->setName($formSaveSimu->get("name")->getData());
             $tattoo->setBasePrice($_SESSION["simulation"]["basePrice"]);
             $tattoo->setSize($sizeRepository->findOneBy(["id" => $_SESSION["simulation"]["size"]]));
@@ -178,14 +190,20 @@ final class SimulationController extends AbstractController
             $tattoo->setDetail($detailRepository->findOneBy(["id" => $_SESSION["simulation"]["detail"]]));
             $tattoo->setFinalPrice($_SESSION["simulation"]["finalPrice"]);
             $tattoo->setUser($this->getUser());
+            // On récupère toutes les variables présentes en session puis on vient hydrater l'entité Tattoo grace à elles
             
             $imageConverter->convertImageToWebp($files, null, $tattoo);
+            // On utilise le service de conversion d'image afin de s'assurer que celle ci soit bien aux normes puis on l'ajoute dans l'entité Tattoo
+            // nb : Le service s'occupe d'hydrater l'entité fournie, c'est pour celà qu'on ne voit pas de "$tattoo->setImage(......)" plus haut
 
             $em->persist($tattoo);
+            // L'EntityManager prépare la requête grace à persist()
             $em->flush();
+            // Puis on l'execute grace à flush(). L'utilisateur possède désormais une simulation de tatouage
 
             $this->addFlash("success", "Votre simulation a bien été ajouté sur votre profil !");
             return $this->redirectToRoute("app_simulation");
+            // Puis on renvoie l'utilisateur sur la page de simulation avec un message de succès
         }
         
 

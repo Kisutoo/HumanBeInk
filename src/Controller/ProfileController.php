@@ -95,7 +95,7 @@ class ProfileController extends AbstractController
     }
 
 
-    #[Route(path: "/delete", name: "app_delete_profile")]
+    #[Route(path: "/member/delete", name: "app_delete_profile")]
     public function deleteProfile(EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
@@ -117,7 +117,7 @@ class ProfileController extends AbstractController
 
     }
 
-    #[Route("flash/addFav", name: "add_fav")]
+    #[Route("/member/flash/addFav", name: "add_fav")]
     public function addFlashToFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em)
     {
         $user = $this->getUser();
@@ -162,8 +162,8 @@ class ProfileController extends AbstractController
 
 
 
-    #[Route("profile/removeFavProfile", name: "remove_fav_from_profile")]
-    #[Route("flash/removeFavFlash", name: "remove_fav_from_flash")]
+    #[Route("/member/profile/removeFavProfile", name: "remove_fav_from_profile")]
+    #[Route("/member/flash/removeFavFlash", name: "remove_fav_from_flash")]
     public function removeFlashFromFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository)
     {
 
