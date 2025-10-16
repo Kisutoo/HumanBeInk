@@ -547,7 +547,7 @@ if(imgInp != null && contactImage)
     }
 
 
-    imgInp.onchange = evt => {
+    imgInp.onchange = () => {
       const [file] = imgInp.files
       if (file) {
         contactImage.src = URL.createObjectURL(file)
@@ -691,7 +691,7 @@ if(formCalcSimu)
             SimuResultContainer.classList.add("flashContainer")
             SimuResultContainer.classList.remove("hidden");
             window.location='#save-simulation';
-            
+
             return;
         })
     })

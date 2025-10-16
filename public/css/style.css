@@ -909,8 +909,11 @@ dialog::backdrop{
         }
     }
     .divBtnAddFlashForm{
+        .btn{
+            border: 2px solid rgba(255, 238, 175, 0.727);
+        }
         display: flex;
-        margin-top: 5em;
+        margin-top: 2em;
         justify-content: center;
     }
     input, select{
@@ -919,7 +922,6 @@ dialog::backdrop{
     button{
         margin-top: 2em;
         font-size: 1.2em;
-        background-color: rgb(25, 26, 27);
     }
 }
 .hidden{
@@ -1308,7 +1310,7 @@ footer{
         justify-content: center;
         align-items: center;
         select{
-            border: 2px solid rgb(255, 231, 145);
+            border: 1px solid rgb(255, 231, 145);
 
             width: 23em;
             font-size: 0.9em;
@@ -1574,10 +1576,10 @@ footer{
         padding-top: 4em;
         height: fit-content;
         .flashFormSection{
+            margin-bottom: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
         }
+
         .divfiles{
             height: 15em;
             width: 100%;
@@ -1589,17 +1591,26 @@ footer{
                 align-items: center;
                 justify-content: center;
                 label{
-                    font-size: 1.5em;
+                    text-align: left;
+                    margin-bottom: 1em;
+                    font-family: "Raleway";
+                    font-size: 2em;
                     padding-bottom: 1em;
+                }
+                .files {
+                    margin-top: 1em;
                 }
             }
             .previewImageDiv{
                 width: 50%;
                 display: flex;
-                align-items: center;
+                align-items: start;
                 justify-content: center;
                 img{
                     width: 50%;
+                }
+                .previewImage{
+                    margin-top: 0;
                 }
             }
         }
@@ -1611,7 +1622,15 @@ footer{
 .titreContact{
     font-size: em;
 }
-
+.resultPrice{
+    margin-bottom: 1em;
+    font-size: 1.5em;
+}
+.prix{
+    font-family: "Raleway";
+    font-size: 2em;
+    text-align: center;
+}
 
 
 
