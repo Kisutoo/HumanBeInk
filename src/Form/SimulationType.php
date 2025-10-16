@@ -6,7 +6,9 @@ use App\Entity\Area;
 use App\Entity\Size;
 use App\Entity\Color;
 use App\Entity\Detail;
+use Doctrine\ORM\QueryBuilder;
 use App\Repository\SizeRepository;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -32,18 +34,30 @@ class SimulationType extends AbstractType
             ->add('color', EntityType::class, [
                 'class' => Color::class,
                 'placeholder'  => 'Choisissez un type de couleur',
-                'label' => 'Couleur'
+                'label' => 'Couleur',
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.multiplicator', 'ASC');
+                },
                 
             ])
             ->add('area', EntityType::class, [
                 'class' => Area::class,
                 'placeholder'  => 'Choisissez une zone à tatouer',
-                'label' => 'Zone'
+                'label' => 'Zone',
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.multiplicator', 'ASC');
+                },
             ])
             ->add('detail', EntityType::class, [
                 'class' => Detail::class,
                 'placeholder'  => 'Choisissez le nombre de détails',
-                'label' => 'Détails'
+                'label' => 'Détails',
+                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                return $er->createQueryBuilder('u')
+                    ->orderBy('u.multiplicator', 'ASC');
+                },
             ])
         ;
     }

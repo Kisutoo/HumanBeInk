@@ -138,12 +138,16 @@ button:active {
 }
 
 select{
-    background-color: rgba(49, 49, 49, 0.5);
+    background-color: rgba(27, 27, 27, 0.622);
     color: white;
     width: 19.2em;
+    height: 3em;
     padding: 0.5em;
     border: none;
+    option{
 
+        width: 1em;
+    }
 }
 .logo{
     z-index: 3;
@@ -1065,7 +1069,7 @@ input::file-selector-button:hover{
     h2{
         margin-bottom: 0.5em;
         font-family: "Great Vibes";
-        font-size: 7em;
+        font-size: 5.5em;
         text-align: center;
         font-weight: 200;
     }   
@@ -1278,9 +1282,10 @@ footer{
         border-bottom: 0;
         .flashContainer{
             width: 50em;
+            margin-bottom: 5em;
         }
     }
-    padding-bottom: 10em;
+    padding-bottom: 0;
     h2{
         font-size: 5em;
         font-family: "Great Vibes";
@@ -1303,7 +1308,10 @@ footer{
         justify-content: center;
         align-items: center;
         select{
+            border: 2px solid rgb(255, 231, 145);
+
             width: 23em;
+            font-size: 0.9em;
             border-radius: 5px;
         }
         .zoneSensiDiv{
@@ -1393,7 +1401,14 @@ footer{
         font-size: 1.5em;
     }
 }
+.divBtnCalculerSimu{
+    margin-top: 3em;
+}
 
+
+}
+.simulationContainerTotal{
+    background: linear-gradient(180deg,rgba(9, 9, 9, 1));
 }
 
 .popupSimu{
@@ -1550,8 +1565,52 @@ footer{
 #simuler{
     width: 100%;
 }
+#save-simulation{
+    height: 10em;
+}
 
-
+.SaveSimuDialogContainer{
+    .popupSaveSimu{
+        padding-top: 4em;
+        height: fit-content;
+        .flashFormSection{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .divfiles{
+            height: 15em;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .inputLabel{
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                label{
+                    font-size: 1.5em;
+                    padding-bottom: 1em;
+                }
+            }
+            .previewImageDiv{
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                    width: 50%;
+                }
+            }
+        }
+        .flashForm{
+            width: 100%;
+        }
+    }
+}
+.titreContact{
+    font-size: em;
+}
 
 
 

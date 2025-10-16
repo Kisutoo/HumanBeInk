@@ -42,7 +42,7 @@
 
     <div class="simuContainer">
 
-    <div id="simuler" class="flashContainerTotal">
+    <div id="simuler" class="flashContainerTotal simulationContainerTotal">
         <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
         <div class="simuForm flashContainer">
             {{ form_start(formSimu, { 'attr' : { 'class': 'formCalcSimu' } }) }}
@@ -56,7 +56,7 @@
                 <div class="totalSize">
                     <div class="labelInfo">
                         {{ form_label(formSimu.size) }}
-                        <p class="changeNumber">0</p>
+                        <p class="changeNumber">75 cm</p>
                     </div>
                     {{ form_errors(formSimu.size) }}
                     {{ form_widget(formSimu.size) }}
@@ -92,25 +92,25 @@
             </div>
 
                 <div class="divBtnCalculerSimu">
-                    <button type="submit" class="btn btnCalcSimu"><p class="goldPolice">Calculer</p></button>
+                    <button type="submit" class="btn btnCalcSimu" onclick="window.location='#save-simulation'"><p class="goldPolice">Calculer</p></button>
                 </div>
             {{ form_end(formSimu) }}
         </div>
 
-        <div class="resultContainer flashContainer hidden">
+        <div id="save-simulation" class="resultContainer hidden">
 
             {# Conteneur permettant d'afficher le résultat final #}
             <div class="showFinalPrice">
             </div>
 
             {# Bouton d'enregistrement seulement disponible pour un utilisateur authentifié #}
-        {% if app.user is not null %}
-            <div class="btnSaveSimu">
-                <div class="divBtnCalculerSimu">
-                    <button type="submit" class="btn saveSimu"><p class="goldPolice">Enregistrer</p></button>
+            {% if app.user is not null %}
+                <div class="btnSaveSimu">
+                    <div class="divBtnCalculerSimu">
+                        <button type="submit" class="btn saveSimu"><p class="goldPolice">Enregistrer</p></button>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
+            {% endif %}
         
         </div>
     </div>

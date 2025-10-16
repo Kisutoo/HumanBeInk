@@ -117,7 +117,7 @@ class ProfileController extends AbstractController
 
     }
 
-    #[Route("/member/flash/addFav", name: "add_fav")]
+    #[Route("/member/profile/addFav", name: "add_fav")]
     public function addFlashToFavorites(FlashRepository $flashRepository, Request $request, EntityManagerInterface $em)
     {
         $user = $this->getUser();

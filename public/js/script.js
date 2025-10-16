@@ -47,7 +47,12 @@ let closePopupSaveSimu = document.querySelector(".croixPopupSaveSimu") || null
 let showPopupSaveSimu = document.querySelector(".saveSimu") || null
 let logoNom = document.querySelector(".logoNom") || null
 let numberRangeSimu = document.querySelector(".changeNumber") || null
-let inputRange = document.querySelector("#simulation_size") || null
+if(numberRangeSimu)
+{
+    let inputRange = document.querySelector("#simulation_size").oninput = function(){
+        numberRangeSimu.innerHTML = this.value + " cm";
+    } 
+}
 
 const containerDialog = document.querySelector('.dialogContainerDetailFlash');
 
@@ -210,17 +215,6 @@ customElements.define("tilt-card", TiltCard);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 // Ces 4 EventListeners servent à faire apparaitre et disparaitre les menu burger et de changement de langue
 burgerIcon.addEventListener("click", () => {
     popupBurger.classList.toggle("letVisibleBurger")
@@ -242,6 +236,7 @@ closeLangue.addEventListener("click", () => {
 
 function openClosePopup(dialog, btnAdd, btnClose)
 {
+    if (!btnAdd) return;
     btnAdd.addEventListener("click", () => {
         dialog.classList.add("transiOpacity")
         dialog.classList.remove("hidden")
@@ -367,8 +362,6 @@ function openDialogSafe(dlg) {
 
 
 
-
-
 function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
   if (!dlg) return;
   dlg.close();
@@ -416,6 +409,7 @@ else
 
   if (!dlg) return;
 
+  console.log(location.pathname);
   // remplir le contenu
   detImage?.setAttribute('src', img);
   detImage?.setAttribute('alt', alt);
@@ -426,7 +420,7 @@ else
   if (lienFavFlash && i == 0) {
     lienFavFlash.onclick = (e) => {
       e.preventDefault();
-      fetch(location.pathname + '/addFav?id=' + id + '&ajax=1', {
+      fetch('/member/profile/addFav?id=' + id + '&ajax=1', {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
       .then(r => r.text())
@@ -459,7 +453,7 @@ else
   {
     lienFavFlash.onclick = (e) => {
       e.preventDefault();
-      fetch(location.pathname + '/removeFav' + actualPage + '?id=' + id + '&ajax=1', {
+      fetch('/member/'+ actualPage.toLowerCase() +'/removeFav' + actualPage + '?id=' + id + '&ajax=1', {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
       .then(r => r.text())
@@ -696,21 +690,15 @@ if(formCalcSimu)
             document.querySelector(".showFinalPrice").innerHTML = html;
             SimuResultContainer.classList.add("flashContainer")
             SimuResultContainer.classList.remove("hidden");
-
+            window.location='#save-simulation';
+            
             return;
         })
     })
+    
 }
 
 if(popupSaveSimu)
     openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);
-
-function changeNumberRange(number, inputRange)
-{
-    inputRange.addEventListener("change", () => {
-    })
-}
-if(numberRangeSimu)
-    changeNumberRange(numberRangeSimu, inputRange)
 
 

@@ -73,7 +73,6 @@ final class SimulationController extends AbstractController
 
             $_SESSION["simulation"] = array();
 
-
             $_SESSION["simulation"]["basePrice"] = $prixBaseTattoo;
             
 
@@ -110,9 +109,21 @@ final class SimulationController extends AbstractController
             $diffMinus = $trueSizeMinus ? $size - $trueSizeMinus[0]->getSize() : null;
             // Plus on se rapproche de 0, plus la taille donnée dans le formulaire se rapproche d'une donnée en db 
 
-            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche 
-            // plus de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
-            if($diffPlus > $diffMinus || $diffPlus == null)
+            // dd(floatval($request->request->all()["simulation"]["size"]), $diffMinus, $diffPlus, $trueSizeMinus, $trueSizePlus);
+
+
+            if($diffMinus == null)
+            {
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * 
+                ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                // On stocke le résultat du calcul dans prixFinalTattoo. Le résultat est arrondi grace à la fonction round()
+
+                $_SESSION["simulation"]["size"] = $trueSizePlus[0]->getId();
+                $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
+                // Puis on stocke les différentes variables dans la session afin de les réutiliser lors de la sauvegarde de la simulation
+            }
+
+            elseif($diffPlus == null)
             {
                 $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * 
                 ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
@@ -121,21 +132,38 @@ final class SimulationController extends AbstractController
                 $_SESSION["simulation"]["size"] = $trueSizeMinus[0]->getId();
                 $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
                 // Puis on stocke les différentes variables dans la session afin de les réutiliser lors de la sauvegarde de la simulation
+            }
 
+            // Si diffMinus est plus petit que diffPlus, cela signifie qu'il y a une taille en db qui se rapproche 
+            // plus de diffMinus (qui est en dessous de la taille donnée dans le formulaire)
+            elseif($diffPlus > $diffMinus)
+            {
+                $prixFinalTattoo = round($prixBaseTattoo * $trueSizeMinus[0]->getMultiplicator() * 
+                ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                // On stocke le résultat du calcul dans prixFinalTattoo. Le résultat est arrondi grace à la fonction round()
+                
+                $_SESSION["simulation"]["size"] = $trueSizeMinus[0]->getId();
+                $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
+                // Puis on stocke les différentes variables dans la session afin de les réutiliser lors de la sauvegarde de la simulation
             }
+            
             // Et inversement, si diffPlus est plus petit que diffMinus, cela signifie qu'il y a une taille en db qui se rapproche + de diffPlus (qui est au dessus de la taille donnée). On utilisera donc diffPlus au lieu de diffMinus
-            elseif($diffPlus < $diffMinus || $diffMinus == null)
+            elseif($diffPlus < $diffMinus)
             {
                 $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
                 $_SESSION["simulation"]["size"] = $trueSizePlus[0]->getId();
                 $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
             }
+
             else
+            // Dans le cas ou diffPlus et diffMinus sont égaux
             {
                 $prixFinalTattoo = round($prixBaseTattoo * $trueSizePlus[0]->getMultiplicator() * ($areaObj->getMultiplicator() * $colorObj->getMultiplicator() * $detailObj->getMultiplicator()));
+                
                 $_SESSION["simulation"]["size"] = $trueSizePlus[0]->getId();
                 $_SESSION["simulation"]["finalPrice"] = $prixFinalTattoo;
             }
+            
             
             
 

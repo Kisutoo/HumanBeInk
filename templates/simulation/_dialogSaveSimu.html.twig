@@ -8,11 +8,16 @@
         <div class="flashFormSection">
             {{ form_row(formSaveSimu.name) }}
         </div>
-        <div>
-            {{ form_row(formSaveSimu.image) }}
+        <div class="divfiles">
+            <div class="inputLabel">
+                {{ form_row(formSaveSimu.image) }}
+            </div>
+            <div class="previewImageDiv">
+                <img class="previewImage" src="" alt="">
+            </div>
         </div>
         <div class="divBtnAddFlashForm">
-            <button type="submit" class="btn"><p class="goldPolice">Enregister</p></button>
+            <a href=""><button class="btn"><p class="goldPolice">Enregistrer</p></button></a>
         </div>
         {{ form_end(formSaveSimu) }}
     </div>
