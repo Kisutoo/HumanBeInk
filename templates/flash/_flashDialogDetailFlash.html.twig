@@ -1,8 +1,9 @@
-<dialog class="popup popupDetailFlash hidden" data-fav="{% for flash in likedFlashsId %}{{ flash.id }} {% endfor %}">
+<dialog class="{% if app.user is null %} notLogged {% endif %} popup popupDetailFlash hidden" data-fav="{% for flash in likedFlashsId %}{{ flash.id }} {% endfor %}">
     <div class="croix croixFlash2">
         <div class="rec1"></div>
         <div class="rec2"></div>
     </div>
+    <h3 class="nomFlash"></h3>
     <tilt-card class="divDetImage">
         <img class="detImage" src="" alt="">
     </tilt-card>

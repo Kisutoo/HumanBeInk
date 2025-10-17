@@ -44,6 +44,13 @@
 
     <div id="simuler" class="flashContainerTotal simulationContainerTotal">
         <h2 class="goldPolice titreFlash titreSimu">Simuler une prestation</h2>
+        
+        {% if app.user is not null and app.session.get("simulation") and app.session.get("simulation") | length == 6 %}
+            <div class="divBtnCalculerSimu getLastSimu">
+                <button type="submit" class="btn getLastSimuBtn"><p class="goldPolice">Enregistrer Précédente Simulation</p></button>
+            </div>
+        {% endif %}
+
         <div class="simuForm flashContainer">
             {{ form_start(formSimu, { 'attr' : { 'class': 'formCalcSimu' } }) }}
             <div class="simuFormSection">

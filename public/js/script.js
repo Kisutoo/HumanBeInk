@@ -20,6 +20,7 @@ let imgInp = document.querySelector(".files") || null
 let contactImage = document.querySelector(".previewImage") || null
 let current = document.querySelector(".current") || null
 let pagination = document.querySelector(".pagination") || null
+let nomFlash = document.querySelector(".nomFlash") || null
 let flashContainer = document.querySelector(".flashContainer") || null
 let maxPagePagination = flashContainer ? flashContainer.getAttribute("data-maxpages") : null
 const categories = document.getElementsByClassName('btnFilter')
@@ -45,6 +46,7 @@ let token = document.querySelector('simulation[_token]')
 let popupSaveSimu = document.querySelector(".popupSaveSimu") || null
 let closePopupSaveSimu = document.querySelector(".croixPopupSaveSimu") || null
 let showPopupSaveSimu = document.querySelector(".saveSimu") || null
+let getLastSimuBtn = document.querySelector(".getLastSimuBtn") || null
 let logoNom = document.querySelector(".logoNom") || null
 let numberRangeSimu = document.querySelector(".changeNumber") || null
 if(numberRangeSimu)
@@ -337,13 +339,14 @@ if(maxPagePagination > 1)
 
 function getDialogEls() {
   const dlg = containerDialog.querySelector('dialog');        // <dialog class="popup popupDetailFlash hidden">
+  const nomFlash = dlg?.querySelector('.nomFlash');
   const detImage = dlg?.querySelector('.detImage');
   const closeBtn = dlg?.querySelector('.croixFlash2');
   const buttonContact = dlg?.querySelector('#flashButtonContact');
   const buttonDeleteFlash = dlg?.querySelector('#deleteFlashBtn');
   const lienFavFlash = dlg?.querySelector('#lienFavFlash');
 
-  return { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash };
+  return { dlg, nomFlash, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash };
 }
 
 
@@ -362,12 +365,13 @@ function openDialogSafe(dlg) {
 
 
 
-function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
+function closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
   if (!dlg) return;
   dlg.close();
   dlg.classList.add('hidden');
   body.classList.remove('disableScroll');
   closeBtn?.classList.remove('croixPopupFlash2');
+  nomFlash.innerText = "";
   detImage?.setAttribute('src', '');
   detImage?.setAttribute('alt', '');
   buttonContact?.setAttribute('href', '');
@@ -378,9 +382,11 @@ function closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, clos
 
 function bindDialogInteractions(id, img, alt, imageName) {
   // Sélection fraîche après le dernier rendu
-  let { dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
+  let { dlg, nomFlash, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls();
 
   idLikedFlash = dlg.getAttribute("data-fav");
+  
+  nomFlash.innerText = alt;
   
   i = null;
 
@@ -432,7 +438,7 @@ else
         // re-sélectionner les éléments et éventuellement rouvrir si besoin
         let flashContainer = document.querySelector(".flashContainer");
         let newMaxPagePagination = flashContainer.getAttribute("data-maxpages");
-        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+        ({ dlg, nomFlash, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
         attachPaginationEvents(newMaxPagePagination, params);
         changeCurrentSpanToP(newMaxPagePagination)
         clickFlash();
@@ -444,7 +450,7 @@ else
         // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
         
         bindDialogInteractions(id, img, alt, imageName)
-        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+        closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn });
 
       });
     };
@@ -467,7 +473,7 @@ else
         // re-sélectionner les éléments et éventuellement rouvrir si besoin
         let flashContainer = document.querySelector(".flashContainer");
         let newMaxPagePagination = flashContainer.getAttribute("data-maxpages");
-        ({ dlg, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
+        ({ dlg, nomFlash, detImage, closeBtn, buttonContact, buttonDeleteFlash, lienFavFlash } = getDialogEls());
         attachPaginationEvents(newMaxPagePagination, params);
         changeCurrentSpanToP(newMaxPagePagination)
         clickFlash();
@@ -479,7 +485,7 @@ else
         // fermer l’ancienne instance (encore dans le DOM tant que le remplacement n’a pas eu lieu)
         
         bindDialogInteractions(id, img, alt, imageName)
-        closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+        closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn });
 
       });
     };
@@ -488,14 +494,14 @@ else
   // fermeture via ESC
   dlg.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn });
+      closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn });
     }
   });
 
   // fermeture via croix
   if (closeBtn) {
     closeBtn.classList.add('croixPopupFlash2');
-    closeBtn.addEventListener('click', () => closeDialogSafe(dlg, { detImage, buttonContact, buttonDeleteFlash, closeBtn }), { once: true });
+    closeBtn.addEventListener('click', () => closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn }), { once: true });
   }
 
   // enfin, ouvrir
@@ -508,8 +514,8 @@ else
 
 function clickFlash() {
   for (let flash of flashs) {
-    flash.addEventListener('click', () => {
-    
+      flash.addEventListener('click', () => {
+
       const img = flash.getAttribute('src');
       const alt = flash.getAttribute('alt') || '';
       const id = flash.getAttribute('index');
@@ -549,13 +555,10 @@ if(imgInp != null && contactImage)
 
     imgInp.onchange = () => {
       const [file] = imgInp.files
-      if (file) {
+      if(file)
         contactImage.src = URL.createObjectURL(file)
-      }
       if(imgInp.files.length == 0)
-      {
         contactImage.src = "";
-      }
     }
 }
 
@@ -699,6 +702,9 @@ if(formCalcSimu)
 }
 
 if(popupSaveSimu)
+{
     openClosePopup(popupSaveSimu, showPopupSaveSimu, closePopupSaveSimu);
+    openClosePopup(popupSaveSimu, getLastSimuBtn, closePopupSaveSimu)
+}
 
 

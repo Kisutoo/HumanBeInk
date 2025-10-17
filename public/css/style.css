@@ -936,6 +936,7 @@ dialog::backdrop{
 .space{
     padding: 4em 0;
 }
+
 input::file-selector-button{
     border-style: none;
     border-radius: 10px;
@@ -955,10 +956,11 @@ input::file-selector-button:hover{
 .popupDetailFlash
 {
     display: flex;
-    padding: 1em;
+    padding: 2em;
     flex-direction: column;
     gap: 5em;
     min-height: 30em;
+    height: 45em;
     .buttons{
         a{
             text-decoration: none;
@@ -971,6 +973,11 @@ input::file-selector-button:hover{
         margin-bottom: 0.5em;
     }
 }
+.nomFlash{
+    font-size: 1.5em;
+    font-family: "Raleway";
+    margin-top: 1em;
+}
 .croixPopupFlash2{
     position: absolute;
     top: 2.5em;
@@ -982,9 +989,9 @@ input::file-selector-button:hover{
 }
 .formContact{
     border-radius: 5px;
-    border: 4px solid rgba(190, 140, 37, 1);
+    border: 4px solid rgb(255, 231, 145, 1);
     padding: 5em;
-    width: 60%;
+    width: 50%;
     .divfiles{
         input{
             color: white;
@@ -995,15 +1002,15 @@ input::file-selector-button:hover{
             margin-bottom: 5em;
             padding: 0.2;
             height: 2em;
-            width: 25em;
+            width: 22em;
             border-radius: 5px;
-            border: 2px solid rgba(190, 140, 37, 1);
+            border: 2px solid rgb(255, 231, 145, 1);
         }
         label{
             padding-bottom: 0.5em;
             color: white;
             font-family: "Raleway";
-            font-size: 2em;
+            font-size: 1.5em;
         }
         display: flex;
         flex-direction: column;
@@ -1015,10 +1022,10 @@ input::file-selector-button:hover{
             font-size: 1em;
             font-family: "Raleway";
             padding: 1em;
-            width: 53em;
+            width: 45em;
             height: 10em;
             border-radius: 5px;
-            border: 2px solid rgba(190, 140, 37, 1);
+            border: 2px solid rgb(255, 231, 145, 1);
             margin-bottom: 5em;
         }
         .files{
@@ -1610,7 +1617,7 @@ footer{
                     width: 50%;
                 }
                 .previewImage{
-                    margin-top: 0;
+                    margin-top: -2em;
                 }
             }
         }
@@ -1623,6 +1630,7 @@ footer{
     font-size: em;
 }
 .resultPrice{
+    width: fit-content;
     margin-bottom: 1em;
     font-size: 1.5em;
 }
@@ -1631,10 +1639,26 @@ footer{
     font-size: 2em;
     text-align: center;
 }
+.showFinalPrice{
+    p{
+        margin-top: 1.5em;
+    }
+}
+.notLogged{
+    .nomFlash{
+        margin-top: 1em;
+    }
+    min-height: 0;
+    height: 35em;
+}
 
-
-
-
+.getLastSimu{
+    font-size: 0.7em;
+    margin-bottom: 5em;
+    .btn{
+        width: 20em;
+    }
+}
 
 
 
