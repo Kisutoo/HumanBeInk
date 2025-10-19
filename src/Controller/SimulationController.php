@@ -185,6 +185,14 @@ final class SimulationController extends AbstractController
                 $allData["finalPrice"] = $prixFinalTattoo;
                 $session->set("simulation", $allData);
             }
+
+            if($size == 0)
+            {
+                $prixFinalTattoo = 0;
+                $allData = $session->get("simulation");
+                $allData["finalPrice"] = $prixFinalTattoo;
+                $session->set("simulation", $allData);
+            }
             
 
             return $this->render('simulation/_simuResultContainer.html.twig', [
