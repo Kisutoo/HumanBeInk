@@ -388,7 +388,7 @@ function bindDialogInteractions(id, img, alt, imageName) {
   
   nomFlash.innerText = alt;
   
-  i = null;
+  i = 0;
 
 if(idLikedFlash.length > 0)
 {
@@ -421,10 +421,11 @@ else
   detImage?.setAttribute('alt', alt);
   buttonContact?.setAttribute('href', '/contact/' + imageName);
   if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
-
+console.log(i)
   // bouton favoris (rebind après chaque remplacement)
   if (lienFavFlash && i == 0) {
     lienFavFlash.onclick = (e) => {
+        console.log("test");
       e.preventDefault();
       fetch('/member/profile/addFav?id=' + id + '&ajax=1', {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
@@ -674,6 +675,8 @@ if(formCalcSimu)
     let SimuResultContainer = document.querySelector(".resultContainer")
     formCalcSimu.addEventListener("submit", (e) => {
         e.preventDefault()
+
+        console.log(url.pathname);
         
         const FormSimu = new FormData(formCalcSimu)
         

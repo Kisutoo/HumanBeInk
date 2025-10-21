@@ -96,24 +96,23 @@ class ProfileController extends AbstractController
 
 
     #[Route(path: "/member/delete", name: "app_delete_profile")]
-    public function deleteProfile(EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    public function deleteProfile(EntityManagerInterface $entityManager, UserRepository $userRepository, Request $request)
     {
         $user = $this->getUser();
         if($user)
         {
+            $request->getSession()->invalidate();
             $this->container->get('security.token_storage')->setToken(null);
 
             $entityManager->remove($user);
             $entityManager->flush();
         
             $this->addFlash("success", "Votre compte a été supprimé avec succès.");
-            return $this->redirectToRoute("app_accueil");
         }
         else
-        {
             $this->addFlash("error", "Personne n'est connecté.");
-            return $this->redirectToRoute("app_accueil"); 
-        }
+        
+        return $this->redirectToRoute("app_accueil"); 
 
     }
 

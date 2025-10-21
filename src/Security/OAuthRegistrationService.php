@@ -11,17 +11,18 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 final readonly class OAuthRegistrationService
 {
-    /**
-     * @param GoogleUser $resourceOwner
-     */
     public function persist(ResourceOwnerInterface $resourceOwner, UserRepository $repository): User
     {
+        $role = ["ROLE_USER"];
+
         $user = (new User())
             ->setPseudonyme($resourceOwner->getFirstName())
             ->setEmail($resourceOwner->getEmail())
-            ->setGoogleId($resourceOwner->getId());
+            ->setGoogleId($resourceOwner->getId())
+            ->setRoles($role);
 
         $repository->add($user, true);
-        return $user;
+
+        return $repository->findOneBy(['googleId' => $user->getGoogleId()]);
     }
 }

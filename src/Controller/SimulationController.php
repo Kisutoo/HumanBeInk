@@ -65,7 +65,6 @@ final class SimulationController extends AbstractController
 
 
         // Calcul du prix d'un tatouage grace au formulaire
-        // dd($request->request->all());
         if($request->getMethod() == "POST" && $request->get("ajax"))
         {
             $session = new Session();
@@ -246,7 +245,6 @@ final class SimulationController extends AbstractController
             $tattoo->setFinalPrice($_SESSION["_sf2_attributes"]["simulation"]["finalPrice"]);
             $tattoo->setUser($this->getUser());
 
-            dd($tattoo);
             // On récupère toutes les variables présentes en session puis on vient hydrater l'entité Tattoo grace à elles
             
             $imageConverter->convertImageToWebp($files, null, $tattoo);
@@ -275,7 +273,7 @@ final class SimulationController extends AbstractController
 
 
 
-    #[Route('admin/simulation/addSize', name: 'add_size')]
+    #[Route('/admin/simulation/addSize', name: 'add_size')]
     public function addSize(Request $request, EntityManagerInterface $em)
     {  
 
@@ -405,3 +403,13 @@ final class SimulationController extends AbstractController
         return $this->redirectToRoute("app_simulation");
     }
 }
+
+{
+            $password = $request->request->get('password');
+
+            // Vérification du mot de passe avec password_verify()
+            if (password_verify($password, $user->getPassword())) {
+
+                $this->addFlash('success', 'Utilisateur connecté.');
+                return $this->redirectToRoute('app_accueil');
+            }}

@@ -62,7 +62,6 @@ final class ContactController extends AbstractController
                 ->from($envoyeur)
                 ->to("poivron@humanbeink.com") // Email envoyé au tatoueur pour le projet du client
                 ->subject('Demande de tatouage/renseignements')
-                ->text('Sending emails is fun again!')
                 ->htmlTemplate("emails/contact.html.twig");
                 if($imageMimeType == "text/plain")
                 {
