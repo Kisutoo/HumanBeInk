@@ -126,4 +126,16 @@ class FlashRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+
+
+    public function findByName(string $name)
+    {
+        
+        return $this->createQueryBuilder('u')
+            ->where('u.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult();
+    }
 }

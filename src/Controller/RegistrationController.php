@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
             $score = $recaptcha3Validator->getLastResponse()->getScore();
             // On récupère le score ReCaptcha d'un utilisateur sur une page afin de vérifier s'il s'agit d'un robot
 
-            if(false === $limiter->consume(1)->isAccepted())
+            if($limiter->consume(1)->isAccepted() === false)
             {
                 // Ajout d'un message d'erreur pour l'utilisateur
                 $this->addFlash("error", "Un nouvel utilisateur vient déjà d'être créé, veuillez réessayer dans 2 minutes.");

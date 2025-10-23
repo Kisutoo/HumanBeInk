@@ -19,6 +19,8 @@ class NicknameType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'user'
         ]);
     }
 }

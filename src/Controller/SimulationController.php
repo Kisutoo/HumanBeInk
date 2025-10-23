@@ -403,13 +403,3 @@ final class SimulationController extends AbstractController
         return $this->redirectToRoute("app_simulation");
     }
 }
-
-{
-            $password = $request->request->get('password');
-
-            // Vérification du mot de passe avec password_verify()
-            if (password_verify($password, $user->getPassword())) {
-
-                $this->addFlash('success', 'Utilisateur connecté.');
-                return $this->redirectToRoute('app_accueil');
-            }}

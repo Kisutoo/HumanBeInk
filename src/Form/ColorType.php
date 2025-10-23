@@ -27,7 +27,8 @@ class ColorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'user'
         ]);
     }
 }

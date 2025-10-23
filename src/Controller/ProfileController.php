@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\NicknameType;
 use App\Repository\UserRepository;
 use App\Repository\FlashRepository;
+use App\Repository\TattooRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProfileController extends AbstractController
 {
     #[Route(path: '/profile', name: 'app_profile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager, FlashRepository $flashRepository, CategoryRepository $categoryRepository)
+    public function profile(Request $request, EntityManagerInterface $entityManager, FlashRepository $flashRepository, CategoryRepository $categoryRepository, TattooRepository $simulationRepository)
     {
         $user = $this->getUser();
 
@@ -29,6 +30,7 @@ class ProfileController extends AbstractController
             $maxPages = ceil($likedFlashs->getTotalItemCount() / 8);
             
             $likedFlashsId = $flashRepository->likedFLashs($this->getUser()->getId());
+            $simulations = $simulationRepository->getSimulations($this->getUser()->getId());
 
             $categories = $categoryRepository->findAll([], []);
 
@@ -82,6 +84,7 @@ class ProfileController extends AbstractController
                 "likedFlashs" => $likedFlashs,
                 "likedFlashsId" => $likedFlashsId,
                 "categories" => $categories,
+                "simulations" => $simulations,
                 "maxPages" => $maxPages,
                 "logoNom" => 1,
                 "footer" => 1,
