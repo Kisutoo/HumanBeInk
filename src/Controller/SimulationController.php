@@ -256,8 +256,8 @@ final class SimulationController extends AbstractController
             $em->flush();
             // Puis on l'execute grace à flush(). L'utilisateur possède désormais une simulation de tatouage
 
-            
-            dd($_SESSION);
+
+            unset($_SESSION["_sf2_attributes"]["simulation"]);
 
             $this->addFlash("success", "Votre simulation a bien été ajouté sur votre profil !");
             return $this->redirectToRoute("app_simulation");

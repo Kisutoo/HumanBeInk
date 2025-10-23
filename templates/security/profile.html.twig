@@ -105,7 +105,7 @@
     
                     </div>
     
-                    <a class="btnSuprSimu" href=""><button class="btn"><p class="gradientSupr">Supprimer</p></button></a>
+                    <a class="btnSuprSimu" href="{{ path("remove_simulation", {"id_simulation": simulation.getId }) }}"><button class="btn"><p class="gradientSupr">Supprimer</p></button></a>
                 </div>
             {% endfor %}
         </div>

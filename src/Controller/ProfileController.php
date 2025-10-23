@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\NicknameType;
+use Doctrine\ORM\EntityManager;
 use App\Repository\UserRepository;
 use App\Repository\FlashRepository;
 use App\Repository\TattooRepository;
@@ -241,9 +242,27 @@ class ProfileController extends AbstractController
     }
 
 
+    #[Route("/member/profile/removeSimulation/{id_simulation}", name: "remove_simulation")]
+    public function removeSimulation(int $id_simulation, TattooRepository $tattooRepository, EntityManagerInterface $em)
+    {
+        $id_simulation = intval($id_simulation);
+        $user = $this->getUser();
+
+        $simulation = $tattooRepository->findOneBy(["id" => $id_simulation], []);
+        if($simulation->getUser()->getId() != $user->getId())
+        {
+            $this->addFlash("error", "Cette simulation n'existe pas");
+            return $this->redirectToRoute("app_profile");
+        }
+
+        $em->remove($simulation);
+        $em->flush();
+
+        $this->addFlash("success", "Votre simulation a bien été suprimée");
+        return $this->redirectToRoute("app_profile");
+    }
 
 
 
 
-    
 }
