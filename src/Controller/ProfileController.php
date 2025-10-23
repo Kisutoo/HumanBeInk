@@ -237,9 +237,13 @@ class ProfileController extends AbstractController
                     "categories" => $categories,
                 ]);
             }
-
-
         }
-
     }
+
+
+
+
+
+
+    
 }

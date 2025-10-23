@@ -14,8 +14,7 @@
     <div class="allProfil homePageTotal">
         <div class="headProfile">
             <div class="lienAncrage">
-                <a href="#coordonnees">Coordonnées</a>
-                <a href="#likes">Mes likes</a>
+                <a href="#coordonnees">Coordonnées / Likes</a>
                 <a href="#simulations">Mes simulations</a>
             </div>
             <div class="fondBlur4 fondBlur">
@@ -43,7 +42,7 @@
                 </div>
             </div>
             <div class="likecontainerContainer">
-                <div class="likeContainer" id="likes">
+                <div class="likeContainer">
                     <h3  class="goldPolice">Flashs Likés</h3>
                     
 
@@ -84,6 +83,32 @@
     </div>
     <div class="sousProfil" id="simulations">
         <h3 class="titre goldPolice">Mes Simulations</h3>
+        <div class="simulationContainer">
+            {% for simulation in simulations %}
+                <div class="cardSimulation">
+                    <h4 class="goldPolice titleCard">{{ simulation.getName }}</h4>
+                    <div class="infos">
+                        <div class="texte">
+                            <p class="goldPolice prixFinalSimuCard">{{ simulation.getFinalPrice }} €</p>
+                            <p class="white">Taille ~ {{ simulation.size.getSize }} cm</p>
+                            <p class="white">Couleur ~ {{ simulation.color.getTypeColor }}</p>
+                            <p class="white">Détail ~ {{ simulation.detail.getDetailName }}</p>
+                            <p class="white">Zone ~ {{ simulation.area.getNameArea }}</p>
+                        </div>
+                        <div class="image">
+                            {% if simulation.image is not null %}
+                            <tilt-card class="divDetImage">
+                                <img src="{{ asset("img/simuImages/" ~ simulation.getImage ) }}" alt="Image de {{ simulation.getName }}" loading="lazy">
+                            </tilt-card>
+                            {% endif %}
+                        </div>
+    
+                    </div>
+    
+                    <a class="btnSuprSimu" href=""><button class="btn"><p class="gradientSupr">Supprimer</p></button></a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
  
 {% endblock %}

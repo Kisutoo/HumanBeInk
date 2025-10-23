@@ -5,7 +5,8 @@
     user-drag: none;
 	-webkit-user-drag: none;
 	-moz-user-select: none;
-    scroll-behavior: smooth !important; 
+    scroll-behavior: smooth !important;
+    font-family: "Raleway"; 
 }
 
 .alertsuccess, .alerterror
@@ -713,7 +714,7 @@ bold{
 .lienAncrage{
     z-index: 9;
     position: fixed;
-    top: 20%;
+    top: 40%;
     right: 0;
     margin-top: 3em;
     margin-right: 1em;
@@ -804,8 +805,10 @@ bold{
 }
 .sousProfil{
     padding-top: 2.5em;
-    height: 50em;
-    background: linear-gradient(180deg,rgb(0, 0, 0) 0%, rgb(24, 23, 23) 100%);
+    background: linear-gradient(180deg,rgba(1, 1, 1, 1) 1%, rgba(16, 16, 16, 1) 50%, rgba(8, 8, 8, 1) 100%);
+    .titre{
+        margin-bottom: 1em;
+    }
 }
 
 .disableScroll{
@@ -1280,11 +1283,6 @@ footer{
 .deleteFavFlash{
     background-image: linear-gradient(90deg,rgb(180, 120, 0) 1%, rgb(136, 0, 0) 100%);
 }
-.simulationContainer{
-    
-    width: 100%;
-    height: 100vh;
-}
 
 .simuContainer{
     .flashContainerTotal{
@@ -1659,6 +1657,72 @@ footer{
         width: 20em;
     }
 }
+.infos{
+    display: flex;
+    gap: 2em;
+    p{
+        margin-bottom: 0.5em;
+        font-size: 1.3em;
+    }
+    .white{
+        color: white;
+    }
+    .texte{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .image{
+        width: 100%;
+        img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+    }
+    .prixFinalSimuCard{
+        font-size: 1.8em;
+    }
+}
+.simulationContainer{
+    display: grid;
+    grid-template-columns: repeat(2, 50em);
+    place-items: center;
+    justify-content: center;
+    gap: 4em 0;
+    padding-bottom: 5em;
+}
+.cardSimulation{
+    padding: 1em 3em;
+    border: 2px solid rgb(255, 238, 175);
+    border-radius: 20px;
+    width: fit-content;
+    background-color: black;
+    .titleCard{
+        text-align: center;
+    }
+    h4{
+        width: fit-content;
+        font-size: 4em;
+        font-family: "Great Vibes";
+        font-weight: 300;
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .btnSuprSimu{
+        font-size: 0.8em;
+    }
+}
+
+
+
 
 
 
