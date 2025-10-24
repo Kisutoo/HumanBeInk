@@ -53,6 +53,7 @@ let lienRating = document.querySelector(".eCzDql") || null
 let lienbtnRating = document.querySelector(".cNeQYs") || null
 let nbReview = document.querySelector("h1") || null
 let noteFinaleAvis = document.querySelector(".hNJvGa") || null
+let backToTopBtn = document.querySelector(".backToTop")
 
 
 if(numberRangeSimu)
@@ -79,13 +80,13 @@ function myFunction() {
             return null
         }
 }
+
 window.onscroll = function() {
     myFunction() }
     
 if(logoNom)
 {
     window.onscroll = function() {
-        myFunction()
         var currentScrollPos = window.pageYOffset;
         if (currentScrollPos < 272) {
             document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
@@ -96,6 +97,8 @@ if(logoNom)
         
     }
 }
+
+
 
 
 

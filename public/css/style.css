@@ -880,12 +880,10 @@ bold{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
+    transition: opacity 1s ease;
+    
 }
-.transition{
-    transition: all 1s ease-in-out;
-}
-
 dialog::backdrop{
     background: rgba(0, 0, 0, 0.9);
 }
@@ -1869,7 +1867,16 @@ footer{
     display: flex;
     justify-content: space-around;
 }
-
+.scrollTop{
+    position: absolute;
+    transform: translate(-950%, -950%);
+    rotate: 180deg;
+    border: 2px solid rgba(255, 231, 145, 1);
+    width: 5em;
+    height: 5em;
+    background-color: rgba(0, 0, 0, 0.696);
+    backdrop-filter: blur(10px);
+}
 
 
 
