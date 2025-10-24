@@ -49,6 +49,13 @@ let showPopupSaveSimu = document.querySelector(".saveSimu") || null
 let getLastSimuBtn = document.querySelector(".getLastSimuBtn") || null
 let logoNom = document.querySelector(".logoNom") || null
 let numberRangeSimu = document.querySelector(".changeNumber") || null
+let lienRating = document.querySelector(".eCzDql") || null
+let lienbtnRating = document.querySelector(".cNeQYs") || null
+let nbReview = document.querySelector("h1") || null
+let noteFinaleAvis = document.querySelector(".hNJvGa") || null
+let backToTopBtn = document.querySelector(".backToTop")
+
+
 if(numberRangeSimu)
 {
     let inputRange = document.querySelector("#simulation_size").oninput = function(){
@@ -73,13 +80,13 @@ function myFunction() {
             return null
         }
 }
+
 window.onscroll = function() {
     myFunction() }
     
 if(logoNom)
 {
     window.onscroll = function() {
-        myFunction()
         var currentScrollPos = window.pageYOffset;
         if (currentScrollPos < 272) {
             document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
@@ -90,6 +97,8 @@ if(logoNom)
         
     }
 }
+
+
 
 
 
@@ -249,6 +258,7 @@ function openClosePopup(dialog, btnAdd, btnClose)
             addEventListener("keydown", (e) => {
                 if(e.key == "Escape")
                 {
+                    dialog.classList.remove("transition")
                     dialog.classList.add("hidden")
                     body.classList.remove("disableScroll")
                     return;
@@ -256,6 +266,7 @@ function openClosePopup(dialog, btnAdd, btnClose)
             })
             btnClose.addEventListener("click", () => {
                 dialog.classList.remove("transiOpacity")
+                dialog.classList.remove("transition")
                 dialog.classList.add("hidden")
                 dialog.close()
                 body.classList.remove("disableScroll")
@@ -368,6 +379,7 @@ function openDialogSafe(dlg) {
 function closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteFlash, closeBtn } = {}) {
   if (!dlg) return;
   dlg.close();
+  dlg.classList.remove("transition")
   dlg.classList.add('hidden');
   body.classList.remove('disableScroll');
   closeBtn?.classList.remove('croixPopupFlash2');
