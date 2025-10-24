@@ -1,3 +1,20 @@
+accueil:
+  titre1: "A propos de moi"
+  presentation: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tempor, velit ut pretium aliquam, nisi tortor consectetur neque, ut lacinia arcu eros eget dolor. Proin magna mi, facilisis sed pellentesque eget, convallis sed purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 flash:
   titre1: "Qu'est-ce qu'un Flash ?"
   description_1: "Un tattoo flash est un motif de tatouage pré-dessiné, imaginé par le tatoueur, prêt à être tatoué tel quel. Ces designs sont souvent exposés en salon ou publiés sur mes réseaux, et ils permettent de se faire tatouer plus rapidement et à un tarif plus accessible qu’un tatouage personnalisé. A noter qu’ils sont uniques et ne peuvent être tatoués qu’une seule fois par personne."

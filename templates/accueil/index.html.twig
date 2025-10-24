@@ -11,7 +11,7 @@
                 <h1 class="titre goldPolice titreHome">Human Be Ink</h1>
                 <a href="{{ path("app_simulation")}}"><button class="btn btn2"><p class="goldPolice">Simulation</p></button></a>
             </div>
-            <h2 class="sousTitre goldPolice sousTitreHome">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h2>
+            <h2 class="sousTitre goldPolice sousTitreHome">Studio de tatouage privé à <strong>Yzeure</strong>. Uniquement sur RDV</h2>
             <div class="btnHomePage btnHomePageTrue">
                 <a href="#galerie"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
                 <a href="{{ path("app_contact")}}"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
@@ -20,15 +20,26 @@
                 <div class="fondNoise noiseHome"></div>
             </div>
         </div>
-        <a href="#galerie"><div class="scroll-down scrollHome"></div></a>
+        <a href="#presentation"><div class="scroll-down scrollHome"></div></a>
     </div>
     <div class="progress-container">
         <div id="progress-bar"></div>
     </div>
 
+    <article id="presentation" class="flashDef presentationContainer">
+        <div class="paragraphePresentation">
+            <h2 class="goldPolice">{{ "accueil.titre1" | trans }}</h2>
+            <p class="defFlash">{{ "accueil.presentation" | trans }}</p>
+        </div>
+    </article>
+
+
     <div id="galerie" class="galerie">
-        <h2 class="titre goldPolice titreGalerie">Galerie</h2>
-        <div class="carousel">
+        <div class="titreGalerieContainer">
+            <h2 class="titre goldPolice titreGalerie">Galerie</h2>
+        </div>
+        <h3 class="titre goldPolice sousTitreGalerie">Tatouages</h3>
+        <div class="carousel carousel1">
             <div class="group spin">
                 <div class="card"><img src="{{ asset("../img/tatoo 1.webp")}}" alt=""></div>
                 <div class="card"><img src="{{ asset("../img/tatoo 2.webp")}}" alt=""></div>
@@ -46,16 +57,85 @@
                 <div class="card"><img src="{{ asset("../img/tatoo 6.webp")}}" alt=""></div>
             </div>
         </div>
+        <h3 class="titre goldPolice sousTitreGalerie">Dessins</h3>
+        <div class="carousel carousel2">
+            <div class="group spin2">
+                <div class="card"><img src="{{ asset("../img/tatoo 1.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 2.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 3.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 4.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 5.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 6.webp")}}" alt=""></div>
+            </div>
+            <div class="group spin2 ">
+                <div class="card"><img src="{{ asset("../img/tatoo 1.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 2.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 3.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 4.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 5.webp")}}" alt=""></div>
+                <div class="card"><img src="{{ asset("../img/tatoo 6.webp")}}" alt=""></div>
+            </div>
+        </div>
+        <div class="btnFlash">
+            <a href="{{ path("app_flash")}}"><button class="btn"><p class="goldPolice">Voir les Flashs</p></button></a>
+        </div>
     </div>
+
+    <section id="wannaDo" class="homePageTotal flashDef defWannaDo">
+        <div class="fondBlur3 fondBlur" loading="lazy">
+            <div class="fondNoise"></div>
+        </div>
+        <div class="divWannaDo divAvis">
+            <div class="titreAvis">
+                <h2 class="titre goldPolice">Les avis</h2>
+            </div>
+            <reviewsjet-slider count="3" platform="others" id="68fb4ce02bfac9ce465c447e"></reviewsjet-slider>
+            <div class="btnAvis">
+                <a class="lienAvis" href="https://www.google.com/search?sca_esv=4c6e5173cbbd1641&rlz=1C1GCEU_frFR1180FR1180&hl=fr-FR&sxsrf=AE3TifPqR-LSoDay05qt4gNY_i3Px2Uk3A:1761308896515&si=AMgyJEtREmoPL4P1I5IDCfuA8gybfVI2d5Uj7QMwYCZHKDZ-E5wgChroW4yL-QZ4668qkqMvQLpEHang10A0EHDfrONOeVi4PeUlk4ZIX7vfzYLG6RT42Bd255pgftbL2RCg2NmjBUGw&q=Human+be+Ink+Avis&sa=X&ved=2ahUKEwiQi_f46ryQAxVtUqQEHUDUHO4Q0bkNegQIJRAE&cshid=1761308939316212&biw=1920&bih=945&dpr=1" target="_blank"><button class="btn btn2"><p class="goldPolice">Me laisser un avis</p></button></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="localisationSalonDiv">
+        <div class="titreSalon">
+            <h2 class="titre goldPolice">Le salon</h2>
+        </div>
+        <div class="horairesCarteContainer">
+            <div class="horairesContainer">
+                <div class="titreHoraire">
+                    <h3 class="goldPolice titre">Les horaires</h3>
+                </div>
+                <div class="jourContainer">
+                    <div class="jourHeure"><p class="jour">Lundi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Mardi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Mercredi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Jeudi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Vendredi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Samedi</p><p class="heure">~ 8h - 18h</p></div>
+                    <div class="jourHeure"><p class="jour">Dimanche</p><p class="heure">~ 8h - 18h</p></div>
+                </div>
+            </div>
+            <div class="carteContainer">
+                <div class="titreCarte">
+                    <h3 class="goldPolice titre">Localisation</h3>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2742.9493336147298!2d3.352009476748708!3d46.56846725908634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f11df819d450e7%3A0x512175feecd68702!2sHuman%20be%20Ink!5e0!3m2!1sfr!2sfr!4v1761312852454!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="btnContact">
+            <a href="{{ path("app_contact")}}"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
+        </div>
+    </section>
 
 
    
-
-
-
 
     {% endblock %}
 
     {% block footer %}
     {% include "_footer.html.twig" %}
+    {% endblock %}
+
+    {% block javascripts %}
+        <script async="true" src='https://cdn.reviewsjet.com/@FlexByt/widgets/embedded-widgets/bundle.js?v=1.0.0'></script>
     {% endblock %}

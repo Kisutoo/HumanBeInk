@@ -43,9 +43,9 @@ body{
 .titre{
     z-index: 3;
     font-family: "Great Vibes";
-    text-align: center;
     font-size: 6em;
     font-weight: 200;
+
 }
 
 
@@ -606,10 +606,10 @@ main{
 
 
 .selectLangue{
+    opacity: 0;
     visibility: hidden;
     white-space:nowrap;
     overflow: hidden;
-    margin-right: -100%;
     z-index: 7;
     position: absolute;
     font-size: 1.5em;
@@ -664,8 +664,8 @@ main{
 }
 
 .letVisibleLangue{
+    opacity: 1;
     visibility: visible;
-    margin-right: 0;
 }
 
 bold{
@@ -880,10 +880,12 @@ bold{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    transition: opacity 1s ease;
-    
+    align-items: center;    
 }
+.transition{
+    transition: all 1s ease-in-out;
+}
+
 dialog::backdrop{
     background: rgba(0, 0, 0, 0.9);
 }
@@ -963,7 +965,7 @@ input::file-selector-button:hover{
     flex-direction: column;
     gap: 5em;
     min-height: 30em;
-    height: 45em;
+    height: fit-content;
     .buttons{
         a{
             text-decoration: none;
@@ -1498,10 +1500,13 @@ footer{
 
 
 .carousel{
-    margin: 100px auto;
-    width: 90%;
+    width: 70%;
     display: flex;
     overflow-x: auto;
+    padding: 2em 0;
+    .group{
+        transition: all 2s ease-in-out;
+    }
 }
 .carousel::-webkit-scrollbar{
     display: none;
@@ -1510,16 +1515,19 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1em;
-    padding-right: 1em;
+    gap: 3em;
+    padding-right: 3em;
 }
 
 .spin{
-    animation: spin 60s infinite linear;
+    animation: spin 40s infinite linear;
+}
+.spin2{
+    animation: spin2 40s infinite linear;
 }
 
-
 .card{
+    cursor: pointer;
     border: 3px solid;
     border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
     border-image-slice: 1;
@@ -1528,10 +1536,22 @@ footer{
     border-radius: .2em;
     text-align: center;
     align-content: center;
+    img{
+        width: 100%;
+    }
+    transition: all 0.5s ease-in-out;
+}
+.card:hover
+{
+    rotate: 5deg;
 }
 @keyframes spin {
     from {translate: 0;}
     to {translate: -100%;}
+}
+@keyframes spin2 {
+    from {translate: -100%;}
+    to {translate: 0%;}
 }
 .scrollHome{
     top: 85%;
@@ -1563,10 +1583,36 @@ footer{
     }
 }
 .galerie{
+    background: linear-gradient(180deg,rgba(1, 1, 1, 1) 1%, rgba(16, 16, 16, 1) 50%, rgba(8, 8, 8, 1) 100%);
     padding-top: 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2{
+        font-size: 7em;
+        margin-bottom: 1em;
+    }
+    .sousTitreGalerie{
+        font-size: 5em;
+        padding-bottom: 0.8em;
+    }
+    border-bottom: 5px solid;
+    border-image: linear-gradient(90deg,rgba(190, 140, 37, 1) 1%, rgba(255, 231, 145, 1) 100%);
+    border-image-slice: 1;
+    padding-bottom: 10em;
+    .btnFlash{
+        margin-top: 5em;
+    }
 }
 .grecaptcha-badge{
     z-index: 3;
+}
+.cNeQYs, .eCzDql, .jibsDZ{
+    visibility: hidden;
+}
+.eCzDql{
+    visibility: hidden;
 }
 
 #simuler{
@@ -1721,6 +1767,108 @@ footer{
     }
 }
 
+.carousel1{
+    margin-bottom: 10em;
+}
+.carousel:hover{
+    .group{
+        animation-play-state: paused;
+    }
+}
+.presentationContainer{
+    display: flex;
+    justify-content: center;
+
+}
+.paragraphePresentation{
+    width: 80%;
+    .defFlash{
+        text-align: center;
+    }
+}
+.titreGalerieContainer, .titreSimulationContainer{
+    display: flex;
+    justify-content: center;
+}
+.divAvis{
+    display: flex;
+    flex-direction: column;
+    .titreAvis{
+        display: flex;
+        justify-content: center;
+        font-size: 1.8em;
+    }
+    .btnAvis
+    {
+        display: flex;
+        justify-content: center;
+        font-size: 0.7em;
+        .btn{
+            width: fit-content;
+        }
+    }
+}
+.localisationSalonDiv{
+    background: linear-gradient(180deg,rgba(1, 1, 1, 1) 1%, rgba(16, 16, 16, 1) 50%, rgba(8, 8, 8, 1) 100%);
+    .titreSalon{
+        padding: 5em 0;
+        display: flex;
+        justify-content: center;
+    }
+    padding-bottom: 10em;
+    .titre{
+        padding-bottom: 0.4em;
+    }
+    .btnContact{
+        margin-top: 10em;
+        display: flex;
+        justify-content: center;
+    }
+    
+}
+.horairesContainer{
+    width: 30%;
+    height: 100%;
+    .titreHoraire{
+        display: flex;
+        justify-content: center;
+    }
+    p{
+        font-size: 1.5em;
+        color: white;
+    }
+    .jourHeure{
+        display: flex;
+        margin-bottom: 2.5em;
+        justify-content: space-around;
+        .jour{
+            width: 40%;
+        }
+        .heure{
+            width: 40%;
+            text-align: end;
+        }
+    }
+    .jourContainer{
+        margin-top: 2em;
+    }
+}
+.carteContainer{
+    width: 40%;
+    .titreCarte{
+        display: flex;
+        justify-content: center;
+    }
+    iframe{
+        width: 100%;
+        height: 80%;
+    }
+}
+
+.horairesCarteContainer{
+    display: flex;
+    justify-content: space-around;
+}
 
 
 
