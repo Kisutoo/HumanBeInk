@@ -34,6 +34,7 @@
 
 
 body{
+    position: relative;
     min-height: 100vh;
     width: 100%;
     overflow-x: hidden;
@@ -426,12 +427,19 @@ input[type="text"], input[type="password"], input[type="email"]{
     }
     .fondBlur2{
         background-image: url(../img/fondSecurity.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .fondBlur3{
         background-image: url(../img/fondtest1.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+
     }
     .fondBlur4{
         background-image: url(../img/fondHome.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .btnHomePage{
         width: 70%;
@@ -2062,4 +2070,263 @@ footer{
         font-size: 1.2em;
     }
 }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (width <= 1200px)
+{
+    .sousTitre {
+        font-size: .9em;
+    }
+    .btnHomePageBlur{
+        gap: 0;
+    }
+    .btn{
+        font-size: 0.9em;
+    }
+    .logoNom{
+        .logo{
+            width: 100%;
+        }
+    }
+    .logoHome{
+        width: 17%;
+    }
+    .homePageTotal{
+        .btnHomePage{
+            gap: 4em;
+        }
+    }
+    .titre{
+        font-size: 4em;
+    }
+    .nav{
+        width: 90%;
+        .langue{
+            img{
+                width: 140%;
+            }
+        }
+    }
+    .btnHomePage {
+        margin-top: 2.5em;
+    }
+    .titreHomeBtns{
+        margin-bottom: 2em;
+    }
+    .logoHome{
+        padding-bottom: 3em;
+    }
+     h2{
+            font-size: 3em;
+    }
+    .flashDef {
+        h2{
+            font-size: 3.5em;
+        }
+        .defFlash{
+            font-size: 0.8em;
+        }
+    }
+    .titreGalerieContainer{
+        h2{
+            font-size: 5em;
+        }
+    }
+    .galerie{
+        .sousTitreGalerie{
+            font-size: 4em;
+        }
+    }
+    .defWannaDo{
+        .divWannaDo{
+            h2{
+                font-size: 2.5em;
+            }
+        }
+    }
+    .footerContainer{
+        font-size: 0.8em;
+    }
+    .scrollTop{
+        font-size: 0.5em;
+        transform: translate(-2200%, -2050%);
+        top: initial;
+        left: initial;
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (width <= 700px)
+{
+    .sousTitre {
+        font-size: .5em;
+    }
+    .btnHomePageBlur{
+        gap: 0;
+    }
+    .btn{
+        font-size: 0.6em;
+    }
+    .btn1, .btn2{
+        margin-top: 0;
+    }
+    .logoNom{
+        .logo{
+            width: 100%;
+        }
+    }
+    .logoHome{
+        width: 17%;
+    }
+    .homePageTotal{
+        .btnHomePage{
+            gap: 0em;
+        }
+    }
+    .titre{
+        font-size: 2.5em;
+    }
+    .nav{
+        width: 70%;
+        .langue{
+            img{
+                width: 400%;
+            }
+        }
+    }
+    .btnHomePage {
+        margin-top: 2.5em;
+    }
+    .titreHomeBtns{
+        margin-bottom: 2em;
+    }
+    .logoHome{
+        width: 30%;
+        padding-bottom: 3em;
+    }
+     h2{
+            font-size: 3em;
+    }
+    .flashDef {
+        h2{
+            font-size: 2em;
+        }
+        .defFlash{
+            font-size: 0.8em;
+            text-align: justify;
+        }
+    }
+    .titreGalerieContainer{
+        h2{
+            font-size: 3em;
+        }
+    }
+    .galerie{
+        .sousTitreGalerie{
+            font-size: 3em;
+        }
+    }
+    .defWannaDo{
+        .divAvis{
+            h2{
+                font-size: 1.5em;
+            }
+            width: 100%;
+            border-radius: 0;
+            padding: 1em 0;
+            margin: 0;        
+        }
+        padding: 1em 0;
+        margin: 0;        
+    }
+    .footerContainer{
+        display: grid;
+        grid-template-columns: repeat(3, 10em);
+        font-size: 0.3em;
+    }
+    footer{
+        .logofooter{
+            width: 25%
+        }
+    }
+    .paragraphePresentation{
+        width: 100%;
+    }
+    .scrollTop{
+        font-size: 0.5em;
+        transform: translate(-700%, -850%);
+        top: initial;
+        left: initial;
+        height: 8em;
+
+    }
+    .nav{
+        .rec1, .rec2
+        {
+            width: 2em;
+            height: 0.3em;
+        }
+    }
+    .carousel{
+        width: 100%;
+    }
+    .horairesCarteContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .horairesContainer{
+            width: 70%;
+            font-size: 0.5em;
+            .titreHoraire{
+                font-size: 1.5em;
+            }
+            margin-bottom: 5em;
+        }
+        .carteContainer{
+            .titreSalon{
+                padding: 2em 0;
+                font-size: 1.5em;
+                margin-bottom: 2em;
+            }
+            iframe{
+                height: 20em;
+            }
+            width: 100%;
+        }
+    }
+    .localisationSalonDiv {
+        .btnContact{
+            margin-top: 3em;
+        }
+        .titreSalon{
+                padding: 2em 0;
+        }
+        padding-bottom: 2em;
+    }
+
 }

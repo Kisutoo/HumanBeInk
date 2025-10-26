@@ -85,13 +85,16 @@ window.onscroll = function() {
 
     myFunction() 
     var currentScrollPos = window.pageYOffset;
-    
-    if (currentScrollPos < 272) {
-        document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
-    } else {
-        document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
+
+    if(logoNom)
+    {
+        if (currentScrollPos < 272) {
+            document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
+        } else {
+            document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
+        }
+        prevScrollpos = currentScrollPos;
     }
-    prevScrollpos = currentScrollPos;
 
     if(currentScrollPos > 272)
         backToTopBtn.classList.remove("zeroopacity", "hidden")
