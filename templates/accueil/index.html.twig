@@ -3,18 +3,18 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <div class="homePageTotal">
+    <div id="top" class="homePageTotal">
         <div class="homePage homePageAccueil">
             <img class="logo logoHome" src="{{ asset("img/logo-HBI.webp")}}" alt="Logo de l'entreprise Human Be Ink">
             <div class="titreHomeBtns">
-                <a href="{{ path("app_flash")}}"><button class="btn btn1"><p class="goldPolice">Flashs</p></button></a>
                 <h1 class="titre goldPolice titreHome">Human Be Ink</h1>
-                <a href="{{ path("app_simulation")}}"><button class="btn btn2"><p class="goldPolice">Simulation</p></button></a>
             </div>
             <h2 class="sousTitre goldPolice sousTitreHome">Studio de tatouage privé à <strong>Yzeure</strong>. Uniquement sur RDV</h2>
             <div class="btnHomePage btnHomePageTrue">
+                <a href="{{ path("app_flash")}}"><button class="btn btn1"><p class="goldPolice">Flashs</p></button></a>
                 <a href="#galerie"><button class="btn"><p class="goldPolice">{{ "home.btn1" | trans }}</p></button></a>
                 <a href="{{ path("app_contact")}}"><button class="btn"><p class="goldPolice">{{ "home.btn2" | trans }}</p></button></a>
+                <a href="{{ path("app_simulation")}}"><button class="btn btn2"><p class="goldPolice">Simulation</p></button></a>
             </div>
             <div class="fondBlur4 fondBlur " loading="lazy">
                 <div class="fondNoise noiseHome"></div>
@@ -98,12 +98,12 @@
 
     <section class="localisationSalonDiv">
         <div class="titreSalon">
-            <h2 class="titre goldPolice">Le salon</h2>
+            <h2 class="titre goldPolice">Où me trouver</h2>
         </div>
         <div class="horairesCarteContainer">
             <div class="horairesContainer">
                 <div class="titreHoraire">
-                    <h3 class="goldPolice titre">Les horaires</h3>
+                    <h3 class="goldPolice titre">Mes horaires</h3>
                 </div>
                 <div class="jourContainer">
                     <div class="jourHeure"><p class="jour">Lundi</p><p class="heure">~ 8h - 18h</p></div>
@@ -117,7 +117,7 @@
             </div>
             <div class="carteContainer">
                 <div class="titreCarte">
-                    <h3 class="goldPolice titre">Localisation</h3>
+                    <h3 class="goldPolice titre">Le salon</h3>
                 </div>
                 <iframe title="Emplacement de l'entreprise Human Be Ink" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2742.9493336147298!2d3.352009476748708!3d46.56846725908634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f11df819d450e7%3A0x512175feecd68702!2sHuman%20be%20Ink!5e0!3m2!1sfr!2sfr!4v1761312852454!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>

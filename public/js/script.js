@@ -82,21 +82,25 @@ function myFunction() {
 }
 
 window.onscroll = function() {
-    myFunction() }
+
+    myFunction() 
+    var currentScrollPos = window.pageYOffset;
     
-if(logoNom)
-{
-    window.onscroll = function() {
-        var currentScrollPos = window.pageYOffset;
-        if (currentScrollPos < 272) {
-            document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
-        } else {
-            document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
-        }
-        prevScrollpos = currentScrollPos;
-        
+    if (currentScrollPos < 272) {
+        document.querySelector(".logoNom").classList.remove("zeroopacity", "hidden")
+    } else {
+        document.querySelector(".logoNom").classList.add("zeroopacity", "hidden")
     }
+    prevScrollpos = currentScrollPos;
+
+    if(currentScrollPos > 272)
+        backToTopBtn.classList.remove("zeroopacity", "hidden")
+    else
+        backToTopBtn.classList.add("zeroopacity", "hidden")
+
 }
+    
+
 
 
 
@@ -427,17 +431,16 @@ else
 
   if (!dlg) return;
 
-  console.log(location.pathname);
   // remplir le contenu
   detImage?.setAttribute('src', img);
   detImage?.setAttribute('alt', alt);
   buttonContact?.setAttribute('href', '/contact/' + imageName);
   if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
-console.log(i)
+
   // bouton favoris (rebind après chaque remplacement)
   if (lienFavFlash && i == 0) {
     lienFavFlash.onclick = (e) => {
-        console.log("test");
+
       e.preventDefault();
       fetch('/member/profile/addFav?id=' + id + '&ajax=1', {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
@@ -688,7 +691,6 @@ if(formCalcSimu)
     formCalcSimu.addEventListener("submit", (e) => {
         e.preventDefault()
 
-        console.log(url.pathname);
         
         const FormSimu = new FormData(formCalcSimu)
         

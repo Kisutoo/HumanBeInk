@@ -434,10 +434,13 @@ input[type="text"], input[type="password"], input[type="email"]{
         background-image: url(../img/fondHome.webp);
     }
     .btnHomePage{
-        width: 100%;
+        width: 70%;
         display: flex;
         justify-content: center;
-        gap: 20em;
+        gap: 10em;
+        .btn1, .btn2{
+            margin-top: -3em;
+        }
     }
 }
 
@@ -1564,21 +1567,6 @@ footer{
     gap: 10em;
     z-index: 3;
     margin-bottom: 4em;
-    .btn{
-        margin-top: -4em;
-    }
-    .btn1{
-        rotate: -20deg;
-    }
-    .btn1:hover{
-        rotate: -18deg;
-    }
-    .btn2{
-        rotate: 20deg;
-    }
-    .btn2:hover{
-        rotate: 22deg;
-    }
 }
 .galerie{
     background: linear-gradient(180deg,rgba(1, 1, 1, 1) 1%, rgba(16, 16, 16, 1) 50%, rgba(8, 8, 8, 1) 100%);
@@ -1876,6 +1864,9 @@ footer{
     height: 5em;
     background-color: rgba(0, 0, 0, 0.696);
     backdrop-filter: blur(10px);
+}
+.backToTop{
+    transition: all 1s ease-in-out;
 }
 
 
