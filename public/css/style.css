@@ -70,8 +70,9 @@ body{
 }
 
 .btnHomePageBlur{
+    position: absolute;
     width: 100%;
-    height: 30em;
+    height: 100%;
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
@@ -994,6 +995,7 @@ input::file-selector-button:hover{
 }
 .croixPopupFlash2{
     position: absolute;
+    right: 2.5em;
     top: 2.5em;
     z-index: 8;
     padding-top: 2em;
@@ -1865,7 +1867,8 @@ footer{
 }
 .scrollTop{
     position: absolute;
-    transform: translate(-950%, -950%);
+    left: 91%;
+    top: 85vh;
     rotate: 180deg;
     border: 2px solid rgba(255, 231, 145, 1);
     width: 5em;
@@ -1876,6 +1879,7 @@ footer{
 .backToTop{
     transition: all 1s ease-in-out;
 }
+
 
 
 
@@ -2054,23 +2058,43 @@ footer{
 
     .allProfil{
 
-    h2{
-        margin-top: -2em;
+        h2{
+            margin-top: -2em;
+        }
     }
-}
-.login{
+    .login{
 
-    .btn{
-        height: 3.5em;
-        width: 10em;
-        font-size: 1.5em;
+        .btn{
+            height: 3.5em;
+            width: 10em;
+            font-size: 1.5em;
+        }
+        .lienslogin{
+            padding-top: 2em;
+            font-size: 1.2em;
+        }
     }
-    .lienslogin{
-        padding-top: 2em;
-        font-size: 1.2em;
-    }
+
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2093,6 +2117,7 @@ footer{
     .btn{
         font-size: 0.9em;
     }
+
     .logoNom{
         .logo{
             width: 100%;
@@ -2136,6 +2161,11 @@ footer{
         .defFlash{
             font-size: 0.8em;
         }
+            .paragrapheFlash{
+        h2{
+            font-size: 3em;
+        }
+    }
     }
     .titreGalerieContainer{
         h2{
@@ -2148,21 +2178,120 @@ footer{
         }
     }
     .defWannaDo{
-        .divWannaDo{
+        .divAvis{
             h2{
                 font-size: 2.5em;
             }
+            width: 100%;
+            border-radius: 0;
+            padding: 1em 0;
+            margin: 0;        
         }
+        padding: 1em 0;
+        margin: 0;        
     }
     .footerContainer{
         font-size: 0.8em;
     }
     .scrollTop{
         font-size: 0.5em;
-        transform: translate(-2200%, -2050%);
         top: initial;
         left: initial;
 
+    }
+        footer{
+        .logofooter{
+            width: 50%
+        }
+        .liensFooter{
+            display: grid;
+            flex-direction: column-reverse;
+            grid-template-columns: repeat(3, 15em);
+            justify-content: center;
+            align-items: center;
+            place-items: center;
+            text-align: center;
+            font-size: 1em;
+            a, p{
+                margin-bottom: 1em;
+            }
+        }
+    }
+    .flash{
+        width: 50%;
+    }
+    .flashContainer{
+        grid-template-columns: repeat(4, 10em);
+        min-height: 0;
+        gap: 1em;
+    }
+    #flash-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+
+    }
+    .flashContainerTotal {
+        .flashContainer{
+            margin: 0;
+            margin-bottom: 3em;
+            width: fit-content;
+        }
+    }
+    .pagination{
+        margin-left: 25em;
+        margin-top: -1em;
+        span{
+            padding: 0.6em;
+            a, p{
+                font-size: 1.5em;
+            }
+        }
+    }
+    .popupDetailFlash{
+        gap: 0;
+    }
+    .notLogged {
+        width: 40em;
+    }
+    .divDetImage {
+        img{
+            margin-left: 2.5em;
+            width: 60%;
+        }
+    }
+    .flashDef{
+        .illustrationFlash{
+            img{
+                width: 100%;
+            }
+        }
+    }
+    .nav{
+        width: 87%;
+    }
+    .logoNom{
+        a{
+            width: 35%;
+        }
+        .titre {
+            font-size: 2.5em;
+        }
+    }
+    .categoryFilters{
+        width: fit-content;
+        grid-template-columns: repeat(3, 12em);
+        .btnFilter {
+            font-size: 1.5em;
+        }
+    }
+    .popupFilters{
+        width: 0em;
+    }
+    .scrollTop{
+        left: 90%;
+        top: 89vh;
     }
 }
 
@@ -2170,7 +2299,41 @@ footer{
 
 
 
+@media screen and (width <= 1560px)
+{
+    .flash{
+        img{
+            width: 80%;
+        }
+    }
+    .pagination{
+        margin-top: 0em;
+        margin-left: 30em;
+        span{
+            padding: 0.6em;
+            a, p{
+                font-size: 2em;
+            }
+        }
+    }
+    #flash-container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
 
+    }
+    .flashContainerTotal {
+        .flashContainer{
+            margin: 0;
+            margin-bottom: 3em;
+            width: fit-content;
+            grid-template-columns: repeat(4, 10em);
+            width: fit-content;
+            min-height: 0;
+        }
+    }
+}
 
 
 
@@ -2191,12 +2354,12 @@ footer{
     .btn{
         font-size: 0.6em;
     }
-    .btn1, .btn2{
-        margin-top: 0;
-    }
     .logoNom{
-        .logo{
-            width: 100%;
+        a{
+            width: 25%;
+        }
+        .titre {
+            font-size: 1.5em;
         }
     }
     .logoHome{
@@ -2204,17 +2367,32 @@ footer{
     }
     .homePageTotal{
         .btnHomePage{
-            gap: 0em;
+            gap: 1em;
+            margin-left: 1.1em;
+            .btn1, .btn2{
+                margin-top: 7em;
+                gap: 0;
+            }
+            .btn1{
+                margin-right: -10em;
+            }
+            .btn2{
+                margin-left: -10em;
+            }
         }
+    }
+    .scroll-down{
+        left: 47%;
     }
     .titre{
         font-size: 2.5em;
     }
     .nav{
-        width: 70%;
+        width: 80%;
         .langue{
+            width: 10%;
             img{
-                width: 400%;
+                width: 100%;
             }
         }
     }
@@ -2222,7 +2400,7 @@ footer{
         margin-top: 2.5em;
     }
     .titreHomeBtns{
-        margin-bottom: 2em;
+        margin-bottom: 0.5em;
     }
     .logoHome{
         width: 30%;
@@ -2232,12 +2410,25 @@ footer{
             font-size: 3em;
     }
     .flashDef {
+        padding: 0em;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .paragrapheFlash{
+            margin-top: 2em;
+            width: 80%;
+        }
         h2{
             font-size: 2em;
         }
         .defFlash{
             font-size: 0.8em;
             text-align: justify;
+        }
+        .illustrationFlash {
+            img{
+                width: 100%;
+            }
         }
     }
     .titreGalerieContainer{
@@ -2261,16 +2452,25 @@ footer{
             margin: 0;        
         }
         padding: 1em 0;
-        margin: 0;        
+        margin: 0;
     }
-    .footerContainer{
-        display: grid;
-        grid-template-columns: repeat(3, 10em);
-        font-size: 0.3em;
-    }
+
     footer{
         .logofooter{
             width: 25%
+        }
+        .liensFooter{
+            display: grid;
+            flex-direction: column-reverse;
+            grid-template-columns: repeat(3, 15em);
+            justify-content: center;
+            align-items: center;
+            place-items: center;
+            text-align: center;
+            font-size: 0.5em;
+            a, p{
+                margin-bottom: 1em;
+            }
         }
     }
     .paragraphePresentation{
@@ -2278,17 +2478,19 @@ footer{
     }
     .scrollTop{
         font-size: 0.5em;
-        transform: translate(-700%, -850%);
-        top: initial;
-        left: initial;
+        left: 85%;
+        top: 85vh;
         height: 8em;
-
     }
     .nav{
         .rec1, .rec2
         {
             width: 2em;
-            height: 0.3em;
+            height: 0.4em;
+            
+        }
+        .burger{
+            gap: 0.5em;
         }
     }
     .carousel{
@@ -2328,5 +2530,191 @@ footer{
         }
         padding-bottom: 2em;
     }
+    .presentationContainer{
+        padding: 2em;
+    }
+    .carousel1{
+        margin-bottom: 5em;
+    }
+    .titreSimu{
+        font-size: 2.5em !important;
+    }
+    .btnFiltresContainer{
+        width: 100%;
+        margin-right: 4em;
+    }
+    .flashContainerTotal{
+        h2{
+            text-align: center;
+            font-size: 2.2em;
+        }
+    }
+    .defWannaDo {
+        .divWannaDo{
+            padding: 0;
+            width: 100%;
+            p{
+                padding: 0 2em;
+                font-size: 0.7em;
+                text-align: justify;
+                padding-bottom: 2em;
+            }
+            h2{
+                margin-top: 1em;
+                font-size: 1.5em;
+            }
+        }
+    }
+    .pagination{
+        
+        margin-left: 11em;
+        span{
+            padding: 0.6em;
+            a, p{
+                font-size: 1em;
+            }
+        }
+    }
+    .divDetImage {
+        img{
+            margin-left: 9.5em;
+            width: 40%;
+        }
+    }
+    #progress-bar{
+        height: 5px;
+    }
+    .flash{
+        width: 100%;
+    }
+    .flashContainer{
+        grid-template-columns: repeat(2, 5em) !important;
+        min-height: 0;
+        gap: 3em;
+    }
+    #flash-container{
+        margin: 0 2em;
+    }
+    .popupDetailFlash {
+        .buttons{
+            font-size: 2em;
+        }
+    }
+    .simuContainer {
+        form{
+            font-size: 0.9em;
+            select{
+                width: 18em;
+                font-size: .7em;
+            }
+        }
+        .labelInfo{
+            .changeNumber{
+                font-size: 0.9em;
+            }
+        }
+        .flashContainerTotal {
+            .flashContainer{
+                margin: 0;
+                margin-bottom: 3em;
+                width: fit-content;
+            }
+        }
+        .simuFormSection {
+            label{
+                font-size: 0.9em;
+            }
+            input[type="range"]{
+                width: 13em;
+            }
+        }
+        .divBtnCalculerSimu{
+            margin: 1em;
 
+        }
+    }
+    .popup {
+        font-size: 0.4em;
+    }
+    .SaveSimuDialogContainer {
+       .popupSaveSimu {
+            .flashFormSection{
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 1em;
+            }
+            .divfiles {
+                display: flex;
+                text-align: center;
+                gap: 3em;
+                flex-direction: column;
+                align-items: center;
+                .previewImageDiv {
+                    margin-top: 2em;
+                    img{
+                        
+                        width: 40%;
+                    }
+                }
+            }
+       } 
+    }
+    .flashForm {
+        .divBtnAddFlashForm{
+            margin-top: 10em;
+        }
+        input{
+            font-size: 1em;
+        }
+    }
+    .resultPrice{
+        font-size: 0.8em;
+        padding: 1em 2em;
+    }
+    .prix{
+        margin-top: 0;
+        font-size: 1.5em;
+    }
+    .flashContainer{
+        min-height: 10em;
+    }
+    .showFinalPrice {
+        p{
+            margin-top: 0;
+        }
+    }
+    .resultContainer {
+        margin-top: 2em;
+    }
+    .homePage2{
+        height: 10em;
+        .btnHomePageBlur{
+            height: 100%;
+            .sousTitre{
+                font-size: 1em;
+            }
+            .btnHome{
+                margin-top: 5em;
+            }
+        }
+    }
+    .menu-burger {
+        li, ul, a{
+            font-size: 0.8em;
+        }
+    }
+    .selectLangue {
+        p{
+            font-size: 0.8em;
+        }
+    }
+    .categoryFilters{
+        grid-template-columns: repeat(3, 15em);
+        .btnFilter {
+            font-size: 2em;
+        }
+    }
+    .submitFilterBtn{
+        font-size: 1.5em;
+    }
 }
