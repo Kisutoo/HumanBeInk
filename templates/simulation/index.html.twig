@@ -36,7 +36,7 @@
         </div>
 
     {% endif %}
-    {% if app.user is not null and "ROLE_MEMBER" in app.user.roles %}
+    {% if app.user is not null and "ROLE_USER" in app.user.roles %}
     <div class="SaveSimuDialogContainer">
         {% include "simulation/_dialogSaveSimu.html.twig" %}
     </div>

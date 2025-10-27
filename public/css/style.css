@@ -313,6 +313,7 @@ input[type="text"], input[type="password"], input[type="email"]{
 .registerDiv{
     background-image: url(../img/fondtest1.webp);
     background-size: 100%;
+    background-repeat: no-repeat;
 }
 .btnGoogleLogin
 {
@@ -335,7 +336,7 @@ input[type="text"], input[type="password"], input[type="email"]{
         display: flex;
         flex-direction: column;
         align-items: center;
-        .flashContainer{
+        .flashContainer {
             border: 2px solid rgb(255, 231, 145);
             z-index: 3;
             backdrop-filter: blur(20px);
@@ -2281,19 +2282,217 @@ footer{
     }
     .categoryFilters{
         width: fit-content;
-        grid-template-columns: repeat(3, 12em);
+        grid-template-columns: repeat(3, 8em);
         .btnFilter {
-            font-size: 1.5em;
+            font-size: 1.1em;
         }
     }
     .popupFilters{
-        width: 0em;
+        width: fit-content;
+        .croix{
+            margin-left: 0;
+            margin-bottom: 2em;
+        }
     }
     .scrollTop{
         left: 90%;
         top: 89vh;
     }
+    .formContactTotal {
+        h2{
+            font-size: 4em;
+        }
+    }
+    .formContact {
+        div{
+            label{
+                font-size: 1em;
+            }
+            input:not(.files){
+                width: 12em;
+                height: 1.5em;
+            }
+            .textarea{
+                width: 28em;
+                height: 6.5em;
+            }
+            .files{
+                font-size: 0.6em;
+                
+            }
+            .previewImage{
+                    width: 40%;
+                }
+        }
+    }
+    .login{
+        .bloc1{
+            img{
+                width: 35%;
+            }
+            h2{
+                font-size: 2em;
+            }
+            h1{
+                font-size: 3.5em;
+            }
+        }
+        .bloc2{
+            label{
+                font-size: 1.2em;
+            }
+        }
+        .btn{
+            font-size: .9em;
+        }
+    }
+    .input[type="text"], input[type="password"], input[type="email"]{
+        width: 15em;
+        height: 1.3em;
+    }
+    #registration_form_email, #registration_form_pseudonyme{
+        width: 15em;
+        height: 1.3em;
+    }
+    .registerDiv {
+        background-size: cover;
+        .bloc2{
+            div:nth-child(5){
+                label{
+                    font-size: 0.7em;
+                }
+            }
+            div:nth-child(3){
+                margin-top: 1em;
+            }
+        }
+    }
+    .popupAddFlash {
+        width: fit-content;
+        .croix{margin-top: 1em;
+            margin-left: 0;
+        }
+        #flash_image{
+            font-size: 0.6em;
+        }
+
+    }
+    .flashForm{
+        .flashFormSection{
+            flex-direction: column;
+            margin-bottom: 1em;
+            gap: 0;
+            label{
+                font-size: 1.3em;
+            }
+            div{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            justify-content: center;
+        }
+        width: fit-content;
+    }
+    .popup{
+        width: fit-content;
+        h3{
+            font-size: 1.2em;
+        }
+    }
+        .profil{
+        flex-direction: column;
+        .likedFlash{
+            width: fit-content;
+            margin-bottom: 2em;
+            padding: 2em;
+            grid-template-columns: repeat(4, 8em);
+        }
+        .likeContainer {
+            margin-top: 4em;
+            h3{
+                font-size: 2.5em;
+            }
+        }
+        .likecontainerContainer{
+            justify-content: center;
+            transform:translate(0, 0);
+        }
+        .bloc2{
+            display: unset;
+            margin-top: 20em;
+            label{
+                font-size: 1.3em;
+            }
+        }
+        #likedFlashContainer{
+            padding: 0;
+            .flashContainer{
+                margin-bottom: 2em;
+            }
+        }
+        .btnFiltresContainer{
+            margin-top: 2em;
+        }
+        
+        .profileForm{
+            .editDiv{
+                margin-left: 5.5em;
+                 .btnEdit {
+                    margin-top: 0;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+    .simulationContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .allProfil{
+        height: fit-content;
+    }
+    .cardSimulation {
+        margin: 1em;
+        padding: 1em;
+        .titleCard{
+            font-size: 3em;
+        }
+        .divDetImage {
+            width: fit-content;
+            padding: 1em;
+            img{
+                width: 90%;
+                margin-left: 0;
+            }
+        }
+        p{
+            font-size: 1.5em;
+        }
+        .btnSuprSimu{
+            font-size: .8em;
+        }
+    }
+    .lienAncrage{
+            font-size: 1em;
+            right: 5em;
+        }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2332,6 +2531,58 @@ footer{
             width: fit-content;
             min-height: 0;
         }
+    }
+            .profil{
+        flex-direction: column;
+        .likedFlash{
+            width: fit-content;
+            margin-bottom: 2em;
+            padding: 2em;
+            grid-template-columns: repeat(4, 8em);
+        }
+        .likeContainer {
+            margin-top: 4em;
+            h3{
+                font-size: 2.5em;
+            }
+        }
+        .likecontainerContainer{
+            justify-content: center;
+            transform:translate(0, 0);
+        }
+        .bloc2{
+            display: unset;
+            margin-top: 20em;
+            label{
+                font-size: 1.3em;
+            }
+        }
+        #likedFlashContainer{
+            padding: 0;
+            .flashContainer{
+                margin-bottom: 2em;
+            }
+        }
+        .btnFiltresContainer{
+            margin-top: 2em;
+        }
+        
+        .profileForm{
+            .editDiv{
+                margin-left: 5.5em;
+                 .btnEdit {
+                    margin-top: 0;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+    .simulationContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .allProfil{
+        height: fit-content;
     }
 }
 
@@ -2576,6 +2827,8 @@ footer{
         }
     }
     .divDetImage {
+        height: fit-content;
+        padding: 2em;
         img{
             margin-left: 9.5em;
             width: 40%;
@@ -2587,7 +2840,7 @@ footer{
     .flash{
         width: 100%;
     }
-    .flashContainer{
+    .flashContainer, .likedFlash{
         grid-template-columns: repeat(2, 5em) !important;
         min-height: 0;
         gap: 3em;
@@ -2675,7 +2928,7 @@ footer{
         margin-top: 0;
         font-size: 1.5em;
     }
-    .flashContainer{
+    .flashContainer, .likedFlash{
         min-height: 10em;
     }
     .showFinalPrice {
@@ -2717,4 +2970,168 @@ footer{
     .submitFilterBtn{
         font-size: 1.5em;
     }
+    .formContactTotal {
+        h2{
+            font-size: 3em;
+        }
+    }
+    .formContact {
+        div{
+            label{
+                font-size: 1em;
+                text-align: center;
+            }
+            input:not(.files){
+                width: 15em;
+                height: 1em;
+                margin-bottom: 3em;
+            }
+            .textarea{
+                width: 15em;
+                height: 5em;
+            }
+            .files{
+                font-size: 0.6em;
+            }
+        }
+        .contact1{
+            flex-direction: column;
+            gap: 0;
+        }
+        .previewImage{
+                width: 50%;
+        }
+    }
+    .login{
+        .bloc1{
+            width: 100%;
+            margin-top: 2em;
+            padding-bottom: 3em;
+            img{
+                width: 30%;
+            }
+            h2{
+                font-size: 1em;
+            }
+            h1{
+                font-size: 2.5em;
+            }
+            .logo{
+                margin-bottom: 1em;
+            }
+        }
+        .bloc2{
+            label{
+                font-size: .9em;
+            }
+            .lienslogin{
+                font-size: .7em;
+            }
+        }
+        .btn{
+            font-size: .6em;
+        }
+        flex-direction: column;
+    }
+    .input[type="text"], input[type="password"], input[type="email"]{
+        width: 10em;
+        height: .8em;
+    }
+    #registration_form_email, #registration_form_pseudonyme, #nickname_pseudonyme, #nickname_email{
+        width: 10em;
+        height: .8em;
+    }
+    .registerDiv {
+        min-height: fit-content;
+        height: 100vh;
+        padding-bottom: 2em;
+        background-repeat:repeat;
+        .bloc2{
+            div:nth-child(5){
+                label{
+                    font-size: 0.7em;
+                }
+            }
+            div:nth-child(3){
+                margin-top: 1em;
+            }
+        }
+    }
+    .profil{
+        flex-direction: column;
+        .likedFlash{
+            width: fit-content;
+            margin-bottom: 2em;
+            gap: 2em;
+            padding: 2em;
+        }
+        .likeContainer {
+            margin-top: 4em;
+            h3{
+                font-size: 1.3em;
+            }
+        }
+        .likecontainerContainer{
+            justify-content: center;
+            transform:translate(0, 0);
+        }
+        .bloc2{
+            display: unset;
+            margin-top: 20em;
+            label{
+                font-size: .9em;
+            }
+        }
+        #likedFlashContainer{
+            padding: 0;
+            .flashContainer{
+                margin-bottom: 2em;
+            }
+        }
+        .btnFiltresContainer{
+            margin-top: 2em;
+        }
+        
+        .profileForm{
+            .editDiv{
+                margin-left: 5.5em;
+                 .btnEdit {
+                    margin-top: 0;
+                    font-size: 0.8em;
+                }
+            }
+        }
+    }
+    .simulationContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .allProfil{
+        height: fit-content;
+    }
+    .cardSimulation {
+        margin: 1em;
+        padding: 1em;
+        .titleCard{
+            font-size: 2em;
+        }
+        .divDetImage {
+            width: fit-content;
+            padding: 1em;
+            img{
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+        p{
+            font-size: 1em;
+        }
+        .btnSuprSimu{
+            font-size: 1.5em;
+        }
+    }
+    .lienAncrage{
+            font-size: .6em;
+            right: 0;
+        }
 }
