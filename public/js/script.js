@@ -115,7 +115,7 @@ window.onscroll = function() {
 if(pseudoProfilInput && newPseudo && editBtn)
 {
     let pseudoProfil = pseudoProfilInput.value || null
-    newPseudo.addEventListener("drag", () => {
+    newPseudo.addEventListener("change", () => {
         
         if(newPseudo.value == pseudoProfil)
         {
