@@ -2425,7 +2425,7 @@ footer{
                 font-size: 1.3em;
             }
         }
-        #likedFlashContainer{
+        .likedFlashContainer{
             padding: 0;
             .flashContainer{
                 margin-bottom: 2em;
@@ -2557,7 +2557,7 @@ footer{
                 font-size: 1.3em;
             }
         }
-        #likedFlashContainer{
+        .likedFlashContainer{
             padding: 0;
             .flashContainer{
                 margin-bottom: 2em;
@@ -3082,7 +3082,7 @@ footer{
                 font-size: .9em;
             }
         }
-        #likedFlashContainer{
+        .likedFlashContainer{
             padding: 0;
             .flashContainer{
                 margin-bottom: 2em;
