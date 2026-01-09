@@ -80,7 +80,7 @@
         </div>
 
         <div id="flash-container">
-            {% include "flash/_flashContainer.html.twig" with { flashs: flashs, maxPages: maxPages } %}
+            {% include "flash/_flashContainer.html.twig" with { flashs: flashs, maxPagesFlashs: maxPagesFlashs } %}
         </div>
     </div>
 
@@ -94,6 +94,35 @@
             <div class="fondNoise"></div>
         </div>
     </article>
+
+    <div class="flashContainerTotal">
+
+        <h2 class="goldPolice titreFlash">WannaDo Disponibles</h2>
+
+        <div class="btnFiltresContainer" >
+            <div class="btn btnShowFilters btnShowFiltersWannaDo">
+                <p class="goldPolice">{{ "flash.btnFiltre" | trans }}</p>
+                <div class="filterIcon">
+                    <div class="filterBarTop">
+                        <div class="rectangle rectangleFilter1"></div>
+                        <div class="carre"></div>
+                    </div>
+                    <div class="filterBarTop">
+                        <div class="rectangle rectangleFilter1"></div>
+                        <div class="carre carre2"></div>
+                    </div>
+                    <div class="filterBarTop">
+                        <div class="rectangle rectangleFilter1"></div>
+                        <div class="carre"></div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div id="flash-container">
+            {% include "flash/_wannaDoContainer.html.twig" with { wannaDos: wannaDos, maxPagesWannaDos: maxPagesWannaDos } %}
+        </div>
+    </div>
 
     
 

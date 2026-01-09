@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Config\TattooType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -32,6 +34,14 @@ class FlashType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'label' => 'Catégorie'
+            ])
+            ->add('tattooType', EnumType::class, [
+                'class' => TattooType::class,
+                'choices' => [
+                    TattooType::Flash,
+                    TattooType::WannaDo,
+                ],
+                'label' => 'Type'
             ])
         ;
     }

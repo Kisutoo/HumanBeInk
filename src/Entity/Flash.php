@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Config\TattooType;
 use App\Repository\FlashRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,6 +37,9 @@ class Flash
      */
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'flashs')]
     private Collection $users;
+
+    #[ORM\Column(enumType: TattooType::class)]
+    private ?TattooType $TattooType = null;
 
     public function __construct()
     {
@@ -130,6 +134,18 @@ class Flash
         if ($this->users->removeElement($user)) {
             $user->removeFlash($this);
         }
+
+        return $this;
+    }
+
+    public function getTattooType(): ?TattooType
+    {
+        return $this->TattooType;
+    }
+
+    public function setTattooType(TattooType $TattooType): static
+    {
+        $this->TattooType = $TattooType;
 
         return $this;
     }

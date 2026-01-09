@@ -23,7 +23,24 @@ class FlashRepository extends ServiceEntityRepository
     public function paginateFlashs(int $page): PaginationInterface
     {
         return $this->paginator->paginate(
-            $this->createQueryBuilder("r"),
+            $this->createQueryBuilder("r")
+            ->where("r.TattooType = :type")
+            ->setParameter("type", "Flash"),
+            $page,
+            8,
+            [
+                "sort_field_name" => "category_id",
+                "sort_direction_name" => "ASC"
+            ]
+        );
+    }
+
+    public function paginateWannaDos(int $page): PaginationInterface
+    {
+        return $this->paginator->paginate(
+            $this->createQueryBuilder("r")
+            ->where("r.TattooType = :type")
+            ->setParameter("type", "WannaDo"),
             $page,
             8,
             [

@@ -40,9 +40,12 @@ final class FlashController extends AbstractController
         $page = $request->query->getInt("page", 1);
         $flashs = $flashRepository->paginateFlashs($page);
         $categories = $categoryRepository->findAll([], []);
-        $maxPages = ceil($flashs->getTotalItemCount() / 8);
+        $maxPagesFlashs = ceil($flashs->getTotalItemCount() / 8);
         
-        if($request->get("ajax"))
+        $wannaDos = $flashRepository->paginateWannaDos($page);
+        $maxPagesWannaDos = ceil($wannaDos->getTotalItemCount() / 8);
+
+        if($request->get("ajaxFlash"))
         {
             $idCategories = $request->get("categories");
 
@@ -53,7 +56,7 @@ final class FlashController extends AbstractController
 
                 return $this->render("flash/_flashContainer.html.twig", [
                 "flashs" => $filtredFlashs,
-                "maxPages" => $maxPages,
+                "maxPagesFlashs" => $maxPagesFlashs,
                 "categories" => $categories,
                 ]);
             }
@@ -61,7 +64,7 @@ final class FlashController extends AbstractController
             {
                 return $this->render('flash/_flashContainer.html.twig', [
                     "flashs" => $flashs,
-                    "maxPages" => $maxPages,
+                    "maxPagesFlashs" => $maxPagesFlashs,
                     "categories" => $categories,
                 ]);
             }
@@ -76,6 +79,7 @@ final class FlashController extends AbstractController
             $flash = $flash->setTaille($form->get('size')->getData());
             $flash = $flash->setCouleur($form->get('color')->getData());
             $flash = $flash->setCategory($form->get('category')->getData());
+            $flash = $flash->setTattooType($form->get('tattooType')->getData());
             
             if(isset($_FILES['flash']))
             // Si le tableau _FILES['affiche'] existe
@@ -101,13 +105,15 @@ final class FlashController extends AbstractController
 
 
         return $this->render('flash/index.html.twig', [
-            'flash_form' => $form,
+            "flash_form" => $form,
             "likedFlashs" => $likedFlashs,
-            'flashs' => $flashs,
-            'maxPages' => $maxPages,
-            'categories' => $categories,
+            "flashs" => $flashs,
+            "maxPagesFlashs" => $maxPagesFlashs,
+            "maxPagesWannaDos" => $maxPagesWannaDos,
+            "categories" => $categories,
             "logoNom" => 1,
             "footer" => 1,
+            "wannaDos" => $wannaDos
         ]);
     }
 

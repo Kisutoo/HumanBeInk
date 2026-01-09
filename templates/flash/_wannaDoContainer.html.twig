@@ -1,0 +1,8 @@
+<div class="flashContainer wannaDoContainer" data-maxpages={{ maxPagesWannaDos }}>
+    {% for wannaDo in wannaDos %}
+            <img class="pointer flash" index="{{ wannaDo.id }}" src="{{ asset( 'img/flashs/' ~ wannaDo.image) }}" loading="lazy" alt="Tatouage de {{ wannaDo.nom }}" tabindex="8">
+    {% endfor %}
+    
+</div>
+
+{{ knp_pagination_render(wannaDos) }}

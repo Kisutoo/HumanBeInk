@@ -1,4 +1,4 @@
-<div class="flashContainer" data-maxpages={{ maxPages }}>
+<div class="flashContainer" data-maxpages={{ maxPagesFlashs }}>
     {% for flash in flashs %}
             <img class="pointer flash" index="{{ flash.id }}" src="{{ asset( 'img/flashs/' ~ flash.image) }}" loading="lazy" alt="Tatouage de {{ flash.nom }}" tabindex="8">
     {% endfor %}

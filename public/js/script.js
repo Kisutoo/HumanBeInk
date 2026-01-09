@@ -22,7 +22,9 @@ let current = document.querySelector(".current") || null
 let pagination = document.querySelector(".pagination") || null
 let nomFlash = document.querySelector(".nomFlash") || null
 let flashContainer = document.querySelector(".flashContainer") || null
-let maxPagePagination = flashContainer ? flashContainer.getAttribute("data-maxpages") : null
+let wannaDoContainer = document.querySelector(".wannaDoContainer") || null
+let maxPagePaginationFlash = flashContainer ? flashContainer.getAttribute("data-maxpages") : null
+let maxPagePaginationWannaDo = wannaDoContainer ? wannaDoContainer.getAttribute("data-maxpages") : null
 const categories = document.getElementsByClassName('btnFilter')
 let btnShowFilters = document.querySelector(".btnShowFilters") || null
 let popupFilters = document.querySelector(".popupFilters") || null
@@ -253,6 +255,17 @@ closeLangue.addEventListener("click", () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 function openClosePopup(dialog, btnAdd, btnClose)
 {
     if (!btnAdd) return;
@@ -283,10 +296,18 @@ function openClosePopup(dialog, btnAdd, btnClose)
         }
     });
 }
-
-
 if(popupAddFlash && btnAddflash)
     openClosePopup(popupAddFlash, btnAddflash, closePopupFlash)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -344,8 +365,18 @@ function openClosePopupFilter(params)
         })
     }
 }
-if(maxPagePagination > 1)    
+if(maxPagePaginationFlash > 1)    
     openClosePopupFilter(params)
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -366,6 +397,14 @@ function getDialogEls() {
 
 
 
+
+
+
+
+
+
+
+
 function openDialogSafe(dlg) {
   if (!dlg) return;
   // si jamais il est détaché, on le rattache
@@ -374,6 +413,15 @@ function openDialogSafe(dlg) {
   dlg.showModal();
   body.classList.add('disableScroll');
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -391,6 +439,19 @@ function closeDialogSafe(dlg, { nomFlash, detImage, buttonContact, buttonDeleteF
   buttonContact?.setAttribute('href', '');
   buttonDeleteFlash?.setAttribute('href', '');
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -442,7 +503,7 @@ else
     .then(window.location.href = urlContact)
     .catch(console.error);
   }
-  
+
   if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
 
   // bouton favoris (rebind après chaque remplacement)
@@ -536,6 +597,14 @@ else
 
 
 
+
+
+
+
+
+
+
+
 function clickFlash() {
   for (let flash of flashs) {
       flash.addEventListener('click', () => {
@@ -551,6 +620,11 @@ function clickFlash() {
 }
 if(flashs)
     clickFlash()
+
+
+
+
+
 
 
 
@@ -591,6 +665,10 @@ if(imgInp != null && contactImage)
 
 
 
+
+
+
+
 function changeCurrentSpanToP(maxPagePagination)
 {
     if(maxPagePagination == "1" || maxPagePagination == "0") return;
@@ -605,23 +683,36 @@ function changeCurrentSpanToP(maxPagePagination)
     else if(nbCurrent == maxPagePagination)
         current.classList.add("last")
 }
-if(maxPagePagination)
-    changeCurrentSpanToP(maxPagePagination)
+if(maxPagePaginationFlash)
+    changeCurrentSpanToP(maxPagePaginationFlash)
+if(maxPagePaginationWannaDo)
+    changeCurrentSpanToP(maxPagePaginationWannaDo)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 function attachPaginationEvents(maxPagePagination, params) {
     // récupère la pagination actuelle
-
     if(parseInt(maxPagePagination) <= 1) return;
-
+    
     let pagination = document.querySelector(".pagination");
+
     let nbPagination = parseInt(document.querySelector(".current").innerText)
 
     let submitFilter = document.querySelector(".submitFilterBtn")
     
     submitFilter.onclick = () => {
-        fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajax=1", {
+        fetch(url.pathname + "?" + params.toString() + "&page=1"  + "&ajaxFlash=1", {
             headers: {
                 "X-Requested-With": "XMLHttpRequest"
             }
@@ -631,8 +722,11 @@ function attachPaginationEvents(maxPagePagination, params) {
             document.querySelector("#flash-container").innerHTML = html
             let flashContainer = document.querySelector(".flashContainer");
             let newMaxPagePagination = flashContainer.getAttribute("data-maxpages")
-            attachPaginationEvents(newMaxPagePagination, params);
-            changeCurrentSpanToP(newMaxPagePagination)
+            if(document.querySelector(".current"))
+            {
+                attachPaginationEvents(newMaxPagePagination, params);
+                changeCurrentSpanToP(newMaxPagePagination)
+            }
             clickFlash();
         })
         .catch(e => console.error(e))
@@ -660,7 +754,7 @@ function attachPaginationEvents(maxPagePagination, params) {
             nbPagination = page;
 
         
-            fetch(url.pathname + "?" + params.toString() + "&page=" + nbPagination + "&ajax=1", {
+            fetch(url.pathname + "?" + params.toString() + "&page=" + nbPagination + "&ajaxFlash=1", {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
@@ -670,19 +764,17 @@ function attachPaginationEvents(maxPagePagination, params) {
                 document.querySelector("#flash-container").innerHTML = html;
 
                 // relance les events sur la nouvelle pagination
-
-
-                attachPaginationEvents(maxPagePagination, params);
+                attachPaginationEvents(maxPagePaginationFlash, params);
                 clickFlash();
-                changeCurrentSpanToP(maxPagePagination);
+                changeCurrentSpanToP(maxPagePaginationFlash);
                 return;
             })
             .catch(e => console.error(e));
         };
     }
 }
-if(flashContainer && maxPagePagination)
-    attachPaginationEvents(maxPagePagination, params)    
+if(flashContainer && maxPagePaginationFlash)
+    attachPaginationEvents(maxPagePaginationFlash, params)    
 
 
 if(addDialogsArea)
