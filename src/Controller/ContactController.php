@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Mailer\Transport\TransportInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,6 +33,9 @@ final class ContactController extends AbstractController
     Recaptcha3Validator $recaptcha3Validator
     ): Response
     {
+        $session = new Session();
+        $image = $session->get("contactImage");
+
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         
@@ -109,5 +113,12 @@ final class ContactController extends AbstractController
             "logoNom" => 1,
             "footer" => 1,
         ]);
+    }
+
+    #[Route('/contact/imageToSession/{image}', name: 'image_to_session')]
+    public function imageToSession(string $image){
+
+        $session = new Session();
+        $session->set("contactImage", $image);
     }
 }

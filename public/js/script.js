@@ -54,6 +54,7 @@ let lienbtnRating = document.querySelector(".cNeQYs") || null
 let nbReview = document.querySelector("h1") || null
 let noteFinaleAvis = document.querySelector(".hNJvGa") || null
 let backToTopBtn = document.querySelector(".backToTop")
+let urlContact = "/contact/";
 
 
 if(numberRangeSimu)
@@ -432,6 +433,16 @@ else
   detImage?.setAttribute('src', img);
   detImage?.setAttribute('alt', alt);
   buttonContact?.setAttribute('href', '/contact/' + imageName);
+  buttonContact.onclick = (e) => {
+    
+    e.preventDefault();
+    fetch("/contact/imageToSession/" + imageName, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(window.location.href = urlContact)
+    .catch(console.error);
+  }
+  
   if (buttonDeleteFlash) buttonDeleteFlash.setAttribute('href', '/deleteFlash/' + id);
 
   // bouton favoris (rebind après chaque remplacement)
