@@ -6,14 +6,14 @@ flash:
   titreWannaDo: "What is a WannaDo"
 
 footer:
-  contact: "Contact Me"
+  contact: "Contact Us"
   droits: "All Rights Reserved"
   confidentialité: "Privacy Policy"
   mentions_légales: "Legal Notice"
 
 contact:
   titreHome: "Contact Form"
-  titre1: "Contact Me"
+  titre1: "Contact Us"
   nom: "Name | First Name"
   email: "Email Address"
   projet: "Your Project (or any useful information)"

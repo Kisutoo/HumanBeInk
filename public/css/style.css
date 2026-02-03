@@ -43,9 +43,10 @@ body{
 
 .titre{
     z-index: 3;
-    font-family: "Great Vibes";
-    font-size: 6em;
-    font-weight: 200;
+    /* font-family: "New Rocker"; */
+    font-family: "New Rocker";
+    font-size: 5em;
+    font-weight: 100;
 
 }
 
@@ -348,7 +349,7 @@ input[type="text"], input[type="password"], input[type="email"]{
         border-image-slice: 1;
         h2{
             margin: 1em 0em;
-            font-family: "Great Vibes";
+            font-family: "New Rocker";
             font-size: 5em;
             font-weight: 500;
         }
@@ -692,7 +693,7 @@ bold{
     background-color: rgb(9,9,9);
     h2{
         font-size: 5em;
-        font-family: "Great Vibes";
+        font-family: "New Rocker";
         font-weight: 200;
         text-align: justify;
         text-align: center;
@@ -1094,7 +1095,7 @@ input::file-selector-button:hover{
     background-color: rgb(9, 9, 9);
     h2{
         margin-bottom: 0.5em;
-        font-family: "Great Vibes";
+        font-family: "New Rocker";
         font-size: 5.5em;
         text-align: center;
         font-weight: 200;
@@ -1309,7 +1310,7 @@ footer{
     padding-bottom: 0;
     h2{
         font-size: 5em;
-        font-family: "Great Vibes";
+        font-family: "New Rocker";
         font-weight: 400;
     }
     display: flex;
@@ -1488,7 +1489,7 @@ footer{
         padding: 4em;
         border-radius: 25px;
         h2{
-            font-size: 3.5em;
+            font-size: 2.5em;
         }
         p{
             text-align: center;
@@ -1751,7 +1752,7 @@ footer{
     h4{
         width: fit-content;
         font-size: 4em;
-        font-family: "Great Vibes";
+        font-family: "New Rocker";
         font-weight: 300;
     }
     display: flex;
@@ -1949,7 +1950,7 @@ footer{
             margin: 1em;
             font-size: 5em;
             text-align: center;
-            font-family: "Great Vibes";
+            font-family: "New Rocker";
             font-weight: 200;
         }
         display: flex;

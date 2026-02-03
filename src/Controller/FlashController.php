@@ -42,8 +42,7 @@ final class FlashController extends AbstractController
         $categories = $categoryRepository->findAll([], []);
         $maxPagesFlashs = ceil($flashs->getTotalItemCount() / 8);
         
-        $wannaDos = $flashRepository->paginateWannaDos($page);
-        $maxPagesWannaDos = ceil($wannaDos->getTotalItemCount() / 8);
+        $wannaDos = $flashRepository->getWannaDo();
 
         if($request->get("ajaxFlash"))
         {
@@ -109,7 +108,6 @@ final class FlashController extends AbstractController
             "likedFlashs" => $likedFlashs,
             "flashs" => $flashs,
             "maxPagesFlashs" => $maxPagesFlashs,
-            "maxPagesWannaDos" => $maxPagesWannaDos,
             "categories" => $categories,
             "logoNom" => 1,
             "footer" => 1,

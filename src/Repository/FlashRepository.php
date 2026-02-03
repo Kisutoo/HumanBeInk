@@ -35,19 +35,32 @@ class FlashRepository extends ServiceEntityRepository
         );
     }
 
-    public function paginateWannaDos(int $page): PaginationInterface
-    {
-        return $this->paginator->paginate(
-            $this->createQueryBuilder("r")
-            ->where("r.TattooType = :type")
-            ->setParameter("type", "WannaDo"),
-            $page,
-            8,
-            [
-                "sort_field_name" => "category_id",
-                "sort_direction_name" => "ASC"
-            ]
-        );
+    // public function paginateWannaDos(int $page): PaginationInterface
+    // {
+    //     return $this->paginator->paginate(
+    //         $this->createQueryBuilder("r")
+    //         ->where("r.TattooType = :type")
+    //         ->setParameter("type", "WannaDo"),
+    //         $page,
+    //         99,
+    //         [
+    //             "sort_field_name" => "category_id",
+    //             "sort_direction_name" => "ASC"
+    //         ]
+    //     );
+    // }
+
+    public function getWannaDo(): array
+        {
+            $em = $this->getEntityManager();
+
+            $subQb = $em->createQueryBuilder();
+            $subQb->select('s2')
+                ->from('App\Entity\Flash', 's2')
+                ->where('s2.TattooType = :type')
+                ->setParameter("type", "WannaDo");
+
+            return $subQb->getQuery()->getResult();
     }
 
     public function paginateFlashsWithCategories(int $page, array $categoryArray): PaginationInterface
