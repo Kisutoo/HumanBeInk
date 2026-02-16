@@ -558,7 +558,6 @@ main{
     z-index: 3;
     height: 50px;
     top: 75%;
-    width: 30px;
     border-radius: 50px;
     position: absolute;
     left: 50%;
@@ -1883,6 +1882,38 @@ footer{
     transition: all 1s ease-in-out;
 }
 
+.quotesContainer{
+    padding: 3em;
+    min-height: 50em;
+    background-color: rgb(9, 9, 9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1{
+        margin-bottom: 1em;
+    }
+    .quotes{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .quote{
+            max-width: 1400px;
+            border: 3px solid rgba(255, 231, 145, 1);
+            border-radius: 10px;
+            padding: 1.2em;
+            background-color: rgb(179, 160, 91);
+        }
+        cursor: pointer;
+        summary{
+            font-size: 1.5em;
+        }
+        .answer{
+            font-size: 1.5em;
+            margin-top: 1em;
+        }
+    }
+
+}
 
 
 
